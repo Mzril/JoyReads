@@ -40,7 +40,7 @@ class Navbar extends React.Component {
 const mSP = (state) => {
   let currentUser;
   if(state.session.currentUserId!==null){
-    currentUser = state.entities.users[state.session.id];
+    currentUser = state.entities.users[state.session.currentUserId];
   }else {
     currentUser = null;
   }
