@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {signup} from './../../actions/session_actions';
+import {signup, login} from './../../actions/session_actions';
+import { Redirect } from 'react-router-dom'
 
 class CreateAccountForm extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class CreateAccountForm extends React.Component {
     this.updatePassword = this.updatePassword.bind(this);
     this.updateEmail = this.updateEmail.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
+    this.demologin=this.demologin.bind(this);
   }
 
   updateUsername(e){
@@ -32,18 +34,25 @@ class CreateAccountForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign( {}, this.state);
-    this.props.signin(user);
+    this.props.signUp(user);
   }
+
+  demologin() {
+    this.props.login();
+    return <Redirect to="/books"/>;
+  }
+
   render() {
-    return (
+    return(
       <div className="create-account-form">
-        <p className="bft">Meet your next favorite book.</p>
+        <p className="fat-text">Meet your next favorite book.</p>
         <form onSubmit={this.handleSubmit} className="session-bar-form" >
           <input className="create-form-input" type="text" onChange={this.updateUsername} placeholder="Name" value={this.state.username}/>
           <input className="create-form-input" type="text" onChange={this.updateEmail} placeholder="Email Address" value={this.state.email}/>
           <input className="create-form-input" type="password" onChange={this.updatePassword} placeholder="Password" value={this.state.password}/>
           <input className="sign-up-button" type="submit" value="Sign up"/>
         </form>
+        <button onClick={this.demologin} className="demo-button">Demo User</button>
       </div>
     );
   }
@@ -57,7 +66,8 @@ const mSP = (state) => {
 
 const mDP = (dispatch) => {
   return {
-    signUp: (user) => dispatch(signup(user))
+    signUp: (user) => dispatch(signup(user)),
+    login: ()=> dispatch(login({email: "wnbs36@gmail.com", password: "password1"}))
   };
 };
 

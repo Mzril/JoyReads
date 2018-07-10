@@ -1,8 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {logout} from './../actions/session_actions';
 
 class Navbar extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.handleClick=this.handleClick.bind(this);
+  }
+
+  handleClick(){
+    this.props.logout();
+  }
 
   render() {
     let navbuttons;
@@ -12,7 +22,10 @@ class Navbar extends React.Component {
                     <Link to="/">Log In</Link>
                     </div>);
     } else {
-      navbuttons = <button>{this.props.currentUser.username}</button>;
+      navbuttons = (<div>
+                      <p>{this.props.currentUser.username}</p>
+                      <button onClick={this.handleClick}>Log Out</button>
+                    </div>);
     }
     return (
       <div className="nav-bar">
@@ -27,7 +40,7 @@ class Navbar extends React.Component {
 const mSP = (state) => {
   let currentUser;
   if(state.session.currentUserId!==null){
-    currentUser = state.users[state.session.currentUserId];
+    currentUser = state.entities.users[state.session.id];
   }else {
     currentUser = null;
   }
@@ -36,11 +49,11 @@ const mSP = (state) => {
   };
 };
 
-// const mDP = (state) => {
-//   return {
-//     user:
-//   };
-// };
+const mDP = (dispatch) => {
+  return {
+    logout: () => dispatch(logout())
+  };
+};
 
 
-export default connect(mSP)(Navbar);
+export default connect(mSP, mDP)(Navbar);
