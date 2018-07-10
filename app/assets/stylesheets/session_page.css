@@ -1,0 +1,16 @@
+.home-login{
+  display: flex;
+  flex-direction: column;
+  background: #F4F1EA;
+}
+
+.header-site-text{
+  font-size: 30px;
+  font-weight: 400;
+  font-family: fantasy;
+}
+
+.signup-form{
+  display: flex;
+
+}
