@@ -28,11 +28,19 @@ class SignInBar extends React.Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="signup-form" >
-        <input type="text" onChange={this.updateEmail} placeholder="Email Address" value={this.state.email}/>
-        <input type="password" onChange={this.updatePassword} placeholder="Password" value={this.state.password}/>
-        <input className="sign-in-button" type="submit" value="Sign In"/>
-      </form>
+      <div className="signup-mainbar">
+        <div className="signup-mainbar-component">
+          <span className="nav-logo joy">Joy</span>
+          <span className="nav-logo reads">Reads</span>
+        </div>
+        <div className="signup-mainbar-component">
+          <form onSubmit={this.handleSubmit} className="signup-form" >
+            <input className="signup-form-input" type="text" onChange={this.updateEmail} placeholder="Email Address" value={this.state.email}/>
+            <input className="signup-form-input" type="password" onChange={this.updatePassword} placeholder="Password" value={this.state.password}/>
+            <input className="sign-in-button" type="submit" value="Sign In"/>
+          </form>
+        </div>
+      </div>
     );
   }
 }

@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div className="app">
       <header>
-        <h1>JoyReads</h1>
+        <h1>IT'S (A)LIVE!!</h1>
         <Switch>
           <Route exact path="/" component={SessionPage}/>
           <Route path="/" component={Navbar}/>

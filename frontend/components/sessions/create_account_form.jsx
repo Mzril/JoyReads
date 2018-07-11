@@ -49,12 +49,15 @@ class CreateAccountForm extends React.Component {
         <div className="create-account-form">
           <p className="fat-text">Meet your next favorite book.</p>
           <form onSubmit={this.handleSubmit} className="session-bar-form" >
+            <h2 className="thin-text">New here? Create a free account!</h2>
             <input className="create-form-input" type="text" onChange={this.updateUsername} placeholder="Name" value={this.state.username}/>
             <input className="create-form-input" type="text" onChange={this.updateEmail} placeholder="Email Address" value={this.state.email}/>
             <input className="create-form-input" type="password" onChange={this.updatePassword} placeholder="Password" value={this.state.password}/>
-            <input className="sign-up-button" type="submit" value="Sign up"/>
+            <div className= "bottom-buttons">
+              <input className="session-button" type="submit" value="Sign up"/>
+              <span onClick={this.demologin} className="session-button">Demo</span>
+            </div>
           </form>
-          <button onClick={this.demologin} className="demo-button">Demo User</button>
         </div>
       );
     }

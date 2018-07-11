@@ -8,7 +8,6 @@ class SessionPage extends React.Component{
     return (
       <div className="home-login">
         <div className="sign-in-header">
-          <div className="header-site-text">JoyReads</div>
           <SignInBar/>
           <CreateAccountForm/>
         </div>

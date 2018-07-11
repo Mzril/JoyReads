@@ -6,11 +6,107 @@
 
 .header-site-text{
   font-size: 30px;
-  font-weight: 400;
-  font-family: fantasy;
+  font-weight: bolder;
 }
 
 .signup-form{
   display: flex;
+}
 
+.signup-mainbar-component{
+  display: flex;
+  width: 50%;
+  min-width: 200px;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-form{
+  align-items: center;
+}
+
+.signup-mainbar{
+  display: flex;
+  border-bottom: 1px inset lightgrey;
+  padding: 10px;
+}
+
+.signup-form-input{
+  font-size: 13px;
+  padding: 5px;
+  width: 120px;
+  margin: 2px;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  border-radius: 3px;
+  border: #DCD6CC 1px solid;
+}
+
+.sign-in-button {
+  background-color: #382110;
+  border-radius: 3px;
+  border: 1px solid #382110;
+  color: white;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  padding: 5px;
+  margin-left: 3px;
+}
+
+.create-account-form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.form-component{
+  width: 50%;
+  min-width: 200px;
+}
+
+.session-bar-form{
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+}
+
+.create-form-input{
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  width: 270px;
+  padding: 7px 5px;
+  font-size: 16px;
+  border: #DCD6CC 1px solid;
+  border-radius: 3px;
+  margin: 3px;
+}
+
+.bottom-buttons{
+  display:flex;
+}
+
+.session-button{
+  font-size: 16px;
+  padding: 5px;
+  background-color: #fdd05f;
+  border: #DCD6CC 1px solid;
+  border-radius: 3px;
+  margin: 4px;
+}
+
+span.session-button{
+  font-weight: bold;
+}
+
+.thin-text{
+  font-weight: 549;
+  font-size: 18px;
+}
+
+.fat-text{
+  color: brown;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+  font-weight: 600;
+  font-size: 56px;
+  width: 450px;
+  text-align: center;
 }

@@ -22,14 +22,17 @@ class Navbar extends React.Component {
                     <Link to="/">Log In</Link>
                     </div>);
     } else {
-      navbuttons = (<div>
-                      <p>{this.props.currentUser.username}</p>
+      navbuttons = (<div className="nav-buttons">
+                      <span>{this.props.currentUser.username}</span>
                       <button onClick={this.handleClick}>Log Out</button>
                     </div>);
     }
     return (
       <div className="nav-bar">
-        <span className="nav-logo">Joyreads</span>
+        <div>
+          <span className="nav-logo joy">Joy</span>
+          <span className="nav-logo reads">Reads</span>
+        </div>
         <input type="text" placeholder="Search books"/>
         {navbuttons}
       </div>

@@ -1,5 +1,18 @@
 .nav-bar {
   display:flex;
-  background: #F4F1EA;
-  justify-content: center;
+  justify-content: space-around;
+  background-color: #F4F2E9;
+  height: 50px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+  align-items: center;
+}
+
+.nav-logo{
+  font-size: 30px;
+  font-weight: 200;
+  font-family: "Lato", sans-serif;
+}
+
+.nav-logo.reads{
+  font-weight: bold;
 }
