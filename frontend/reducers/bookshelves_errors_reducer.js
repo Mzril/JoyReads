@@ -10,7 +10,7 @@ const bookshelvesErrorsReducer = (state = [], action) => {
     case RECEIVE_USER_BOOKSHELVES:
       return [];
     case RECEIVE_BOOKSHELF_ERRORS:
-      return state.concat(action.errors);
+      return action.errors;
     default:
       return state;
   }
