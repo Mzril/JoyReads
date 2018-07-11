@@ -55,7 +55,7 @@ class CreateAccountForm extends React.Component {
             <input className="create-form-input" type="password" onChange={this.updatePassword} placeholder="Password" value={this.state.password}/>
             <div className= "bottom-buttons">
               <input className="session-button" type="submit" value="Sign up"/>
-              <span onClick={this.demologin} className="session-button">Demo</span>
+              <span onClick={this.demologin} className="session-button demo">Demo</span>
             </div>
           </form>
         </div>
