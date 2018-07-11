@@ -47,7 +47,7 @@ class CreateAccountForm extends React.Component {
     }else{
       return(
         <div className="create-account-form">
-          <img className="slogan" src="/assets/slogan.png"/>
+          <img className="slogan" src={window.sloganURL}/>
           <form onSubmit={this.handleSubmit} className="session-bar-form" >
             <h2 className="thin-text">New here? Create a free account!</h2>
             <input className="create-form-input" type="text" onChange={this.updateUsername} placeholder="Name" value={this.state.username}/>
