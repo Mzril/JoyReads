@@ -2,9 +2,13 @@
   display:flex;
   justify-content: space-around;
   background-color: #F4F2E9;
-  height: 50px;
   box-shadow: 0 1px 1px rgba(0,0,0,0.15);
   align-items: center;
+  color: #382110;
+}
+
+.nav-search-bar{
+
 }
 
 .nav-logo{
@@ -15,4 +19,20 @@
 
 .nav-logo.reads{
   font-weight: bold;
+}
+
+.nav-buttons{
+  display: flex;
+  text-align: center;
+}
+
+.nav-buttons > a, .nav-buttons >span{
+  text-decoration: none;
+  color: #382110;
+  padding: 10px;
+}
+
+.nav-buttons a:hover, .nav-buttons span:hover{
+  color: white;
+  background-color: #382110;
 }

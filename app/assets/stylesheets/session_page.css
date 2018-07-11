@@ -55,8 +55,9 @@
 
 .create-account-form {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  padding: 30px;
 }
 
 .form-component{
@@ -68,6 +69,7 @@
   display: flex;
   flex-direction: column;
   width: 280px;
+  padding-left: 150px;
 }
 
 .create-form-input{
@@ -98,12 +100,11 @@ span.session-button{
 }
 
 .thin-text{
-  font-weight: 549;
+  font-weight: 350;
   font-size: 18px;
 }
 
 .fat-text{
-  color: brown;
   font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
   font-weight: 600;
   font-size: 56px;

@@ -24,7 +24,7 @@ class Navbar extends React.Component {
     } else {
       navbuttons = (<div className="nav-buttons">
                       <span>{this.props.currentUser.username}</span>
-                      <button onClick={this.handleClick}>Log Out</button>
+                      <a onClick={this.handleClick}>Log Out</a>
                     </div>);
     }
     return (
@@ -33,7 +33,7 @@ class Navbar extends React.Component {
           <span className="nav-logo joy">Joy</span>
           <span className="nav-logo reads">Reads</span>
         </div>
-        <input type="text" placeholder="Search books"/>
+        <input className="nav-search-bar" type="search" placeholder="Search books"/>
         {navbuttons}
       </div>
     );
