@@ -18,9 +18,9 @@ class ApplicationController < ActionController::Base
     session[:session_token] = nil
   end
 
-  # def ensure_logged_in
-  #   unless logged_in?
-  #     render json: {session: "You must be logged in"}, status: 404
-  #   end
-  # end
+  def ensure_logged_in
+    unless logged_in?
+      render json: ["You must be logged in"], status: 404
+    end
+  end
 end

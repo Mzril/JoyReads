@@ -35,4 +35,5 @@
 .nav-buttons a:hover, .nav-buttons span:hover{
   color: white;
   background-color: #382110;
+  cursor: pointer;
 }

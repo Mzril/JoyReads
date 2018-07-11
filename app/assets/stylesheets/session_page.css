@@ -1,13 +1,12 @@
-.home-login{
-  display: flex;
-  flex-direction: column;
-  background: #F4F1EA;
+.sign-in-text{
+  font-size: 50px;
+  font-weight: 200;
 }
 
-.header-site-text{
-  font-size: 30px;
-  font-weight: bolder;
+.sign-in-text.reads{
+  font-weight: 500;
 }
+
 
 .signup-form{
   display: flex;
@@ -27,8 +26,6 @@
 
 .signup-mainbar{
   display: flex;
-  border-bottom: 1px inset lightgrey;
-  padding: 10px;
 }
 
 .signup-form-input{
@@ -53,11 +50,26 @@
   margin-left: 3px;
 }
 
+.sign-in-button:hover{
+  background-color: #58371F;
+  cursor: pointer;
+}
+
 .create-account-form {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  box-sizing: border-box;
+  height: 220px;
+}
+
+.lul-padding {
+  height: 75px;
+}
+
+.slogan {
+  height: 116px;
+  width: 446px;
 }
 
 .form-component{
@@ -93,6 +105,11 @@
   border: #DCD6CC 1px solid;
   border-radius: 3px;
   margin: 4px;
+}
+
+.session-button:hover{
+  background-color: #fdd05f9c;
+  cursor: pointer;
 }
 
 span.session-button{

@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+ .home-login{
+   display: flex;
+   flex-direction: column;
+   background-image: image-url('session_page_background.jpg');
+   background-position: center;
+ }

@@ -10,6 +10,7 @@ class SessionPage extends React.Component{
         <div className="sign-in-header">
           <SignInBar/>
           <CreateAccountForm/>
+          <div className="lul-padding"></div>
         </div>
       </div>
     );

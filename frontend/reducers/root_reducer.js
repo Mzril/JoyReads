@@ -5,8 +5,10 @@ import {sessionReducer} from "./session_reducer";
 // import filterReducer from "./filter_reducer";
 
 
-const rootReducer = combineReducers(
-  {entities: entitiesReducer, session: sessionReducer, errors: errorsReducer}
+const rootReducer = combineReducers({
+  entities: entitiesReducer,
+  session: sessionReducer,
+  errors: errorsReducer}
 );
 
 export default rootReducer;

@@ -33,7 +33,7 @@ class Navbar extends React.Component {
           <span className="nav-logo joy">Joy</span>
           <span className="nav-logo reads">Reads</span>
         </div>
-        <input className="nav-search-bar" type="search" placeholder="Search books"/>
+        <input className="nav-search-bar" disabled type="search" placeholder="Search books"/>
         {navbuttons}
       </div>
     );

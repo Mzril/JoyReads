@@ -30,8 +30,8 @@ class SignInBar extends React.Component {
     return (
       <div className="signup-mainbar">
         <div className="signup-mainbar-component">
-          <span className="nav-logo joy">Joy</span>
-          <span className="nav-logo reads">Reads</span>
+          <span className="sign-in-text joy">joy</span>
+          <span className="sign-in-text reads">Reads</span>
         </div>
         <div className="signup-mainbar-component">
           <form onSubmit={this.handleSubmit} className="signup-form" >
