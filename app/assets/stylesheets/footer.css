@@ -1,0 +1,33 @@
+.footer{
+  display: flex;
+  height: 30px;
+  background-color: #F4F2E9;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  align-items: center;
+  font-size: 11px;
+  color: #666;
+}
+
+.footer1{
+  width: 67%
+}
+
+.footer2{
+  display: flex;
+  justify-content: flex-end;
+  width: 33%
+}
+
+
+.footer-links{
+  text-decoration: none;
+  padding: 7px 15px 7px 15px;
+  color: #666;
+}
+
+.footer-links:hover{
+  background-color: #382110;
+  color: white;
+}

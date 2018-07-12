@@ -57,7 +57,7 @@ class CreateAccountForm extends React.Component {
               <input className="session-button" type="submit" value="Sign up"/>
               <span onClick={this.demologin} className="session-button demo">Demo</span>
               <ul className="session-errors">
-                {this.props.errors.map((error, i) => <li className="error-list" key={i}>*{error}*</li>)}
+                {this.props.errors.map((error, i) => <li className="error-li" key={i}>*{error}*</li>)}
               </ul>
             </div>
           </form>

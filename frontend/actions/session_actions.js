@@ -4,10 +4,11 @@ export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 
 import * as SessionAPIUtil from './../util/session_api_util';
 
-export const receiveCurrentUser = (current_user) => {
+export const receiveCurrentUser = (payload) => {
   return {
     type: RECEIVE_CURRENT_USER,
-    user: current_user
+    user: payload.user,
+    bookshelves : payload.bookshelves
   };
 };
 
@@ -27,8 +28,8 @@ export const receiveErrors= (errors) => {
 export const login = (user) => {
   return dispatch => {
     return SessionAPIUtil.login(user).then(
-      (current_user) => {
-        return dispatch(receiveCurrentUser(current_user));
+      (payload) => {
+        return dispatch(receiveCurrentUser(payload));
       },
       (errors) => dispatch(receiveErrors(errors.responseJSON))
     );
@@ -46,8 +47,8 @@ export const logout = () => {
 export const signup = (user) => {
   return dispatch => {
     return SessionAPIUtil.signup(user)
-      .then((current_user) => {
-        return dispatch(receiveCurrentUser(current_user));},
+      .then((payload) => {
+        return dispatch(receiveCurrentUser(payload));},
       (errors) => {
         return dispatch(receiveErrors(errors.responseJSON));
     });

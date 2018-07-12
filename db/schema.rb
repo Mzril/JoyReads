@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_11_224734) do
+ActiveRecord::Schema.define(version: 2018_07_12_020834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 2018_07_11_224734) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "books", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description", null: false
+    t.string "author", null: false
+    t.integer "isbn_13", null: false
+    t.date "published_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["isbn_13"], name: "index_books_on_isbn_13", unique: true
+  end
+
   create_table "bookshelves", force: :cascade do |t|
     t.string "title", null: false
     t.integer "user_id", null: false
@@ -43,6 +54,15 @@ ActiveRecord::Schema.define(version: 2018_07_11_224734) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "title"], name: "index_bookshelves_on_user_id_and_title", unique: true
     t.index ["user_id"], name: "index_bookshelves_on_user_id"
+  end
+
+  create_table "shelvings", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "bookshelf_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id", "bookshelf_id"], name: "index_shelvings_on_book_id_and_bookshelf_id", unique: true
+    t.index ["book_id"], name: "index_shelvings_on_book_id"
   end
 
   create_table "users", force: :cascade do |t|

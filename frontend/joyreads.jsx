@@ -8,15 +8,18 @@ import {fetchBookshelf, createBookshelf, deleteBookshelf} from "./actions/booksh
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
   let store;
-  if (window.currentUser) {
+  if (window.payload) {
+    const initialshelf = {};
+    window.payload.bookshelves.forEach(shelf=>initialshelf[shelf.id]=shelf);
     const preloadedState = {
       entities: {
-        users: { [window.currentUser.id]: window.currentUser }
+        users: { [window.payload.user.id]: window.payload.user },
+        bookshelves: initialshelf
       },
-      session: { currentUserId: window.currentUser.id }
+      session: { currentUserId: window.payload.user.id }
     };
     store = configureStore(preloadedState);
-    delete window.currentUser;
+    delete window.payload;
   } else {
     store = configureStore();
   }

@@ -1,0 +1,17 @@
+.users-shelf-container{
+  width: 180px;
+}
+
+.shelves {
+  font-size: 14px;
+  color: #00635d;
+}
+
+.shelves.tag{
+  font-weight: bold;
+  color: #181818;
+}
+
+.shelves.all{
+  color: #777777;
+}

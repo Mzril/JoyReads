@@ -5,20 +5,16 @@ import {fetchBookshelves} from './../../actions/bookshelf_actions';
 
 class BookshelvesIndex extends React.Component {
 
-  componentDidMount(){
-    if(this.props.user!=={}){
-      this.props.fetchBookshelves(this.props.user);
-    }
-  }
-
   render () {
     let shelves = "";
     let bookshelfIds = this.props.user.bookshelf_ids;
     let bookshelves = this.props.bookshelves;
     if(bookshelfIds && bookshelves[bookshelfIds[0]]){
-      shelves = bookshelfIds.map(id => <li key={id}>{bookshelves[id].title}</li>);
+      shelves = bookshelfIds.map(id => <div className="shelves" key={id}>{bookshelves[id].title}</div>);
     }
-    return (<div className="user-shelf-index">
+    return (<div className="users-shelf-container">
+              <div className="shelves tag">Bookshelves</div>
+              <div className="shelves all">All</div>
               {shelves}
             </div>);
   }

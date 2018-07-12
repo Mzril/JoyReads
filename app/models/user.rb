@@ -9,6 +9,10 @@ class User < ApplicationRecord
     foreign_key: :user_id,
     dependent: :destroy
 
+  has_many :books,
+    through: :bookshelves,
+    source: :books
+
   attr_reader :password
   after_initialize :ensure_session_token
 

@@ -119,6 +119,8 @@
   border: #DCD6CC 1px solid;
   border-radius: 3px;
   margin: 4px;
+  flex-shrink: 0;
+  flex-grow: 0;
 }
 
 .demo{
@@ -149,9 +151,11 @@ span.session-button{
 }
 
 .session-errors {
+  justify: text;
   font-size: 11px;
   color: red;
   padding-left: 4px;
+  line-height: 1.4;
 }
 
 .error-list{

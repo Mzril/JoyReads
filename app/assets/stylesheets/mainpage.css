@@ -1,0 +1,17 @@
+.site-content{
+  width: 970px;
+  margin: auto;
+  flex-direction: column;
+}
+
+.content-header{
+  height: 70px;
+}
+
+.index-table{
+  display: flex;
+}
+
+.booktable{
+  width: 750px;
+}
