@@ -1,12 +1,17 @@
 .sign-in-text{
-  font-size: 50px;
+  font-size: 45px;
   font-weight: 200;
+  color: #95897d;
 }
 
 .sign-in-text.reads{
-  font-weight: 500;
+  font-weight: 340;
+  color: #372211;
 }
 
+.sign-in-text:hover{
+  cursor: pointer;
+}
 
 .signup-form{
   display: flex;

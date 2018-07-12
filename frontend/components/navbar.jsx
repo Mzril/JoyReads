@@ -30,8 +30,8 @@ class Navbar extends React.Component {
     return (
       <div className="nav-bar">
         <div>
-          <span className="nav-logo joy">Joy</span>
-          <span className="nav-logo reads">Reads</span>
+          <Link to="/" style={{ textDecoration: 'none' }}><span className="nav-logo joy">joy</span>
+          <span className="nav-logo reads">Reads</span></Link>
         </div>
         <input className="nav-search-bar" disabled type="search" placeholder="Search books"/>
         {navbuttons}

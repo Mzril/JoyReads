@@ -14,11 +14,13 @@
 .nav-logo{
   font-size: 30px;
   font-weight: 200;
+  color: #95897d;
   font-family: "Lato", sans-serif;
 }
 
 .nav-logo.reads{
-  font-weight: bold;
+  font-weight: 340;
+  color: #372211;
 }
 
 .nav-buttons{

@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {login} from './../../actions/session_actions';
+
 
 class SignInBar extends React.Component {
   constructor(props) {
@@ -34,8 +36,8 @@ class SignInBar extends React.Component {
     return (
       <div className="signup-mainbar">
         <div className="signup-mainbar-component">
-          <span className="sign-in-text joy">joy</span>
-          <span className="sign-in-text reads">Reads</span>
+          <Link to="/" style={{ textDecoration: 'none' }}><span className="sign-in-text joy">joy</span>
+          <span className="sign-in-text reads">Reads</span></Link>
         </div>
           <div className="form-errors-container">
             <form onSubmit={this.handleSubmit} className="signup-form" >
