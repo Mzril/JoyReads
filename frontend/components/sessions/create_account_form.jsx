@@ -56,6 +56,9 @@ class CreateAccountForm extends React.Component {
             <div className= "bottom-buttons">
               <input className="session-button" type="submit" value="Sign up"/>
               <span onClick={this.demologin} className="session-button demo">Demo</span>
+              <ul className="session-errors">
+                {this.props.errors.map((error, i) => <li className="error-list" key={i}>*{error}*</li>)}
+              </ul>
             </div>
           </form>
         </div>
@@ -71,8 +74,11 @@ const mSP = (state) => {
   }else {
     currentUser = null;
   }
+  let formErrors = state.errors.session;
+  formErrors = formErrors.filter((error)=>{return error !=="Invalid Email/Password";});
   return {
-    currentUser : currentUser
+    currentUser : currentUser,
+    errors: formErrors
   };
 };
 

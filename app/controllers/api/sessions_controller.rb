@@ -8,7 +8,7 @@ class Api::SessionsController < ApplicationController
       log_in!(@user)
       render json: {id: @user.id, username:@user.username, bookshelf_ids: @user.bookshelf_ids}
     else
-      render json: ["Invalid Credentials"], status: 401
+      render json: ["Invalid Email/Password"], status: 401
     end
   end
 

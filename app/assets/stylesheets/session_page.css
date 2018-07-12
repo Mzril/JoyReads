@@ -16,7 +16,6 @@
   display: flex;
   width: 50%;
   min-width: 200px;
-  justify-content: center;
   align-items: center;
 }
 
@@ -26,6 +25,11 @@
 
 .signup-mainbar{
   display: flex;
+  justify-content: space-between;
+  width: 970px;
+  height: 75px;
+  margin: auto;
+  align-items: center;
 }
 
 .signup-form-input{
@@ -70,6 +74,7 @@
 .slogan {
   height: 116px;
   width: 446px;
+  padding-left: 85px;
 }
 
 .form-component{
@@ -81,7 +86,7 @@
   display: flex;
   flex-direction: column;
   width: 280px;
-  padding-left: 150px;
+  padding-left: 140px;
 }
 
 .create-form-input{
@@ -95,7 +100,8 @@
 }
 
 .bottom-buttons{
-  display:flex;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .session-button{
@@ -135,4 +141,15 @@ span.session-button{
   font-size: 56px;
   width: 450px;
   text-align: center;
+}
+
+.session-errors {
+  font-size: 11px;
+  color: red;
+  padding-left: 4px;
+}
+
+.error-list{
+  font-size: 11px;
+  white-space: nowrap;
 }
