@@ -31,7 +31,7 @@ class SignInBar extends React.Component {
   render() {
     let loginError = "";
     if(this.props.errors.indexOf("Invalid Email/Password") !== -1 ){
-      loginError = "* Invalid Email/Password *";
+      loginError = "*Invalid Email/Password*";
     }
     return (
       <div className="signup-mainbar">
@@ -39,14 +39,16 @@ class SignInBar extends React.Component {
           <Link to="/" style={{ textDecoration: 'none' }}><span className="sign-in-text joy">joy</span>
           <span className="sign-in-text reads">Reads</span></Link>
         </div>
+        <div className="signup-mainbar-component">
+          <div className="session-errors login">{loginError}</div>
           <div className="form-errors-container">
             <form onSubmit={this.handleSubmit} className="signup-form" >
               <input className="signup-form-input" type="text" onChange={this.updateEmail} placeholder="Email Address" value={this.state.email}/>
               <input className="signup-form-input" type="password" onChange={this.updatePassword} placeholder="Password" value={this.state.password}/>
               <input className="sign-in-button" type="submit" value="Sign In"/>
             </form>
-            <div className="session-errors login">{loginError}</div>
           </div>
+        </div>
       </div>
     );
   }

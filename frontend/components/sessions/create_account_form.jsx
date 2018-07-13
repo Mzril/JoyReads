@@ -9,9 +9,13 @@ class CreateAccountForm extends React.Component {
     this.state = {
       email: "",
       password: "",
-      username: ""
+      username: "",
+      currentErrors: [],
+      clicked: false
     };
 
+    this.errorform = this.errorform.bind(this);
+    this.handleClear = this.handleClear.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
     this.updateEmail = this.updateEmail.bind(this);
@@ -34,7 +38,44 @@ class CreateAccountForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign( {}, this.state);
-    this.props.signUp(user);
+    this.props.signUp(user).then(()=>console.log("derp"),()=>this.setState({clicked:false}));
+  }
+
+  handleClear(){
+    this.setState({clicked: true});
+  }
+
+  errorform(){
+    const errors = this.props.errors;
+    let input1 = <input className="create-form-input" type="text" onChange={this.updateUsername} placeholder="Name" value={this.state.username}/>;
+    let input2 = <input className="create-form-input" type="text" onChange={this.updateEmail} placeholder="Email Address" value={this.state.email}/>;
+    let input3 = <input className="create-form-input" type="password" onChange={this.updatePassword} placeholder="Password" value={this.state.password}/>;
+    if(errors.includes("Password is too short (minimum is 6 characters)")){
+      input3 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Password" value="Password is too short (min is 6 chars)"/>;
+    }
+    if(errors.includes("Email can't be blank")){
+      input2 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Email Address" value="Email can't be blank"/>;
+    }
+    if(errors.includes("Email has already been taken")){
+      input2 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Email Address" value="Email has already been taken"/>;
+    }
+    if(errors.includes("Username can't be blank")){
+      input1 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Name" value="Username can't be blank"/>;
+    }
+    if(errors.includes("Username has already been taken")){
+      input1 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Name" value="Username has already been taken"/>;
+    }
+    return (<form onSubmit={this.handleSubmit} className="session-bar-form" >
+              <h2 className="thin-text">New here? Create a free account!</h2>
+              {input1}
+                {input2}
+                  {input3}
+              <div className= "bottom-buttons">
+                <input className="session-button" type="submit" value="Sign up"/>
+                <span onClick={this.demologin} className="session-button demo">Demo</span>
+              </div>
+            </form>
+          );
   }
 
   demologin() {
@@ -45,23 +86,26 @@ class CreateAccountForm extends React.Component {
     if(this.props.currentUser!==null){
       return <Redirect to="/books"/>;
     }else{
+      let form;
+      if(this.props.errors.length > 0 && !this.state.clicked){
+        form = this.errorform();
+      }else{
+        form = (<form onSubmit={this.handleSubmit} className="session-bar-form" >
+                  <h2 className="thin-text">New here? Create a free account!</h2>
+                  <input className="create-form-input" type="text" onChange={this.updateUsername} placeholder="Name" value={this.state.username}/>
+                  <input className="create-form-input" type="text" onChange={this.updateEmail} placeholder="Email Address" value={this.state.email}/>
+                  <input className="create-form-input" type="password" onChange={this.updatePassword} placeholder="Password" value={this.state.password}/>
+                  <div className= "bottom-buttons">
+                    <input className="session-button" type="submit" value="Sign up"/>
+                    <span onClick={this.demologin} className="session-button demo">Demo</span>
+                  </div>
+                </form>);
+      }
       return(
-        <div className="create-account-form">
-          <img className="slogan" src={window.sloganURL}/>
-          <form onSubmit={this.handleSubmit} className="session-bar-form" >
-            <h2 className="thin-text">New here? Create a free account!</h2>
-            <input className="create-form-input" type="text" onChange={this.updateUsername} placeholder="Name" value={this.state.username}/>
-            <input className="create-form-input" type="text" onChange={this.updateEmail} placeholder="Email Address" value={this.state.email}/>
-            <input className="create-form-input" type="password" onChange={this.updatePassword} placeholder="Password" value={this.state.password}/>
-            <div className= "bottom-buttons">
-              <input className="session-button" type="submit" value="Sign up"/>
-              <span onClick={this.demologin} className="session-button demo">Demo</span>
-              <ul className="session-errors">
-                {this.props.errors.map((error, i) => <li className="error-li" key={i}>*{error}*</li>)}
-              </ul>
-            </div>
-          </form>
-        </div>
+          <div className="create-account-form">
+            <img className="slogan" src={window.sloganURL}/>
+            {form}
+          </div>
       );
     }
   }

@@ -8,4 +8,8 @@ class Book < ApplicationRecord
     foreign_key: :book_id,
     dependent: :destroy
 
+  def self.in_shelf(id)
+    Book.joins(:shelvings).where("shelvings.bookshelf_id = ?", id)
+  end
+
 end

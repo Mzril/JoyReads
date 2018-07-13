@@ -8,7 +8,8 @@ export const receiveCurrentUser = (payload) => {
   return {
     type: RECEIVE_CURRENT_USER,
     user: payload.user,
-    bookshelves : payload.bookshelves
+    bookshelves : payload.bookshelves,
+    books : payload.books
   };
 };
 

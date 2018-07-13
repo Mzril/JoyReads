@@ -17,13 +17,6 @@
   display: flex;
 }
 
-.signup-mainbar-component{
-  display: flex;
-  width: 50%;
-  min-width: 200px;
-  align-items: center;
-}
-
 .signup-form {
   align-items: center;
 }
@@ -35,6 +28,17 @@
   height: 75px;
   margin: auto;
   align-items: center;
+}
+
+.signup-mainbar-component{
+  display: flex;
+  width: 50%;
+  min-width: 200px;
+  align-items: center;
+}
+
+.signup-mainbar-component:last-child{
+  justify-content: flex-end;
 }
 
 .signup-form-input{
@@ -158,9 +162,28 @@ span.session-button{
   line-height: 1.4;
 }
 
+.session-errors.login{
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+}
+
 .error-li{
-  font-weight: normal;
+  font-weight: lighter;
   font-size: 11px;
+  font-style: italic;
   color: red;
   white-space: nowrap;
+}
+
+.error-option{
+  color: #e21212;
+  font-style: italic;
+}
+
+.shelf-errors > .error-li{
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  margin-top: 5px;
 }

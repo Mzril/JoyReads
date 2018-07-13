@@ -72,6 +72,7 @@ class BookshelvesIndex extends React.Component {
   }
 
   shelves(bookshelfIds, bookshelves){
+    const total_number = 0;
     const bookshelfids = bookshelfIds.slice();
     let exclusive = bookshelfids.splice(0,3).map(id => <Link to={`/bookshelves/${id}`} className="shelves" key={id}>{bookshelves[id].title} (0)</Link>);
     let shelves = bookshelfids.map(id => {
@@ -86,7 +87,7 @@ class BookshelvesIndex extends React.Component {
     return (<div className="users-shelf-container">
               <div className="shelves tag">Bookshelves</div>
               <div>
-                <Link to="/books" className="shelves all">All</Link>
+                <Link to="/books" className="shelves all">All ({total_number})</Link>
               </div>
               <div className="exclusive-shelves">
                 {exclusive}

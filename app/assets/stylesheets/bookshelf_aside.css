@@ -17,6 +17,11 @@
 }
 
 .shelves {
+  display: inline-flex;
+  margin-right: 0;
+  word-wrap: break-word;
+  word-break: break-all;
+  width: 140px;
   vertical-align: center;
   font-size: 14px;
   color: #00635d;
@@ -79,6 +84,7 @@
   border-radius: 3px;
   border: 1px solid #dcd6cc;
   padding: 3px;
+  margin-right: 3px;
 }
 
 .shelf-button-form{
@@ -87,7 +93,6 @@
   border: 1px solid #dcd6cc;
   background-color: #F4F1EA;
   padding: 3px 11px 3px 11px;
-  margin-left: 3px;
 }
 
 .shelf-button-form.update{
