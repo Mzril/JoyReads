@@ -2,9 +2,34 @@
   width: 180px;
 }
 
+.exclusive-shelves{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.non-exclusive-shelves{
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
 .shelves {
+  vertical-align: center;
   font-size: 14px;
   color: #00635d;
+  text-decoration: none;
+  line-height: 18px;
+}
+
+.shelves:hover{
+  text-decoration: underline;
+}
+
+.shelves.tag:hover{
+  text-decoration: none;
 }
 
 .shelves.tag{
@@ -14,4 +39,73 @@
 
 .shelves.all{
   color: #777777;
+}
+
+.add-shelf-button:hover{
+  cursor: pointer;
+  background-color: #f4e5bf;
+}
+
+.bookshelf-item{
+  position: relative;
+}
+
+.index-icons{
+  position: absolute;
+  right: 0;
+}
+
+.fa{
+  color: lightgrey;
+  padding-right: 3px;
+  padding-left: 3px;
+}
+
+.fa:hover {
+  padding-left: 2px;
+  padding-right: 2px;
+  font-size: 18px;
+  color: lightblue;
+}
+
+.shelf-form {
+  color: #181818;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.shelf-form-input{
+  border-radius: 3px;
+  border: 1px solid #dcd6cc;
+  padding: 3px;
+}
+
+.shelf-button-form{
+  font-size: 11px;
+  border-radius: 3px;
+  border: 1px solid #dcd6cc;
+  background-color: #F4F1EA;
+  padding: 3px 11px 3px 11px;
+  margin-left: 3px;
+}
+
+.shelf-button-form.update{
+  padding: 3px;
+  font-size: 10.5px;
+}
+
+.add-shelf-button{
+  font-size: 11px;
+  font-weight: normal;
+  padding: 4px 12px 4px 12px;
+  background-color: #ede6d6;
+  border: 1px solid #d6d0c4;
+  border-radius: 3px;
+  color: #333333;
+}
+
+.shelf-form {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d8d8d8;
 }
