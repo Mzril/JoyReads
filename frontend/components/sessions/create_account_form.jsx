@@ -51,19 +51,19 @@ class CreateAccountForm extends React.Component {
     let input2 = <input className="create-form-input" type="text" onChange={this.updateEmail} placeholder="Email Address" value={this.state.email}/>;
     let input3 = <input className="create-form-input" type="password" onChange={this.updatePassword} placeholder="Password" value={this.state.password}/>;
     if(errors.includes("Password is too short (minimum is 6 characters)")){
-      input3 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Password" value="Password is too short (min is 6 chars)"/>;
+      input3 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Password" value="* Password is too short (min is 6 chars) *"/>;
     }
     if(errors.includes("Email can't be blank")){
-      input2 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Email Address" value="Email can't be blank"/>;
+      input2 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Email Address" value="* Email can't be blank *"/>;
     }
     if(errors.includes("Email has already been taken")){
-      input2 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Email Address" value="Email has already been taken"/>;
+      input2 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Email Address" value="* Email has already been taken *"/>;
     }
     if(errors.includes("Username can't be blank")){
-      input1 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Name" value="Username can't be blank"/>;
+      input1 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Name" value="* Username can't be blank *"/>;
     }
     if(errors.includes("Username has already been taken")){
-      input1 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Name" value="Username has already been taken"/>;
+      input1 = <input className="create-form-input error-option" type="text" onClick={this.handleClear} placeholder="Name" value="* Username has already been taken *"/>;
     }
     return (<form onSubmit={this.handleSubmit} className="session-bar-form" >
               <h2 className="thin-text">New here? Create a free account!</h2>

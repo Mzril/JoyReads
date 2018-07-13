@@ -165,7 +165,7 @@ span.session-button{
 .session-errors.login{
   font-size: 14px;
   font-style: italic;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .error-li{
@@ -178,6 +178,7 @@ span.session-button{
 
 .error-option{
   color: #e21212;
+  font-weight: 300;
   font-style: italic;
 }
 
