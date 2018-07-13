@@ -4,10 +4,9 @@ import {Link} from 'react-router-dom';
 
 
 class Bookshelf extends React.Component {
-  
+
 
 }
-
 
 const mSP = (state) => {
   let currentUser;

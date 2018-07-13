@@ -2,16 +2,43 @@
   width: 970px;
   margin: auto;
   flex-direction: column;
+  margin-top: 15px;
+  box-sizing: border-box;
+  padding: 5px;
 }
 
 .content-header{
-  height: 70px;
+  height: 36px;
+  font-size: 20px;
+  padding-bot: 5px;
+  border-bottom: 1px solid #BBB596;
+  color: #00635d;
+  margin-bottom: 10px;
+}
+
+.main-header-link{
+  font-family: "Merriweather", Georgia, "Times New Roman", serif;
+  color: #00635d;
+  font-weight: 700;
+  text-decoration: solid;
+}
+
+.main-header-link:hover{
+  text-decoration: underline;
 }
 
 .index-table{
   display: flex;
+  justify-content: center;
+}
+
+.whole-aside{
+  margin-right: 20px;
 }
 
 .booktable{
   width: 750px;
+  margin: auto;
+  text-align: center;
+  font-size: 40px;
 }
