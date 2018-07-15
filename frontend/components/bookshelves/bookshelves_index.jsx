@@ -90,7 +90,9 @@ class BookshelvesIndex extends React.Component {
                 <Link to="/books" className="shelves all">All ({total_number})</Link>
               </div>
               <div className="exclusive-shelves">
-                {exclusive}
+                <div className="holders">
+                  {exclusive}
+                </div>
               </div>
               <div className="non-exclusive-shelves">
                 {shelves}
@@ -102,6 +104,9 @@ class BookshelvesIndex extends React.Component {
   render () {
     let bookshelfIds = this.props.user.bookshelf_ids;
     let bookshelves = this.props.bookshelves;
+    if(this.props.location.pathname =="/home"){
+      return <div className="users-shelf-container" style={{display: "none"}} ></div>;
+    }
     if(bookshelfIds && bookshelves[bookshelfIds[0]]){
       return this.shelves(bookshelfIds, bookshelves);
     } else {

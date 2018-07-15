@@ -27,7 +27,7 @@ export const receiveErrors= (errors) => {
 export const fetchBook = (id) => {
   return dispatch => {
     return BookAPIUtil.fetchBook(id).then(
-      (bookshelf) => {
+      (book) => {
         return dispatch(receiveBook(book));
       },
       (errors) => dispatch(receiveErrors(errors.responseJSON))
@@ -38,7 +38,7 @@ export const fetchBook = (id) => {
 export const fetchLimitedBooks = () => {
   return dispatch => {
     return BookAPIUtil.fetchLimitedBooks().then(
-      (bookshelf) => {
+      (books) => {
         return dispatch(receiveBooks(books));
       },
       (errors) => dispatch(receiveErrors(errors.responseJSON))
@@ -49,7 +49,41 @@ export const fetchLimitedBooks = () => {
 export const fetchBooksByShelf = (bookshelfId) => {
   return dispatch => {
     return BookAPIUtil.fetchBooksByShelf(bookshelfId).then(
-      (bookshelf) => {
+      (books) => {
+        return dispatch(receiveBooks(books));
+      },
+      (errors) => dispatch(receiveErrors(errors.responseJSON))
+    );
+  };
+};
+
+export const fetchBooksByUser = (userId) => {
+  return dispatch => {
+    return BookAPIUtil.fetchBooksByUser(userId).then(
+      (payload) => {
+        return dispatch(receiveBooks(payload.books));
+      },
+      (errors) => {
+        return dispatch(receiveErrors(errors.responseJSON));}
+    );
+  };
+};
+
+export const fetchBooksByQuery = (query) => {
+  return dispatch => {
+    return BookAPIUtil.fetchBooksByQuery(query).then(
+      (books) => {
+        return dispatch(receiveBooks(books));
+      },
+      (errors) => dispatch(receiveErrors(errors.responseJSON))
+    );
+  };
+};
+
+export const createApiBooks = (data) => {
+  return dispatch => {
+    return BookAPIUtil.createApiBooks(data).then(
+      (books) => {
         return dispatch(receiveBooks(books));
       },
       (errors) => dispatch(receiveErrors(errors.responseJSON))

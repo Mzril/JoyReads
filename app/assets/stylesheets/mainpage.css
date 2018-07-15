@@ -1,5 +1,6 @@
 .site-content{
-  width: 970px;
+  max-width: 970px;
+  min-width: 200px;
   margin: auto;
   flex-direction: column;
   margin-top: 15px;
@@ -14,6 +15,12 @@
   border-bottom: 1px solid #BBB596;
   color: #00635d;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.right-aside{
+  display: flex;
 }
 
 .main-header-link{
@@ -23,21 +30,32 @@
   text-decoration: solid;
 }
 
-.main-header-link:hover{
-  text-decoration: underline;
+.main-header-link{
+  text-decoration:none;
+  display: inline-block;
+}
+.main-header-link:after{
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+  background: transparent;
+  transition: width .5s ease, background-color .5s ease; /* .5 seonds for changes to the width and background-color */
+  -webkit-transition: width .5s ease, background-color .5s ease; /* Chrome and Safari */
+  -moz-transition: width .5s ease, background-color .5s ease; /* FireFox */
 }
 
-.index-table{
-  display: flex;
-  justify-content: center;
+.main-header-link:hover:after{
+  width: 100%;
+  background: #00635d;
 }
+
 
 .whole-aside{
   margin-right: 20px;
 }
 
 .booktable{
-  width: 750px;
   margin: auto;
   text-align: center;
   font-size: 40px;

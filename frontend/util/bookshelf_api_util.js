@@ -35,3 +35,26 @@ export const createBookshelf = (bookshelf) => {
     data: {bookshelf:bookshelf}
   });
 };
+
+export const createShelving = (data) => {
+  return $.ajax({
+    method: "POST",
+    url: `/api/shelvings`,
+    data: {shelving :data}
+  });
+};
+
+export const updateShelving = (data) => {
+  return $.ajax({
+    method: "POST",
+    url: `/api/shelvings`,
+    data: {shelving :data}
+  });
+};
+
+export const deleteShelving = (id) => {
+  return $.ajax({
+    method: "DELETE",
+    url: `/api/shelvings/${id}`,
+  });
+};

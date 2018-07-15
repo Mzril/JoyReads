@@ -23,18 +23,24 @@ class Navbar extends React.Component {
                     </div>);
     } else {
       navbuttons = (<div className="nav-buttons">
-                      <span>{this.props.currentUser.username}</span>
+                      <Link to={`/users/${this.props.currentUser.id}`} >{this.props.currentUser.username}</Link>
                       <a onClick={this.handleClick}>Log Out</a>
                     </div>);
     }
     return (
       <div className="nav-bar">
-        <div>
-          <Link to="/" style={{ textDecoration: 'none' }}><span className="nav-logo joy">joy</span>
-          <span className="nav-logo reads">Reads</span></Link>
+        <div className="nav-bar-main">
+          <div style={{display: `flex`}}>
+            <Link to="/home" style={{ textDecoration: 'none' }}><span className="nav-logo joy">joy</span>
+            <span className="nav-logo reads">Reads</span></Link>
+            <div className="nav-buttons" >
+              <Link to="/home">Home</Link>
+              <Link to="/books">My Books</Link>
+            </div>
+          </div>
+          <input className="nav-search-bar" disabled type="search" placeholder="Search books"/>
+          {navbuttons}
         </div>
-        <input className="nav-search-bar" disabled type="search" placeholder="Search books"/>
-        {navbuttons}
       </div>
     );
   }

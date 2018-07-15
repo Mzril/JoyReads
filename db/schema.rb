@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_12_020834) do
+ActiveRecord::Schema.define(version: 2018_07_15_081233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,10 +40,11 @@ ActiveRecord::Schema.define(version: 2018_07_12_020834) do
     t.string "title", null: false
     t.string "description", null: false
     t.string "author", null: false
-    t.integer "isbn_13", null: false
     t.date "published_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "isbn_13"
+    t.string "image_url"
     t.index ["isbn_13"], name: "index_books_on_isbn_13", unique: true
   end
 
@@ -54,6 +55,17 @@ ActiveRecord::Schema.define(version: 2018_07_12_020834) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "title"], name: "index_bookshelves_on_user_id_and_title", unique: true
     t.index ["user_id"], name: "index_bookshelves_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "book_id", null: false
+    t.integer "rating", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id", "user_id"], name: "index_reviews_on_book_id_and_user_id", unique: true
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "shelvings", force: :cascade do |t|

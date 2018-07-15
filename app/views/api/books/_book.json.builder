@@ -1,3 +1,4 @@
-json.extract! book, :id, :title, :description, :isbn_i3, :published_date
+json.extract! book, :id, :title, :description, :isbn_13, :published_date
+json.photoUrl book.image_url
 
 #add review_ids, score, avg score once you begin reviews

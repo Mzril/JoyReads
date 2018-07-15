@@ -17,11 +17,10 @@
 }
 
 .shelves {
-  display: inline-flex;
   margin-right: 0;
   word-wrap: break-word;
   word-break: break-all;
-  width: 140px;
+  max-width: 140px;
   vertical-align: center;
   font-size: 14px;
   color: #00635d;
@@ -29,12 +28,34 @@
   line-height: 18px;
 }
 
-.shelves:hover{
-  text-decoration: underline;
+.shelves{
+  text-decoration:none;
+  display: inline-block;
 }
 
-.shelves.tag:hover{
-  text-decoration: none;
+.shelves:after{
+  content: '';
+  display: block;
+  height: 1px;
+  width: 0;
+  background: transparent;
+  transition: width .5s ease, background-color .5s ease; /* .5 seonds for changes to the width and background-color */
+  -webkit-transition: width .5s ease, background-color .5s ease; /* Chrome and Safari */
+  -moz-transition: width .5s ease, background-color .5s ease; /* FireFox */
+}
+
+.shelves:hover:after{
+  width: 100%;
+  background: #00635d;
+}
+
+.all:hover:after{
+  width: 100%;
+  background: lightgrey;
+}
+
+.tag:hover:after{
+  background: white;
 }
 
 .shelves.tag{
@@ -113,4 +134,8 @@
 .shelf-form {
   padding-bottom: 10px;
   border-bottom: 1px solid #d8d8d8;
+}
+
+.holders {
+  line-height: 17px;
 }

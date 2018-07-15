@@ -130,7 +130,7 @@ const mSP = (state) => {
 const mDP = (dispatch) => {
   return {
     signUp: (user) => dispatch(signup(user)),
-    login: ()=> dispatch(login({email: "wnbs36@gmail.com", password: "password1"}))
+    login: ()=> dispatch(login({email: "morty@gmail.com", password: "password1"}))
   };
 };
 

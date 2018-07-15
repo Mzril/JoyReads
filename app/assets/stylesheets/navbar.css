@@ -1,14 +1,16 @@
 .nav-bar {
-  display:flex;
-  justify-content: space-around;
   background-color: #F4F2E9;
   box-shadow: 0 1px 1px rgba(0,0,0,0.15);
-  align-items: center;
   color: #382110;
+  display: flex;
+  justify-content: center;
 }
 
-.nav-search-bar{
-
+.nav-bar-main{
+  width: 1200px;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
 }
 
 .nav-logo{
@@ -31,7 +33,18 @@
 .nav-buttons > a, .nav-buttons >span{
   text-decoration: none;
   color: #382110;
-  padding: 10px;
+  padding: 10px 15px 10px 15px;
+  transition-property: background;
+  transition-duration: .8s;
+}
+
+.footer-links{
+  transition-property: background;
+  transition-duration: .8s;
+}
+
+i {
+  transition-duration: .5s;
 }
 
 .nav-buttons a:hover, .nav-buttons span:hover{
