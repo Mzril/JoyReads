@@ -74,7 +74,7 @@ class BookshelvesIndex extends React.Component {
   shelves(bookshelfIds, bookshelves){
     const total_number = 0;
     const bookshelfids = bookshelfIds.slice();
-    let exclusive = bookshelfids.splice(0,3).map(id => <Link to={`/bookshelves/${id}`} className="shelves" key={id}>{bookshelves[id].title} (0)</Link>);
+    let exclusive = bookshelfids.splice(0,3).map(id => <Link to={`/bookshelves/${id}`} className="shelves" key={id}>{bookshelves[id].title} ({bookshelves[id].book_ids.length})</Link>);
     let shelves = bookshelfids.map(id => {
       return (<div key={id} className="bookshelf-item">
                 <Link to={`/bookshelves/${id}`} className="shelves" key={id}>{bookshelves[id].title} (0)</Link>
@@ -84,7 +84,8 @@ class BookshelvesIndex extends React.Component {
                 </span>
               </div>);
             });
-    return (<div className="users-shelf-container">
+
+    return   (<div className="users-shelf-container">
               <div className="shelves tag">Bookshelves</div>
               <div>
                 <Link to="/books" className="shelves all">All ({total_number})</Link>
@@ -117,8 +118,8 @@ class BookshelvesIndex extends React.Component {
 
 const mSP = (state, ownProps)=>{
   let user;
-  if(ownProps.user){
-    user = ownProps.user;
+  if(ownProps.match.params.userId){
+    user = ownProps.match.params.userId;
   } else if(state.session.currentUserId){
     user = state.entities.users[state.session.currentUserId];
   } else {

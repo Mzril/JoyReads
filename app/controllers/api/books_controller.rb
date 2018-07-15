@@ -13,7 +13,7 @@ class Api::BooksController < ApplicationController
 
   def user
     @user = User.find(params[:user_id])
-    if @user
+    if @user.books
       render "api/users/show"
     else
       render json: ["No Such User"], status: 404

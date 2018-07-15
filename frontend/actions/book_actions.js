@@ -18,6 +18,7 @@ export const receiveBook= (book) => {
 };
 
 export const receiveErrors= (errors) => {
+  debugger
   return {
     type: RECEIVE_BOOK_ERRORS,
     errors: errors
@@ -47,6 +48,7 @@ export const fetchLimitedBooks = () => {
 };
 
 export const fetchBooksByShelf = (bookshelfId) => {
+  debugger
   return dispatch => {
     return BookAPIUtil.fetchBooksByShelf(bookshelfId).then(
       (books) => {
@@ -63,8 +65,7 @@ export const fetchBooksByUser = (userId) => {
       (payload) => {
         return dispatch(receiveBooks(payload.books));
       },
-      (errors) => {
-        return dispatch(receiveErrors(errors.responseJSON));}
+      (errors) => dispatch(receiveErrors(errors.responseJSON))
     );
   };
 };
