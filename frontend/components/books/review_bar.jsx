@@ -19,9 +19,9 @@ class ReviewBar extends React.Component{
   }
 
   render(){
-    if(this.props.currentUser){
+    if(this.props.currentUser !== null || this.props.currentUser !== undefined){
       let addedclass= "";
-      if(this.props.biggerstars){
+      if(this.props.currentUser !== null || this.props.currentUser !== undefined){
         addedclass = "biggerstars";
       }
       return (<div onClick={this.handleSubmit.bind(this)}>

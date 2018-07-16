@@ -4,15 +4,14 @@ import {createShelving} from "./../../actions/bookshelf_actions";
 
 class ShelfDropDown extends React.Component{
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.handleSubmit = this.handleSubmit;
   }
 
-
   render(){
-      if(this.props.currentUser){
-        const userShelves = currentUser.bookshelf_ids;
+      if(this.props.currentUser !== null || this.props.currentUser !== undefined){
+        const userShelves = this.props.currentUser.bookshelf_ids;
         return (<div>
                   <div>
                     DropdownHere
