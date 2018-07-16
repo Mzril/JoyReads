@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :reviews,
     dependent: :destroy
 
-  # has_one_attached :photo
+  has_one_attached :photo
 
   attr_reader :password
   after_initialize :ensure_session_token
