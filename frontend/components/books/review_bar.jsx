@@ -12,7 +12,6 @@ class ReviewBar extends React.Component{
 
   change(e){
     const derp = e.currentTarget.value;
-    console.log(derp);
   }
 
   handleSubmit(e){

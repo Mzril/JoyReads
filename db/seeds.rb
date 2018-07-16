@@ -25,10 +25,3 @@ shelf7 = Bookshelf.create(title: "Read", user_id: user3.id)
 shelf8 = Bookshelf.create(title: "Currently Reading", user_id: user3.id)
 shelf9 = Bookshelf.create(title: "Want to Read", user_id: user3.id)
 shelf10 = Bookshelf.create(title: "Favorites", user_id: user1.id)
-
-book1 = Book.new(title: "Nintendo", description: "Examines the company Nintendo and the people who took it from a card company to a leader in the video gaming world." ,author: "Mary Firestone", isbn_13: "978167148095", published_date: "2011-01-01")
-file1 = EzDownload.open('https://books.google.com/books/content?id=Cp2iohZHy8oC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api')
-book1.photo.attach(io: file1, filename: 'book1.jpg')
-book1.save
-
-shelving1 = Shelving.create(book_id: book1.id, bookshelf_id: shelf9.id)
