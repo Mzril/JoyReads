@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
 import {createApiBooks} from "./../../actions/book_actions";
 import * as BookAPIUtil from "./../../util/book_api_util";
@@ -28,12 +28,22 @@ class GoogleApi extends React.Component{
 
   handleOne(e){
     const idx = e.currentTarget.getAttribute("derp");
-    this.props.createApiBooks([this.state.data[idx]]);
+    this.props.createApiBooks([this.state.data[idx]]).then((response)=>(this.props.history.push(`/books/${response.books[0].id}`)));
   }
-
   render(){
-
     if(this.props.currentUser !==undefined && this.props.currentUser.username === "Admin" ){
+      const results = [];
+      for (var i = 0; i < this.state.data.length; i++) {
+        const book = this.state.data[i];
+        if(!book.volumeInfo.imageLinks){
+          continue;
+        } else{
+          results.push(<div key={i}><li >{`${book.volumeInfo.title}`}</li>
+              <img className="book-image" src={`${book.volumeInfo.imageLinks.thumbnail}`}/>
+              <button derp={i} onClick={this.handleOne.bind(this)}>Add This to DB</button>
+            </div>);
+        }
+      }
       return (
         <div className="api">
           <div className="api-search">
@@ -45,12 +55,7 @@ class GoogleApi extends React.Component{
           <div className= "api-results">
             Is the book you want in here? Click Add to DB if so!
             <div className = "api-result">
-              {this.state.data.map((book,i) =>
-                <div key={i}><li >{`${book.volumeInfo.title}`}</li>
-                  <img className="book-image" src={`${book.volumeInfo.imageLinks.thumbnail}`}/>
-                  <button derp={i} onClick={this.handleOne.bind(this)}>Add This to DB</button>
-                </div>)
-              }
+              {results}
             </div>
           </div>
         </div>
@@ -74,4 +79,4 @@ const mDP = (dispatch, ownProps)=>{
 };
 
 
-export default connect(mSP, mDP)(GoogleApi);
+export default connect(mSP, mDP)(withRouter(GoogleApi));

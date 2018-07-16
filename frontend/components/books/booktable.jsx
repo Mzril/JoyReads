@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {withRouter, Redirect} from 'react-router-dom';
+import ShelfDropDown from "./shelf_drop_down";
+import ReviewBar from "./review_bar";
+import {withRouter, Redirect, Link} from 'react-router-dom';
 import {fetchBooksByShelf, fetchLimitedBooks, fetchBooksByQuery, fetchBooksByUser} from "./../../actions/book_actions";
 
 class BookTable extends React.Component{
@@ -30,7 +32,6 @@ class BookTable extends React.Component{
   }
 
   componentWillUnmount(){
-    debugger
     this.locals = {visitedhome: false , updated: false, visitedindex: false};
     this.locals.is_mounted = false;
   }
@@ -128,15 +129,17 @@ class BookTable extends React.Component{
   table(){
     const table = this.state.displayedBookIds.map((bookId, i) => {
       return (<div key={i} className="book-info-container">
+                <Link to={`/books/${bookId}`}>
                 <img className="book-image" src={this.props.books[bookId].photoUrl}/>
+                </Link>
                 <span className="book-title">
                   {this.props.books[bookId].title}
                 </span>
                 <div>
-                  Review Container
+                  <ReviewBar starkey={`${bookId}`}/>
                 </div>
                 <div>
-                  Status Container
+                  <ShelfDropDown/>
                 </div>
               </div>);
     });
@@ -156,7 +159,7 @@ class BookTable extends React.Component{
       );
     }else if(this.state.displayedBookIds.length === 0){
       return(<div className="booktable max">
-        Loading...
+
       </div>);
     }
     return (

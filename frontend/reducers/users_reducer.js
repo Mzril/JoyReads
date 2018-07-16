@@ -14,7 +14,6 @@ const usersReducer = (state = {}, action) => {
       userShelves.splice( userShelves.indexOf(action.bookshelf.id), 1);
       return newState;
     case RECEIVE_ONE_BOOKSHELF:
-      // debugger
       newState = merge({}, state);
       userShelves = newState[action.bookshelf.user_id].bookshelf_ids;
       let exists = userShelves.indexOf(action.bookshelf.id);

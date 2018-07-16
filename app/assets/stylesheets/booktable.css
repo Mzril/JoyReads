@@ -6,14 +6,7 @@
   width: 150px;
   box-sizing: border-box;
   padding: 5px;
-  height: 300px;
-}
-
-.booktable{
-  min-width: 150px;
-  max-width: 750px;
-  display: flex;
-  flex-wrap: wrap;
+  height: 315px;
 }
 
 .book-image{
@@ -27,6 +20,13 @@
 
 .book-image:hover{
   width: 135px;
+}
+
+.booktable{
+  min-width: 150px;
+  max-width: 750px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .book-title{
