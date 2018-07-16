@@ -11,7 +11,7 @@ class Book < ApplicationRecord
   has_many :reviews,
     dependent: :destroy
 
-  has_one_attached :photo
+  # has_one_attached :photo
 
   def self.in_shelf(id)
     Book.joins(:shelvings).where("shelvings.bookshelf_id = ?", id)
