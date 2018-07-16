@@ -1,27 +1,41 @@
 import {connect} from 'react-redux';
 import React from 'react';
-
-
+import {createShelving} from "./../../actions/bookshelf_actions";
 
 class ShelfDropDown extends React.Component{
 
+  constructor(){
+    super();
+    this.handleSubmit = this.handleSubmit;
+  }
+
+
   render(){
-      return (<div>
-                <div>Add To Shelf</div>
-              </div>);
+      if(this.props.currentUser){
+        const userShelves = currentUser.bookshelf_ids;
+        return (<div>
+                  <div>
+                    DropdownHere
+                  </div>
+                </div>);
+      } else {
+        return (<div>
+                  <div></div>
+                </div>);
+      }
   }
 }
 
 const mSP = (state, ownProps)=>{
   return {
-    // userShelves: state.entities.users[state.session.currentUserId].bookshelf_ids,
-    // bookshelves: state.entities.bookshelves
+    currentUser: state.entities.users[state.session.currentUserId],
+    bookshelves: state.entities.bookshelves
   };
 };
 
 const mDP = (dispatch, ownProps)=>{
   return {
-    fetchBook: (id)=>dispatch(fetchBook(id))
+    createShelving: (data)=>dispatch(createShelving(data))
   };
 };
 

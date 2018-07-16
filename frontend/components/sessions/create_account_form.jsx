@@ -14,6 +14,7 @@ class CreateAccountForm extends React.Component {
       clicked: false
     };
 
+    this.changed = true;
     this.errorform = this.errorform.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,24 +25,30 @@ class CreateAccountForm extends React.Component {
   }
 
   updateUsername(e){
+    this.changed = true;
     this.setState({username: e.currentTarget.value});
   }
 
   updateEmail(e){
+    this.changed = true;
     this.setState({email: e.currentTarget.value});
   }
 
   updatePassword(e){
+    this.changed = true;
     this.setState({password: e.currentTarget.value});
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    const user = Object.assign( {}, this.state);
-    this.props.signUp(user).then(()=>console.log("derp"),()=>this.setState({clicked:false}));
+    if(this.changed){
+      e.preventDefault();
+      const user = Object.assign( {}, this.state);
+      this.props.signUp(user).then(()=>console.log("derp"),()=>this.setState({clicked:false}));
+    }
   }
 
   handleClear(){
+    this.changed = false;
     this.setState({clicked: true});
   }
 

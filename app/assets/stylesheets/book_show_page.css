@@ -21,6 +21,12 @@
   font-size: 14px;
 }
 
+.only-logged-in{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .book-show-title{
   font-size: 16px;
   margin-bottom: 5px;
@@ -60,4 +66,23 @@ label.star:hover{
 label.star:before{
   content:'\f006';
   font-family: FontAwesome;
+}
+
+input.star.biggerstars{
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+label.star.biggerstars{
+  font-size: 25px;
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 10px;
+}
+
+input.star-5:checked ~ label.star:before {
+  color:#1e8;
+  text-shadow: 2px 2px 3px #0a6;
 }

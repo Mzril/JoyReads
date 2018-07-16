@@ -2,6 +2,10 @@ export const RECEIVE_USER_BOOKSHELVES = "RECEIVE_USER_BOOKSHELVES";
 export const RECEIVE_BOOKSHELF_ERRORS = "RECEIVE_BOOKSHELF_ERRORS";
 export const RECEIVE_ONE_BOOKSHELF = "RECEIVE_ONE_BOOKSHELF";
 export const REMOVE_BOOKSHELF = "REMOVE_BOOKSHELF";
+export const RECEIVE_SHELVING = "RECEIVE_SHELVING";
+export const UPDATE_SHELVING = "UPDATE_SHELVING";
+export const REMOVE_SHELVING = "RECEIVE_SHELVING";
+
 import * as BookshelfAPIUtil from './../util/bookshelf_api_util';
 
 export const receiveBookshelves = (bookshelves) => {
@@ -18,10 +22,31 @@ export const receiveBookshelf= (bookshelf) => {
   };
 };
 
+export const receieveShelving= (shelving) => {
+  return {
+    type: RECEIVE_SHELVING,
+    shelving: shelving
+  };
+};
+
+export const updateExclusiveShelving= (shelving) => {
+  return {
+    type: UPDATE_SHELVING,
+    shelving: shelving
+  };
+};
+
 export const removeBookshelf = (bookshelf)=>{
   return {
     type: REMOVE_BOOKSHELF,
     bookshelf: bookshelf
+  };
+};
+
+export const removeShelving = (shelving)=>{
+  return {
+    type: REMOVE_SHELVING,
+    shelving: shelving
   };
 };
 
@@ -81,6 +106,39 @@ export const deleteBookshelf = (id) => {
     return BookshelfAPIUtil.deleteBookshelf(id).then(
       (bookshelf) => {
         return dispatch(removeBookshelf(bookshelf));
+      },
+      (errors) => dispatch(receiveErrors(errors.responseJSON))
+    );
+  };
+};
+
+export const createShelving = (data) => {
+  return dispatch => {
+    return BookshelfAPIUtil.createShelving(data).then(
+      (shelving) => {
+        return dispatch(receieveShelving(shelving));
+      },
+      (errors) => dispatch(receiveErrors(errors.responseJSON))
+    );
+  };
+};
+
+export const updateShelving = (data) => {
+  return dispatch => {
+    return BookshelfAPIUtil.createShelving(data).then(
+      (shelving) => {
+        return dispatch(updateExclusiveShelving(shelving));
+      },
+      (errors) => dispatch(receiveErrors(errors.responseJSON))
+    );
+  };
+};
+
+export const deleteShelving = (data) => {
+  return dispatch => {
+    return BookshelfAPIUtil.createShelving(data).then(
+      (shelving) => {
+        return dispatch(removeShelving(shelving));
       },
       (errors) => dispatch(receiveErrors(errors.responseJSON))
     );

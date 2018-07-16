@@ -30,8 +30,8 @@ class BookShowPage extends React.Component{
     let userOptions = "";
     if(this.props.currentUser){
       userOptions = (<div className="only-logged-in">
-        <ReviewBar className="show-stars"/>
-        <ShelfDropDown/>
+        <ReviewBar className="show-stars" biggerstars="true"/>
+        <ShelfDropDown biggerdropdown="true"/>
       </div>);
     }
     const id = this.props.match.params.bookId;

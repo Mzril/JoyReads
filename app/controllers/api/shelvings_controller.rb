@@ -7,23 +7,32 @@ class Api::ShelvingsController < ApplicationController
     if @shelving.save
       render :show
     else
-      render json: ["Cannot Create"], status: 401
+      render json: ["You already have this book in your shelf"], status: 401
     end
   end
 
-  def create
+  def update
     @shelving = Shelving.find(params[:id])
-    if @shelving && @shelving.update(shelving_params)
-      render :show
+    if @shelving
+      @previous = {book_id: @shelving.book_id, bookshelf_id: @shelving.bookshelf_id}
+      if @shelving.update(shelving_params)
+        render :updated
+      else
+        render json: @shelving.errors.full_messages, status: 401
+      end
     else
-      render json: ["Cannot Update"], status: 401
+      render json: ["Can't be found"], status: 404
     end
   end
 
   def destroy
     @shelving = Shelving.find(params[:id])
-    @shelving.destroy
-    render :show
+    if @shelving
+      @shelving.destroy
+      render :show
+    else
+      render json: ["Shelving Doesn't exist"], status: 404
+    end
   end
 
   private

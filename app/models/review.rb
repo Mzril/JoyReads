@@ -3,7 +3,6 @@ class Review < ApplicationRecord
   validates :book_id, uniqueness: {scope: :user_id, message: "one review per user"}
 
   belongs_to :book
-
   belongs_to :user
 
 end
