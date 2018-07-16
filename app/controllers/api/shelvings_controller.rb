@@ -7,7 +7,7 @@ class Api::ShelvingsController < ApplicationController
     if @shelving.save
       render :show
     else
-      render json: ["Cannot Create"]
+      render json: ["Cannot Create"], status: 401
     end
   end
 
@@ -16,7 +16,7 @@ class Api::ShelvingsController < ApplicationController
     if @shelving && @shelving.update(shelving_params)
       render :show
     else
-      render json: ["Cannot Update"]
+      render json: ["Cannot Update"], status: 401
     end
   end
 

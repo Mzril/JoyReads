@@ -36,43 +36,6 @@ class BookTable extends React.Component{
     this.locals.is_mounted = false;
   }
 
-  // shouldComponentUpdate(nextProps){
-  //   if(nextProps.user !== this.props.user){
-  //     this.locals = {visitedhome: false , updated: false, visitedindex: false};
-  //     return true;
-  //   }
-  //   if((this.props.user !== nextProps.user) && nextProps.user === null){
-  //     this.initialize.bind(this)();
-  //   } else if(!this.locals.visitedhome && nextProps.location.pathname==="/home" &&  nextProps.user){
-  //     this.initialize.bind(this)();
-  //   } else if(this.props.location.pathname !== nextProps.location.pathname && nextProps.location.pathname == '/books'){
-  //       if(this.locals.visitedindex === false && nextProps.user!==null){
-  //         this.locals.visitedindex = true;
-  //         nextProps.fetchBooksByUser(nextProps.user).then(response => {
-  //           const ids = response.books.map(book=>book.id);
-  //           this.setState({displayedBookIds: ids});});
-  //       } else if(this.props.user !== null){
-  //         let displayedBookIds=[];
-  //         nextProps.user.bookshelf_ids.forEach(shelfId => {
-  //           displayedBookIds.concat(nextProps.bookshelves[shelfId].book_ids);
-  //         });
-  //         this.setState({displayedBookIds: displayedBookIds});
-  //       } else {
-  //         this.props.history.push('/');
-  //       }
-  //   }else if(this.props.location.pathname !== nextProps.location.pathname && nextProps.match.params.bookshelfId ){
-  //     if(this.locals.visitedindex === false){
-  //       this.props.fetchBooksByShelf(nextProps.match.params.bookshelfId).
-  //         then(response => {
-  //           const ids = response.books.map(book=>book.id);
-  //           this.setState({displayedBookIds: ids});});
-  //     }else{
-  //       this.setState({displayedBookIds: nextProps.bookshelves[nextProps.match.params.bookshelfId].book_ids});
-  //     }
-  //   }
-  //   return true;
-  // }
-
   shouldComponentUpdate(nextProps){
     if(nextProps.user !==null && nextProps.user !== this.props.user){
       // Reset, if the user you're viewing is different from the last user, and you did snot log out.
