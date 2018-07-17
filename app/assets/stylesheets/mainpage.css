@@ -21,6 +21,8 @@
 
 .right-aside{
   display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .main-header-link{
@@ -56,7 +58,6 @@
 }
 
 .booktable{
-  margin: auto;
   text-align: center;
   font-size: 40px;
 }

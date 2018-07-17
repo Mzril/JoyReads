@@ -1,11 +1,28 @@
 export const RECEIVE_BOOKS = "RECEIVE_BOOKS";
 export const RECEIVE_BOOK_ERRORS = "RECEIVE_BOOK_ERRORS";
 export const RECEIVE_ONE_BOOK = "RECEIVE_ONE_BOOK";
+export const RECEIVE_INDEX = "RECEIVE_INDEX";
+export const RECEIVE_USER_BOOKS = "RECEIVE_USER_BOOKS";
 import * as BookAPIUtil from './../util/book_api_util';
 
 export const receiveBooks = (books) => {
   return {
     type: RECEIVE_BOOKS,
+    books: books
+  };
+};
+
+export const receiveUserBooks = (books, userId) => {
+  return {
+    type: RECEIVE_USER_BOOKS,
+    books: books,
+    userId: userId
+  };
+};
+
+export const receiveIndex = (books) => {
+  return {
+    type: RECEIVE_INDEX,
     books: books
   };
 };
@@ -39,7 +56,7 @@ export const fetchLimitedBooks = () => {
   return dispatch => {
     return BookAPIUtil.fetchLimitedBooks().then(
       (books) => {
-        return dispatch(receiveBooks(books));
+        return dispatch(receiveIndex(books));
       },
       (errors) => dispatch(receiveErrors(errors.responseJSON))
     );
@@ -61,7 +78,7 @@ export const fetchBooksByUser = (userId) => {
   return dispatch => {
     return BookAPIUtil.fetchBooksByUser(userId).then(
       (payload) => {
-        return dispatch(receiveBooks(payload.books));
+        return dispatch(receiveUserBooks(payload.books, payload.user.id));
       },
       (errors) => dispatch(receiveErrors(errors.responseJSON))
     );

@@ -16,7 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
         users: { [window.payload.user.id]: window.payload.user },
         bookshelves: initialshelf
       },
-      session: { currentUserId: window.payload.user.id }
+      session: {
+        currentUserId: window.payload.user.id
+      },
+      ui: {visitedUsers: {[window.payload.user.id]: true}}
     };
     store = configureStore(preloadedState);
     delete window.payload;

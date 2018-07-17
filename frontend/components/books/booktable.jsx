@@ -9,75 +9,47 @@ class BookTable extends React.Component{
 
   constructor(props){
     super(props);
-    this.state = {displayedBookIds: [], homeIds: []};
-    this.locals = {visitedhome: false , updated: false, visitedindex: false, is_mounted: false};
+    this.state = {displayedBookIds: []};
+    //I also have props from Route
   }
 
   componentDidMount(){
-    this.locals.is_mounted = true;
-    if(this.props.user === null || this.props.location.pathname === "/home"){
-      this.locals.visitedhome = true;
-      this.props.fetchLimitedBooks().then(response => {
-        const ids = response.books.map(book=>book.id);
-        this.setState({displayedBookIds: ids, homeIds: ids});});
-    }else if(this.props.user && this.props.location.pathname === "/books"){
-      this.getFromUser.bind(this)();
-    }else if(this.props.match.params){
-      if(this.props.match.params.id){
+    debugger
+    if(this.props.location.pathname === "/home"){
+      if(!this.props.ui.visitedIndex || this.props.ui.updated){
+        this.getFromHome.bind(this)();
+      } else {
+        this.setState({displayedBookIds: this.props.ui.indexBookIds });
+      }
+    }else if(this.props.location.pathname === "/books" && this.props.user){
+      if(this.props.ui.updated || !this.props.ui.visitedUsers[this.props.user.id]){
         this.getFromUser.bind(this)();
-      }else if(this.props.match.params.bookshelfId){
-        this.getFromShelf.bind(this)();
+      }else{
+        let userBookIds = [];
+        this.props.user.bookshelf_ids.forEach((shelfId)=>{
+          userBookIds = userBookIds.concat(this.props.bookshelves[shelfId].book_ids);
+        });
+        this.setState({displayedBookIds: userBookIds});
       }
     }
   }
 
   componentWillUnmount(){
-    this.locals = {visitedhome: false , updated: false, visitedindex: false};
-    this.locals.is_mounted = false;
+
   }
 
-  // shouldComponentUpdate(nextProps){
-  //   if(nextProps.user !==null && nextProps.user !== this.props.user){
-  //     // Reset, if the user you're viewing is different from the last user, and you did snot log out.
-  //     this.locals = {visitedhome: false , updated: false, visitedindex: false};
-  //     return true;
-  //   }
-  //   let {visitedhome, visitedindex, updated} = this.locals;
-  //   //If you're on home screen, and you didn't visit/fetch. Else, just setState and move on
-  //   if(visitedhome===false && nextProps.location.pathname === "/home"){
-  //     this.getFromHome.bind(this)();
-  //     return true;
-  //   } else if (visitedhome === true && this.props.location.pathname !== nextProps.location.pathname && nextProps.location.pathname === "/home"){
-  //     this.setState({displayedBookIds: this.state.homeIds});
-  //     return true;
-  //   } else if(nextProps.user === null && nextProps.location.pathname === "/books"){
-  //     return true;
-  //   } else if (visitedindex === false && nextProps.location.pathname === "/books"){
-  //     // if the next/current_path is index/not visited, fetch accordingly
-  //     this.getFromUser.bind(this)();
-  //     return true;
-  //   }else if(visitedindex === true && this.props.location.pathname !== nextProps.location.pathname && nextProps.location.pathname === "/books"){
-  //     //if a user has visited "/books" and is now again on "/books"
-  //     let displayedBookIds=[];
-  //     this.props.user.bookshelf_ids.forEach(shelfId => {
-  //       displayedBookIds.concat(this.props.bookshelves[shelfId].book_ids);
-  //     });
-  //     this.setState({displayedBookIds: displayedBookIds});
-  //     return true;
-  //   }
-  //   return true;
-  // }
+  componentWillReceiveProps(){
+
+  }
 
   getFromHome(){
-    this.locals.visitedhome = true;
     this.props.fetchLimitedBooks().then(response => {
     const ids = response.books.map(book=>book.id);
-    this.setState({displayedBookIds: ids, homeIds: ids});});
+    this.setState({displayedBookIds: ids});});
   }
 
   getFromUser(){
     const id = this.props.match.params.userId || this.props.user.id;
-    this.locals.visitedindex = true;
     this.props.fetchBooksByUser(id).then(response => {
     const ids = response.books.map(book=>book.id);
     this.setState({displayedBookIds: ids});});
@@ -110,9 +82,10 @@ class BookTable extends React.Component{
   }
 
   render(){
+    debugger
     //Fix the bookshelf render route and why it's not updateing when visiting a shelf
-  
     if(this.props.user === null && this.props.location.pathname==="/books"){
+      debugger
       return (
         <Redirect to="/" />
       );
@@ -148,7 +121,8 @@ const mSP = (state, ownProps)=>{
     user: user,
     bookshelves: state.entities.bookshelves,
     books: state.entities.books,
-    errors: state.errors.books
+    errors: state.errors.books,
+    ui: state.ui
   };
 };
 
