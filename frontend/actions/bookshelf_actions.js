@@ -29,13 +29,6 @@ export const receiveShelving= (shelving) => {
   };
 };
 
-export const updateExclusiveShelving= (shelving) => {
-  return {
-    type: UPDATE_SHELVING,
-    shelving: shelving
-  };
-};
-
 export const removeBookshelf = (bookshelf)=>{
   return {
     type: REMOVE_BOOKSHELF,
@@ -46,6 +39,20 @@ export const removeBookshelf = (bookshelf)=>{
 export const removeShelving = (shelving)=>{
   return {
     type: REMOVE_SHELVING,
+    shelving: shelving
+  };
+};
+
+export const updateExclusiveShelving= (shelving) => {
+  return {
+    type: UPDATE_EXCLUSIVE_SHELVING,
+    shelving: shelving
+  };
+};
+
+export const createExclusiveShelving= (shelving) => {
+  return {
+    type: RECEIVE_EXCLUSIVE_SHELVING,
     shelving: shelving
   };
 };

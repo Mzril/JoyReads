@@ -56,6 +56,10 @@ class ShelfDropDown extends React.Component{
 
   render(){
       if(this.props.currentUser !== null && this.props.currentUser !== undefined){
+        const deleteFromAll = {value: -1,
+        label: <div className="take-all-space" onClick={this.stop} onMouseDown={this.statusclick} onTouchEnd={this.stop}>
+                    Remove
+                 </div>};
         const bookshelves=this.props.bookshelves;
         const {bookshelf_ids} = this.props.currentUser;
         const userShelves = bookshelf_ids.map((id,i) => {

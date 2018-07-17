@@ -29,4 +29,9 @@ class Api::StatusesController < ApplicationController
     end
   end
 
+  private
+  def status_params
+    params.require(:status).permit(:book_id, :user_id, :status)
+  end
+
 end
