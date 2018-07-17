@@ -10,18 +10,17 @@ class BookTable extends React.Component{
   constructor(props){
     super(props);
     this.state = {displayedBookIds: []};
-    //I also have props from Route
+    this.table = this.table.bind(this);
   }
 
   componentDidMount(){
-    debugger
-    if(this.props.location.pathname === "/home"){
+    if(this.props.currentPath === "/home"){
       if(!this.props.ui.visitedIndex || this.props.ui.updated){
         this.getFromHome.bind(this)();
       } else {
         this.setState({displayedBookIds: this.props.ui.indexBookIds });
       }
-    }else if(this.props.location.pathname === "/books" && this.props.user){
+    }else if(this.props.currentPath === "/books" && this.props.user){
       if(this.props.ui.updated || !this.props.ui.visitedUsers[this.props.user.id]){
         this.getFromUser.bind(this)();
       }else{
@@ -38,8 +37,21 @@ class BookTable extends React.Component{
 
   }
 
-  componentWillReceiveProps(){
-
+  componentWillReceiveProps(nextProps){
+    if(nextProps.currentPath === '/books'){
+      let userBookIds = [];
+      nextProps.user.bookshelf_ids.forEach((shelfId)=>{
+        userBookIds = userBookIds.concat(nextProps.bookshelves[shelfId].book_ids);
+      });
+      userBookIds = Array.from(new Set(userBookIds));
+      this.setState({displayedBookIds: userBookIds});
+    }else if(nextProps.currentPath === "/home"){
+      if(!nextProps.ui.visitedIndex || nextProps.ui.updated){
+        this.getFromHome.bind(this)();
+      }else{
+        this.setState({displayedBookIds: nextProps.ui.indexBookIds });
+      }
+    }
   }
 
   getFromHome(){
@@ -61,7 +73,7 @@ class BookTable extends React.Component{
     this.setState({displayedBookIds: ids});});
   }
 
-  table(){
+  table() {
     const table = this.state.displayedBookIds.map((bookId, i) => {
       return (<div key={i} className="book-info-container">
                 <Link to={`/books/${bookId}`}>
@@ -82,15 +94,13 @@ class BookTable extends React.Component{
   }
 
   render(){
-    debugger
-    //Fix the bookshelf render route and why it's not updateing when visiting a shelf
-    if(this.props.user === null && this.props.location.pathname==="/books"){
-      debugger
+    //Fix the bookshelf render route and why it's not updating when visiting a shelf
+    if(this.props.user === null && this.props.currentPath==="/books"){
       return (
         <Redirect to="/" />
       );
     }
-    if(this.state.displayedBookIds === undefined){
+    if(this.state.displayedBookIds.length===0){
       return (
         <div className="booktable max">
         </div>
@@ -102,7 +112,7 @@ class BookTable extends React.Component{
     }
     return (
       <div className="booktable">
-        {this.table.bind(this)()}
+        {this.table()}
       </div>
     );
   }
@@ -122,7 +132,8 @@ const mSP = (state, ownProps)=>{
     bookshelves: state.entities.bookshelves,
     books: state.entities.books,
     errors: state.errors.books,
-    ui: state.ui
+    ui: state.ui,
+    currentPath: ownProps.location.pathname
   };
 };
 
