@@ -33,7 +33,9 @@ class BookshelvesIndex extends React.Component {
   }
 
   handleDelete(e){
-    this.props.deleteBookshelf(parseInt(e.currentTarget.getAttribute("value"))).then(() => this.setState({creating: false, editing: false}));
+    this.setState({creating: false, editing: false});
+    this.props.history.push('/books');
+    this.props.deleteBookshelf(parseInt(e.currentTarget.getAttribute("value")));
   }
 
   handleCreate(e){
@@ -72,18 +74,23 @@ class BookshelvesIndex extends React.Component {
   }
 
   shelves(bookshelfIds, bookshelves){
-    const total_number = 0;
     const bookshelfids = bookshelfIds.slice();
-    let exclusive = bookshelfids.splice(0,3).map(id => <Link to={`/bookshelves/${id}`} className="shelves" key={id}>{bookshelves[id].title} ({bookshelves[id].book_ids.length})</Link>);
+    let total_book_ids = [];
+    let exclusive = bookshelfids.splice(0,3).map((id) =>{
+      total_book_ids = total_book_ids.concat(bookshelves[id].book_ids);
+      return <Link to={`/bookshelves/${id}`} className="shelves" key={id}>{bookshelves[id].title} ({bookshelves[id].book_ids.length})</Link>;
+    });
     let shelves = bookshelfids.map(id => {
+      total_book_ids = total_book_ids.concat(bookshelves[id].book_ids);
       return (<div key={id} className="bookshelf-item">
-                <Link to={`/bookshelves/${id}`} className="shelves" key={id}>{bookshelves[id].title} (0)</Link>
+                <Link to={`/bookshelves/${id}`} className="shelves" key={id}>{bookshelves[id].title} ({bookshelves[id].book_ids.length})</Link>
                 <span className="index-icons">
                   <i onClick={this.openForm("editing", id)} className="fa fa-pencil-square"></i>
                   <i value={id} onClick={this.handleDelete} className="fa fa-eraser"></i>
                 </span>
               </div>);
-            });
+    });
+    const total_number = Array.from(new Set(total_book_ids)).length;
 
     return   (<div className="users-shelf-container">
               <div className="shelves tag">Bookshelves</div>

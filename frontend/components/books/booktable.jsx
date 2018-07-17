@@ -25,6 +25,8 @@ class BookTable extends React.Component{
         this.getFromUser.bind(this)();
       }else{
         let userBookIds = [];
+        let userbookIds = Array.from(new Set(this.state.displayedBookIds));
+        userbookIds = userbookIds.sort().reverse();
         this.props.user.bookshelf_ids.forEach((shelfId)=>{
           userBookIds = userBookIds.concat(this.props.bookshelves[shelfId].book_ids);
         });
@@ -33,23 +35,26 @@ class BookTable extends React.Component{
     }
   }
 
-  componentWillUnmount(){
-
-  }
-
   componentWillReceiveProps(nextProps){
-    if(nextProps.currentPath === '/books'){
-      let userBookIds = [];
-      nextProps.user.bookshelf_ids.forEach((shelfId)=>{
-        userBookIds = userBookIds.concat(nextProps.bookshelves[shelfId].book_ids);
-      });
-      userBookIds = Array.from(new Set(userBookIds));
-      this.setState({displayedBookIds: userBookIds});
-    }else if(nextProps.currentPath === "/home"){
-      if(!nextProps.ui.visitedIndex || nextProps.ui.updated){
-        this.getFromHome.bind(this)();
-      }else{
-        this.setState({displayedBookIds: nextProps.ui.indexBookIds });
+    if(nextProps.user){
+      if(nextProps.currentPath === '/books'){
+        let userBookIds = [];
+        nextProps.user.bookshelf_ids.forEach((shelfId)=>{
+          userBookIds = userBookIds.concat(nextProps.bookshelves[shelfId].book_ids);
+        });
+        let userbookIds = Array.from(new Set(this.state.displayedBookIds));
+        userbookIds = userbookIds.sort().reverse();
+        this.setState({displayedBookIds: userBookIds});
+      }else if(nextProps.currentPath === "/home" && this.props.currentPath !== "/home"){
+        if(!nextProps.ui.visitedIndex || nextProps.ui.updated){
+          this.getFromHome.bind(this)();
+        }else{
+
+          this.setState({displayedBookIds: nextProps.ui.indexBookIds });
+        }
+      }else if(nextProps.match.params.bookshelfId){
+        const shelfId = nextProps.match.params.bookshelfId;
+        this.setState({displayedBookIds: nextProps.bookshelves[shelfId].book_ids});
       }
     }
   }
@@ -73,9 +78,12 @@ class BookTable extends React.Component{
     this.setState({displayedBookIds: ids});});
   }
 
-  table() {
-    const table = this.state.displayedBookIds.map((bookId, i) => {
-      return (<div key={i} className="book-info-container">
+  table(){
+    //Find out why you need to put the unique function here and not anywhere else
+    // let userbookIds = Array.from(new Set(this.state.displayedBookIds));
+    // userbookIds = userbookIds.sort().reverse();
+    const table = this.state.displayedBookIds.map((bookId) => {
+      return (<div key={bookId} className="book-info-container">
                 <Link to={`/books/${bookId}`}>
                 <img className="book-image" src={this.props.books[bookId].photoUrl}/>
                 </Link>
@@ -100,9 +108,10 @@ class BookTable extends React.Component{
         <Redirect to="/" />
       );
     }
-    if(this.state.displayedBookIds.length===0){
+    if(this.state.displayedBookIds.length===0 && this.props.location.pathname !=="/home"){
       return (
         <div className="booktable max">
+          No Books here yet...go add some!
         </div>
       );
     }else if(this.state.displayedBookIds.length === 0){
