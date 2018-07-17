@@ -25,11 +25,11 @@ class BookTable extends React.Component{
         this.getFromUser.bind(this)();
       }else{
         let userBookIds = [];
-        let userbookIds = Array.from(new Set(this.state.displayedBookIds));
-        userbookIds = userbookIds.sort().reverse();
         this.props.user.bookshelf_ids.forEach((shelfId)=>{
           userBookIds = userBookIds.concat(this.props.bookshelves[shelfId].book_ids);
         });
+        userBookIds = Array.from(new Set(userBookIds));
+        userBookIds = userBookIds.sort().reverse();
         this.setState({displayedBookIds: userBookIds});
       }
     }
@@ -42,14 +42,13 @@ class BookTable extends React.Component{
         nextProps.user.bookshelf_ids.forEach((shelfId)=>{
           userBookIds = userBookIds.concat(nextProps.bookshelves[shelfId].book_ids);
         });
-        let userbookIds = Array.from(new Set(this.state.displayedBookIds));
-        userbookIds = userbookIds.sort().reverse();
+        userBookIds = Array.from(new Set(userBookIds));
+        userBookIds = userBookIds.sort().reverse();
         this.setState({displayedBookIds: userBookIds});
       }else if(nextProps.currentPath === "/home" && this.props.currentPath !== "/home"){
         if(!nextProps.ui.visitedIndex || nextProps.ui.updated){
           this.getFromHome.bind(this)();
         }else{
-
           this.setState({displayedBookIds: nextProps.ui.indexBookIds });
         }
       }else if(nextProps.match.params.bookshelfId){
@@ -80,8 +79,8 @@ class BookTable extends React.Component{
 
   table(){
     //Find out why you need to put the unique function here and not anywhere else
-    // let userbookIds = Array.from(new Set(this.state.displayedBookIds));
-    // userbookIds = userbookIds.sort().reverse();
+    // let userBookIds = Array.from(new Set(this.state.displayedBookIds));
+    // userBookIds = userBookIds.sort().reverse();
     const table = this.state.displayedBookIds.map((bookId) => {
       return (<div key={bookId} className="book-info-container">
                 <Link to={`/books/${bookId}`}>

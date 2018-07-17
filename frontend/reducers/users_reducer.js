@@ -1,5 +1,6 @@
 import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
 import { REMOVE_BOOKSHELF, RECEIVE_ONE_BOOKSHELF} from '../actions/bookshelf_actions';
+import { REMOVE_SHELVING, RECEIVE_SHELVING} from '../actions/bookshelf_actions';
 import { merge } from 'lodash';
 
 const usersReducer = (state = {}, action) => {

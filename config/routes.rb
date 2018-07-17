@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
     delete '/shelvings/', to: "shelvings#destroy", as: 'api_shelvings'
 
+    resources :statuses, only: [:update, :create, :destroy]
+
   end
 
 end
