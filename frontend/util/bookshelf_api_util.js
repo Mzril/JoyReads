@@ -40,7 +40,7 @@ export const createShelving = (data) => {
   return $.ajax({
     method: "POST",
     url: `/api/shelvings`,
-    data: {shelving :data}
+    data: {shelving: data}
   });
 };
 
@@ -48,13 +48,14 @@ export const updateShelving = (data) => {
   return $.ajax({
     method: "POST",
     url: `/api/shelvings`,
-    data: {shelving :data}
+    data: {shelving: data}
   });
 };
 
-export const deleteShelving = (id) => {
+export const deleteShelving = (data) => {
   return $.ajax({
     method: "DELETE",
-    url: `/api/shelvings/${id}`,
+    url: `/api/shelvings/`,
+    data: data
   });
 };

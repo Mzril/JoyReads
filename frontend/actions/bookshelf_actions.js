@@ -4,7 +4,7 @@ export const RECEIVE_ONE_BOOKSHELF = "RECEIVE_ONE_BOOKSHELF";
 export const REMOVE_BOOKSHELF = "REMOVE_BOOKSHELF";
 export const RECEIVE_SHELVING = "RECEIVE_SHELVING";
 export const UPDATE_SHELVING = "UPDATE_SHELVING";
-export const REMOVE_SHELVING = "RECEIVE_SHELVING";
+export const REMOVE_SHELVING = "REMOVE_SHELVING";
 
 import * as BookshelfAPIUtil from './../util/bookshelf_api_util';
 
@@ -22,7 +22,7 @@ export const receiveBookshelf= (bookshelf) => {
   };
 };
 
-export const receieveShelving= (shelving) => {
+export const receiveShelving= (shelving) => {
   return {
     type: RECEIVE_SHELVING,
     shelving: shelving
@@ -116,7 +116,7 @@ export const createShelving = (data) => {
   return dispatch => {
     return BookshelfAPIUtil.createShelving(data).then(
       (shelving) => {
-        return dispatch(receieveShelving(shelving));
+        return dispatch(receiveShelving(shelving));
       },
       (errors) => dispatch(receiveErrors(errors.responseJSON))
     );
@@ -136,7 +136,7 @@ export const updateShelving = (data) => {
 
 export const deleteShelving = (data) => {
   return dispatch => {
-    return BookshelfAPIUtil.createShelving(data).then(
+    return BookshelfAPIUtil.deleteShelving(data).then(
       (shelving) => {
         return dispatch(removeShelving(shelving));
       },

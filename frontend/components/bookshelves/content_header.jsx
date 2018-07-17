@@ -20,8 +20,8 @@ class ContentHeader extends React.Component{
       <div className="content-header">
         {bigtext}
         <div className="display-option">
-          <button>Classic</button>
-          <button>Modern</button>
+          <button disabled>Classic</button>
+          <button disabled>Modern</button>
         </div>
       </div>
     );

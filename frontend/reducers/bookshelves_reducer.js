@@ -20,12 +20,12 @@ const bookshelvesReducer = (state = {}, action) => {
     case REMOVE_SHELVING:
       newState = merge({},state);
       const removingfrom = newState[action.shelving.bookshelf_id];
-      removingfrom.book_ids = removingfrom.book_ids.splice(removingfrom.book_ids.indexOf(action.shelving.book_id) , 1);
+      removingfrom.book_ids = removingfrom.book_ids.filter(id => id!==action.shelving.book_id);
       return newState;
     case RECEIVE_SHELVING:
       newState = merge({},state);
       const receivingshelf = newState[action.shelving.bookshelf_id];
-      receivingshelf.push(action.book_id);
+      receivingshelf.book_ids.push(action.shelving.book_id);
       return newState;
     default:
       return state;

@@ -4,6 +4,7 @@
   color: #382110;
   display: flex;
   justify-content: center;
+  min-width: 500px;
 }
 
 .nav-bar-main{
@@ -18,6 +19,10 @@
   font-weight: 200;
   color: #95897d;
   font-family: "Lato", sans-serif;
+}
+
+.nav-logo.joy{
+  margin-left: 40px;
 }
 
 .nav-logo.reads{
@@ -35,7 +40,12 @@
   color: #382110;
   padding: 10px 15px 10px 15px;
   transition-property: background;
+  box-sizing: border-box;
   transition-duration: .8s;
+}
+
+.nav-buttons > a:nth-child(2){
+  min-width: 110px;
 }
 
 .footer-links{

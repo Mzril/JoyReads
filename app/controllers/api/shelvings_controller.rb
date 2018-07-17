@@ -26,7 +26,7 @@ class Api::ShelvingsController < ApplicationController
   end
 
   def destroy
-    @shelving = Shelving.find(params[:id])
+    @shelving = Shelving.find_by(book_id: params[:book_id], bookshelf_id: params[:bookshelf_id])
     if @shelving
       @shelving.destroy
       render :show

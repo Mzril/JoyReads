@@ -9,3 +9,11 @@ end
 json.books do
   json.array! user.books, partial: 'api/books/booklimited.json.jbuilder', as: :book
 end
+
+json.reviews do
+
+end
+
+json.comments do
+
+end

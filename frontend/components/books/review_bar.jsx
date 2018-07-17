@@ -9,22 +9,24 @@ class ReviewBar extends React.Component{
     this.state = {isChecked: true};
   }
 
-
   change(e){
     const derp = e.currentTarget.value;
   }
 
   handleSubmit(e){
-    const time = e.target.value;
+    const value = e.target.value;
+    if(value !== null && value !== undefined){
+
+    }
   }
 
   render(){
-    if(this.props.currentUser !== null || this.props.currentUser !== undefined){
+    if(this.props.currentUser !== null && this.props.currentUser !== undefined){
       let addedclass= "";
-      if(this.props.currentUser !== null || this.props.currentUser !== undefined){
+      if(this.props.biggerstars){
         addedclass = "biggerstars";
       }
-      return (<div onClick={this.handleSubmit.bind(this)}>
+      return (<div>
                 <form>
                   <input className={`star star-5 ${addedclass}`} id={`star-5-${this.props.starkey}`} value='5' type="radio" name="star"/>
                   <label className={`star star-5 ${addedclass}`} htmlFor={`star-5-${this.props.starkey}`}></label>
@@ -44,18 +46,21 @@ class ReviewBar extends React.Component{
   }
 }
 
-
 const mSP = (state, ownProps)=>{
+  let currentUser=null;
+  if(state.entities.users[state.session.currentUserId] !== null | state.entities.users[state.session.currentUserId] !== undefined){
+    currentUser = state.entities.users[state.session.currentUserId];
+  }
   return {
-    currentUser: state.entities.users[state.session.currentUserId],
-    books: state.entities.books,
-    errors: state.errors.books
+    currentUser: currentUser,
+    reviews: state.entities.reviews
   };
 };
 
 const mDP = (dispatch, ownProps)=>{
   return {
-    fetchBook: (id)=>dispatch(fetchBook(id))
+    createReview: (data)=>dispatch(fetchBook(data)),
+    updateReview: (data)=>dispatch(fetchBook(data))
   };
 };
 

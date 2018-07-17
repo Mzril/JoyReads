@@ -64,6 +64,7 @@ class Api::BooksController < ApplicationController
       begin
         @book_array.each do |book|
           next unless book["volumeInfo"]["authors"] && book["volumeInfo"]["description"] && book["volumeInfo"]["industryIdentifiers"] && book["volumeInfo"]["imageLinks"]
+          httpsurl = book["volumeInfo"]["imageLinks"]["thumbnail"].insert(4,"s")
           isbn_13 = book["volumeInfo"]["industryIdentifiers"].values.select {|hash| hash["type"] = "ISBN_13"}[0]["identifier"]
           created_book = Book.create!(title: book["volumeInfo"]["title"],
             description: book["volumeInfo"]["description"], author: book["volumeInfo"]["authors"][0],

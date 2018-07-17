@@ -31,17 +31,18 @@ class BookShowPage extends React.Component{
     if(this.props.currentUser){
       userOptions = (<div className="only-logged-in">
         <ReviewBar className="show-stars" biggerstars="true"/>
-        <ShelfDropDown biggerdropdown="true"/>
+        <ShelfDropDown bookId={this.props.bookId} biggerdropdown="true"/>
       </div>);
     }
     const id = this.props.match.params.bookId;
     let desc = "";
     let left = "";
     if(this.props.books[id]){
-      desc = (<div>
+      desc = (<div className="book-right-aside">
                 <div className ="book-show-title">{this.props.books[id].title}</div>
-                <div className ="book-show-author">{this.props.books[id].author}</div>
-                <div className ="book-desc">{this.props.books[id].description}</div>
+                <div className ="book-show-author">by {this.props.books[id].author}</div>
+                <div className = "book-stats"> Review/Rating Details</div>
+                <div className ="book-desc">{this.props.books[id].description.split('.').join('.\n')}</div>
               </div>);
       left = (<div className="split-left">
                 <img className="book-show-image" src={this.props.books[id].photoUrl}/>
@@ -65,10 +66,12 @@ class BookShowPage extends React.Component{
 }
 
 const mSP = (state, ownProps)=>{
+  const bookId = ownProps.match.params.bookId;
   return {
     currentUser: state.entities.users[state.session.currentUserId],
     books: state.entities.books,
-    errors: state.errors.books
+    errors: state.errors.books,
+    bookId: bookId
   };
 };
 
