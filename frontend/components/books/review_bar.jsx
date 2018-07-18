@@ -6,18 +6,19 @@ class ReviewBar extends React.Component{
 
   constructor(){
     super();
-    this.state = {isChecked: true};
-  }
-
-  change(e){
-    const derp = e.currentTarget.value;
+    this.state = {currentvalue: 0};
+    this.handleSubmit= this.handleSubmit.bind(this);
   }
 
   handleSubmit(e){
-    const value = e.target.value;
-    if(value !== null && value !== undefined){
+    const value = parseInt(e.target.value);
+    console.log(value);
+    console.log(this.props.starkey);
+    console.log(this.props.currentUser.id);
+    this.setState({currentvalue: value});
+    const data = {user_id: this.props.currentUser.id, book_id: this.props.starkey};
+    this.props.createOrUpdateReview(data);
 
-    }
   }
 
   render(){
@@ -28,15 +29,15 @@ class ReviewBar extends React.Component{
       }
       return (<div>
                 <form>
-                  <input className={`star star-5 ${addedclass}`} id={`star-5-${this.props.starkey}`} value='5' type="radio" name="star"/>
+                  <input onChange={this.handleSubmit} checked={this.state.currentvalue === 5} className={`star star-5 ${addedclass}`} id={`star-5-${this.props.starkey}`} value='5' type="radio" name="star"/>
                   <label className={`star star-5 ${addedclass}`} htmlFor={`star-5-${this.props.starkey}`}></label>
-                  <input className={`star star-4 ${addedclass}`} id={`star-4-${this.props.starkey}`} value='4' type="radio" name="star"/>
+                  <input onChange={this.handleSubmit} checked={this.state.currentvalue === 4} className={`star star-4 ${addedclass}`} id={`star-4-${this.props.starkey}`} value='4' type="radio" name="star"/>
                   <label className={`star star-4 ${addedclass}`} htmlFor={`star-4-${this.props.starkey}`}></label>
-                  <input className={`star star-3 ${addedclass}`} id={`star-3-${this.props.starkey}`} value='3' type="radio" name="star"/>
+                  <input onChange={this.handleSubmit} checked={this.state.currentvalue === 3} className={`star star-3 ${addedclass}`} id={`star-3-${this.props.starkey}`} value='3' type="radio" name="star"/>
                   <label className={`star star-3 ${addedclass}`} htmlFor={`star-3-${this.props.starkey}`}></label>
-                  <input className={`star star-2 ${addedclass}`} id={`star-2-${this.props.starkey}`} value='2'type="radio" name="star"/>
+                  <input onChange={this.handleSubmit} checked={this.state.currentvalue === 2} className={`star star-2 ${addedclass}`} id={`star-2-${this.props.starkey}`} value='2'type="radio" name="star"/>
                   <label className={`star star-2 ${addedclass}`} htmlFor={`star-2-${this.props.starkey}`}></label>
-                  <input className={`star star-1 ${addedclass}`} id={`star-1-${this.props.starkey}`} value='1'type="radio" name="star"/>
+                  <input onChange={this.handleSubmit} checked={this.state.currentvalue === 1} className={`star star-1 ${addedclass}`} id={`star-1-${this.props.starkey}`} value='1'type="radio" name="star"/>
                   <label className={`star star-1 ${addedclass}`} htmlFor={`star-1-${this.props.starkey}`}></label>
                 </form>
               </div>);
@@ -48,19 +49,19 @@ class ReviewBar extends React.Component{
 
 const mSP = (state, ownProps)=>{
   let currentUser=null;
-  if(state.entities.users[state.session.currentUserId] !== null | state.entities.users[state.session.currentUserId] !== undefined){
+  if(state.entities.users[state.session.currentUserId] !== null && state.entities.users[state.session.currentUserId] !== undefined){
     currentUser = state.entities.users[state.session.currentUserId];
   }
   return {
     currentUser: currentUser,
+    books: state.entities.books,
     reviews: state.entities.reviews
   };
 };
 
 const mDP = (dispatch, ownProps)=>{
   return {
-    createReview: (data)=>dispatch(fetchBook(data)),
-    updateReview: (data)=>dispatch(fetchBook(data))
+    depositReview: (data)=>dispatch(fetchBook(data))
   };
 };
 

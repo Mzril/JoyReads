@@ -27,11 +27,6 @@ export const uiReducer = (state = default_state, action) => {
       newState.visitedUsers[action.userId] = true;
       newState.updated = false;
       return newState;
-    case RECEIVE_SHELVING:
-    case REMOVE_SHELVING:
-      newState = merge({}, state);
-      newState.updated = true;
-      return newState;
     default:
       return state;
   }

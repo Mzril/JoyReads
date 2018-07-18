@@ -18,8 +18,7 @@
 
 .shelves {
   margin-right: 0;
-  word-wrap: break-word;
-  word-break: break-all;
+  overflow-wrap: break-word;
   max-width: 140px;
   vertical-align: center;
   font-size: 14px;
