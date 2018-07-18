@@ -27,10 +27,12 @@ export const receiveIndex = (books) => {
   };
 };
 
-export const receiveBook= (book) => {
+export const receiveBook = ({book, users, reviews}) => {
   return {
     type: RECEIVE_ONE_BOOK,
-    book: book
+    book: book,
+    users: users,
+    reviews: reviews
   };
 };
 
@@ -44,8 +46,8 @@ export const receiveErrors= (errors) => {
 export const fetchBook = (id) => {
   return dispatch => {
     return BookAPIUtil.fetchBook(id).then(
-      (book) => {
-        return dispatch(receiveBook(book));
+      (payload) => {
+        return dispatch(receiveBook(payload));
       },
       (errors) => dispatch(receiveErrors(errors.responseJSON))
     );

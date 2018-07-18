@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {fetchBook} from "./../../actions/book_actions";
 import ReviewBar from "./review_bar";
 import ShelfDropDown from "./shelf_drop_down";
+import ReviewList from "./../reviews/review_list.jsx";
 
 class BookShowPage extends React.Component{
 
@@ -30,7 +31,7 @@ class BookShowPage extends React.Component{
     let userOptions = "";
     if(this.props.currentUser){
       userOptions = (<div className="only-logged-in">
-        <ReviewBar className="show-stars" biggerstars="true"/>
+        <ReviewBar starkey={this.props.match.params.bookId} className="show-stars" biggerstars="true"/>
         <ShelfDropDown bookId={this.props.bookId} biggerdropdown="true"/>
       </div>);
     }
@@ -58,7 +59,7 @@ class BookShowPage extends React.Component{
           </div>
         </div>
         <div className="book-reviews-container">
-          Reviews go here
+          <ReviewList book={this.props.books[this.props.bookId]} />
         </div>
       </div>
     );

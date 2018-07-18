@@ -1,5 +1,5 @@
 json.user do
-  json.extract! user, :id , :username, :bookshelf_ids
+  json.extract! user, :id , :username, :bookshelf_ids, :review_ids
 end
 
 json.bookshelves do
@@ -11,7 +11,7 @@ json.books do
 end
 
 json.reviews do
-
+  json.array! user.reviews, partial: 'api/reviews/review.json.jbuilder', as: :review
 end
 
 json.comments do

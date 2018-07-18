@@ -126,3 +126,7 @@ input.star-5:checked ~ label.star:before {
   color:#1e8;
   text-shadow: 2px 2px 3px #0a6;
 }
+
+fieldset{
+  border: none;
+}

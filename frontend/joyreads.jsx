@@ -11,13 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.payload) {
     const initialshelf = {};
     const initialbooks = {};
+    const initialreviews = {};
     window.payload.bookshelves.forEach(shelf=>initialshelf[shelf.id]=shelf);
     window.payload.books.forEach(book=>initialbooks[book.id]=book);
+    window.payload.reviews.forEach(review=>initialreviews[review.id]=review);
     const preloadedState = {
       entities: {
         users: { [window.payload.user.id]: window.payload.user },
         bookshelves: initialshelf,
-        books: initialbooks
+        books: initialbooks,
+        reviews: initialreviews
       },
       session: {
         currentUserId: window.payload.user.id

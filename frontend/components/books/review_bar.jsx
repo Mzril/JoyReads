@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {deleteReview, handleReview} from "./../../actions/review&status_actions";
 
 
 class ReviewBar extends React.Component{
@@ -10,19 +11,49 @@ class ReviewBar extends React.Component{
     this.handleSubmit= this.handleSubmit.bind(this);
   }
 
-  handleSubmit(e){
-    const value = parseInt(e.target.value);
-    console.log(value);
-    console.log(this.props.starkey);
-    console.log(this.props.currentUser.id);
-    this.setState({currentvalue: value});
-    const data = {user_id: this.props.currentUser.id, book_id: this.props.starkey};
-    this.props.createOrUpdateReview(data);
+   // componentWillReceiveProps({displayedUser, reviews, books}){
+   //   if(displayedUser.id !== null){
+   //     const reviewed_book_ids = displayedUser.review_ids.map((id) =>{
+   //       return reviews[id].book_id;
+   //     });
+   //     // Change reviewIds to hash for O(1) time - Later
+   //     for (let i = 0; i < reviewed_book_ids.length; i++) {
+   //       if(reviewed_book_ids[i] === this.props.starkey){
+   //         this.setState({currentvalue: reviews[id].value});
+   //         break;
+   //       }
+   //     }
+   //   }
+   // }
 
+   componentDidMount(){
+     const {displayedUser, reviews, books} = this.props;
+     if(displayedUser.id !== null){
+       const reviewed_book_ids = displayedUser.review_ids.map((id) =>{
+         return reviews[id].book_id;
+       });
+       // Change reviewIds to hash for O(1) time - Later
+       for (let i = 0; i < reviewed_book_ids.length; i++) {
+         if(reviewed_book_ids[i] === parseInt(this.props.starkey)){
+           this.setState({currentvalue: reviews[displayedUser.review_ids[i]].rating});
+           break;
+         }
+       }
+     }
+   }
+
+  handleSubmit(e){
+    const rating = parseInt(e.target.value);
+    console.log(rating);
+    console.log(this.props.starkey);
+    console.log(this.props.displayedUser.id);
+    this.setState({currentvalue: rating});
+    const data = {user_id: this.props.displayedUser.id, book_id: this.props.starkey, rating: rating};
+    this.props.handleReview(data);
   }
 
   render(){
-    if(this.props.currentUser !== null && this.props.currentUser !== undefined){
+    if(this.props.displayedUser.id !== null){
       let addedclass= "";
       if(this.props.biggerstars){
         addedclass = "biggerstars";
@@ -48,20 +79,27 @@ class ReviewBar extends React.Component{
 }
 
 const mSP = (state, ownProps)=>{
-  let currentUser=null;
-  if(state.entities.users[state.session.currentUserId] !== null && state.entities.users[state.session.currentUserId] !== undefined){
-    currentUser = state.entities.users[state.session.currentUserId];
+  let user;
+  if(ownProps.user){
+    user = ownProps.user;
+  }else if(state.entities.users[state.session.currentUserId] !== null && state.entities.users[state.session.currentUserId] !== undefined){
+    user = state.entities.users[state.session.currentUserId];
+  }else{
+    user = {id: null};
   }
+  const disabled = (user.id !== state.session.currentUserId);
   return {
-    currentUser: currentUser,
+    displayedUser: user,
     books: state.entities.books,
-    reviews: state.entities.reviews
+    reviews: state.entities.reviews,
+    disabled: disabled
   };
 };
 
 const mDP = (dispatch, ownProps)=>{
   return {
-    depositReview: (data)=>dispatch(fetchBook(data))
+    handleReview: (data)=>dispatch(handleReview(data)),
+    deleteReview: (data)=>dispatch(deleteReview(data)),
   };
 };
 

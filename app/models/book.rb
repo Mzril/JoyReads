@@ -11,6 +11,10 @@ class Book < ApplicationRecord
   has_many :reviews,
     dependent: :destroy
 
+  has_many :reviewed_users,
+    through: :reviews,
+    source: :user
+
   has_many :statuses,
     dependent: :destroy
 

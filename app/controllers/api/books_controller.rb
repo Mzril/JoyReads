@@ -40,7 +40,7 @@ class Api::BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
+    @book = Book.includes(:reviews, :reviewed_users).find(params[:id])
     if @book
       render :show
     else

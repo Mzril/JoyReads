@@ -4,9 +4,11 @@ export const DELETE_REVIEW = "DELETE_REVIEW";
 export const RECEIVE_STATUS = "RECEIVE_STATUS";
 export const UPDATE_STATUS = "UPDATE_STATUS";
 export const DELETE_STATUS = "DELETE_STATUS";
+export const RECEIVE_REVIEW_ERRORS = "RECEIVE_REVIEW_ERRORS";
+export const RECEIVE_STATUS_ERRORS = "RECEIVE_STATUS_ERRORS";
 
 
-import * as ReviewStatusAPIUtil from "./../util.review&status_api_util.js";
+import * as ReviewStatusAPIUtil from "./../util/review&status_api_util.js";
 
 export const receiveReview = (review)=>{
   return {
@@ -44,6 +46,43 @@ export const deleteStatus = (status)=>{
     status: status
   };
 };
+
+export const receiveReviewErrors = (error)=>{
+  return {
+    type: RECEIVE_REVIEW_ERRORS,
+    errors: errors
+  };
+};
+
+export const receiveStatusErrors = (error)=>{
+  return {
+    type: RECEIVE_STATUS_ERRORS,
+    errors: errors
+  };
+};
+
+export const handleReview = (data) => {
+  return dispatch => {
+    return ReviewStatusAPIUtil.handleReview(data).then(
+      (review) => {
+        return dispatch(receiveReview(review));
+      },
+      (errors) => dispatch(receiveReviewErrors(errors.responseJSON))
+    );
+  };
+};
+
+export const removeReview = (data) => {
+  return dispatch => {
+    return ReviewStatusAPIUtil.deleteReview(data).then(
+      (review) => {
+        return dispatch(deleteReview(review));
+      },
+      (errors) => dispatch(receiveReviewErrors(errors.responseJSON))
+    );
+  };
+};
+
 
 export const createReview = (data) => {
   return dispatch => {

@@ -1,10 +1,10 @@
 class Api::ReviewsController < ApplicationController
 
-  before_action :ensure_logged_in, only: [:handle :destroy]
+  before_action :ensure_logged_in, only: [:handle, :destroy]
 
   def handle
-    @review = Review.find_by(book_id: params[:book_id], user_id: params[:user_id])
-    if @review && review.update(review_params)
+    @review = Review.find_by(book_id: params[:review][:book_id], user_id: params[:review][:user_id])
+    if @review && @review.update(review_params)
       render :show
     else
       @review = Review.new(review_params)
