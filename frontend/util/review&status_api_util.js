@@ -21,3 +21,11 @@ export const updateStatus = (data)=>{
     data: {status: data}
   });
 };
+
+export const handleReview = (data)=>{
+  return $.ajax({
+    method: "POST",
+    url: `/api/reviews`,
+    data: {review: data}
+  });
+};
