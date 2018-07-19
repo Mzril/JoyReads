@@ -22,17 +22,24 @@ body{
   overflow: auto;
 }
 
+.site-content{
+  margin: 0;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+}
+
+.darken{
+  background-color: #f6f5f5;
+}
+
 #root{
   height: 100%;
 }
 
- .home-login{
-   display: flex;
-   flex-direction: column;
-   background-image: image-url('session_page_background.jpg');
-   background-position: center;
- }
-
- .api-results{
-   padding-bottom: 100px;
- }
+.home-login{
+ display: flex;
+ flex-direction: column;
+ background-image: image-url('session_page_background.jpg');
+ background-position: center;
+}

@@ -2,6 +2,17 @@
   width: 180px;
 }
 
+.shelf-router{
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 200px;
+  max-width: 970px;
+}
+
+.control-width{
+  margin-left: 20px;
+}
+
 .exclusive-shelves{
   display: flex;
   flex-direction: column;

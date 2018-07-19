@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialshelf = {};
     const initialbooks = {};
     const initialreviews = {};
+    const initialstatuses = {};
     window.payload.bookshelves.forEach(shelf=>initialshelf[shelf.id]=shelf);
     window.payload.books.forEach(book=>initialbooks[book.id]=book);
     window.payload.reviews.forEach(review=>initialreviews[review.id]=review);
@@ -20,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         users: { [window.payload.user.id]: window.payload.user },
         bookshelves: initialshelf,
         books: initialbooks,
-        reviews: initialreviews
+        reviews: initialreviews,
+
       },
       session: {
         currentUserId: window.payload.user.id
@@ -34,10 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-
-  window.fetchBookshelf = fetchBookshelf;
-  window.createBookshelf = createBookshelf;
-  window.deleteBookshelf = deleteBookshelf;
 
   ReactDOM.render(<Root store={store} />, root);
 });

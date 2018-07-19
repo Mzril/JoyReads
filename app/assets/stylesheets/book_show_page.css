@@ -38,6 +38,8 @@
 
 .book-show-page{
   display: flex;
+  max-width: 970px;
+  min-width: 500px;
   flex-direction: column;
 }
 

@@ -9,7 +9,14 @@ const Mainpage = () => {
   return (
     <div className="main-page">
       <Navbar/>
-      <SiteContent/>
+      <Switch>
+        <Route path='/books/:bookId' render={(props) => (
+          <SiteContent {...props}  />
+        )}/>
+        <Route path='/' render={(props) => (
+          <SiteContent {...props}  />
+        )}/>
+      </Switch>
       <Footer/>
     </div>
   );

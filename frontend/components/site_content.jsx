@@ -10,8 +10,12 @@ import UserShowPage from "./users/user_show_page";
 import BookShowPage from "./books/book_show_page";
 
 const SiteContent = (props) => {
+  let addClass="";
+  if(props.match.params.bookId){
+    addClass= " darken";
+  }
   return (
-    <div className="site-content">
+    <div id="site-content" className={"site-content"+ addClass}>
       <Switch>
         <Route exact path="/books" component={ShelfRoute}/>
         <Route exact path="/thekonamicode" component={GoogleApi}/>
@@ -39,4 +43,4 @@ const SiteContent = (props) => {
 
 
 
-export default withRouter(SiteContent);
+export default SiteContent;
