@@ -1,0 +1,36 @@
+.review-bar{
+  display: flex;
+  justify-content: space-between;
+}
+
+.font-opener {
+  margin-right: 0;
+  overflow-wrap: break-word;
+  max-width: 140px;
+  vertical-align: center;
+  font-size: 14px;
+  color: #00635d;
+  text-decoration: none;
+  line-height: 18px;
+}
+
+.font-opener{
+  text-decoration:none;
+  display: inline-block;
+}
+
+.font-opener:after{
+  content: '';
+  display: block;
+  height: 1px;
+  width: 0;
+  background: transparent;
+  transition: width .5s ease, background-color .5s ease; /* .5 seonds for changes to the width and background-color */
+  -webkit-transition: width .5s ease, background-color .5s ease; /* Chrome and Safari */
+  -moz-transition: width .5s ease, background-color .5s ease; /* FireFox */
+}
+
+.font-opener:hover:after{
+  width: 100%;
+  background: #00635d;
+}

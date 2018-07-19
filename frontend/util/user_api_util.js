@@ -1,8 +1,15 @@
 
-export const getUser = (username) => {
+export const getUserById = (id) => {
   return $.ajax({
     method: 'GET',
-    url: `api/users/${username}`
+    url: `api/users/${id}`
+  });
+};
+
+export const getUserByUsername = (username) => {
+  return $.ajax({
+    method: 'GET',
+    url: `api/users/username/${username}`
   });
 };
 

@@ -58,6 +58,7 @@ class BookTable extends React.Component{
     }
   }
 
+
   getFromHome(){
     this.props.fetchLimitedBooks().then(response => {
     const ids = response.books.map(book=>book.id);

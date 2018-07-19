@@ -1,10 +1,14 @@
 .nav-bar {
+  position: fixed;
+  top: 0px;
   background-color: #F4F2E9;
   box-shadow: 0 1px 1px rgba(0,0,0,0.15);
   color: #382110;
   display: flex;
   justify-content: center;
+  width: 100%;
   min-width: 500px;
+  z-index: 50;
 }
 
 .nav-bar-main{
@@ -22,7 +26,7 @@
 }
 
 .nav-logo.joy{
-  margin-left: 40px;
+  margin-left: 16px;
 }
 
 .nav-logo.reads{

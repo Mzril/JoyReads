@@ -14,6 +14,6 @@ json.reviews do
   json.array! user.reviews, partial: 'api/reviews/review.json.jbuilder', as: :review
 end
 
-json.comments do
-
-end
+# json.statuses do
+#   json.array! user.statuses, partial: 'api/reviews/review.json.jbuilder', as: :status
+# end

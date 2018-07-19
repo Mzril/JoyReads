@@ -3,7 +3,7 @@ import BookTable from "./books/booktable.jsx";
 // import ContentHeader from "./bookshelves/content_header";
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link, Route, Switch, Redirect} from 'react-router-dom';
+import {Link, Route, Switch, Redirect, withRouter} from 'react-router-dom';
 import ShelfRoute from './shelf_route.jsx';
 import GoogleApi from "./books/google_api";
 import UserShowPage from "./users/user_show_page";
@@ -39,4 +39,4 @@ const SiteContent = (props) => {
 
 
 
-export default SiteContent;
+export default withRouter(SiteContent);

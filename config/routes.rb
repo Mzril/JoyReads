@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:create, :show, :update]
+    get '/users/username/:username', to: "users#show_by_username", as: 'user_by_username'
+
     resource :sessions, only: [:create, :destroy]
     resources :bookshelves, only: [:update, :create, :destroy, :index, :show]
     resources :books, only: [:index, :show, :create]

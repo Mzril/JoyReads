@@ -39,7 +39,6 @@
 .book-show-page{
   display: flex;
   flex-direction: column;
-  padding-bottom: 40px;
 }
 
 .book-desc {

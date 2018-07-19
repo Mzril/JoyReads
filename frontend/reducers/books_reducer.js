@@ -1,4 +1,5 @@
 import { RECEIVE_ONE_BOOK, RECEIVE_BOOKS, RECEIVE_INDEX, RECEIVE_USER_BOOKS} from '../actions/book_actions';
+import { RECEIVE_A_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
 import { RECEIVE_CURRENT_USER } from './../actions/session_actions';
 import {RECEIVE_REVIEW} from './../actions/review&status_actions';
@@ -10,6 +11,7 @@ const booksReducer = (state = {}, action) => {
     case RECEIVE_INDEX:
     case RECEIVE_CURRENT_USER:
     case RECEIVE_USER_BOOKS:
+    case RECEIVE_A_USER:
       const merging={};
       action.books.forEach((books)=>{merging[books.id]=books;});
       return merge({}, state, merging);

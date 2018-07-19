@@ -7,6 +7,7 @@ export const DELETE_STATUS = "DELETE_STATUS";
 export const RECEIVE_REVIEW_ERRORS = "RECEIVE_REVIEW_ERRORS";
 export const RECEIVE_STATUS_ERRORS = "RECEIVE_STATUS_ERRORS";
 
+//Maybe turn stuff like review_ids and stuff into objects instead for optimization purposes.
 
 import * as ReviewStatusAPIUtil from "./../util/review&status_api_util.js";
 
@@ -16,7 +17,7 @@ export const receiveReview = (review)=>{
     review: review
   };
 };
-export const updateReview = (review)=>{
+export const updateTheReview = (review)=>{
   return {
     type: UPDATE_REVIEW,
     review: review
@@ -66,6 +67,17 @@ export const handleReview = (data) => {
     return ReviewStatusAPIUtil.handleReview(data).then(
       (review) => {
         return dispatch(receiveReview(review));
+      },
+      (errors) => dispatch(receiveReviewErrors(errors.responseJSON))
+    );
+  };
+};
+
+export const updateReview = (data) => {
+  return dispatch => {
+    return ReviewStatusAPIUtil.updateReview(data).then(
+      (review) => {
+        return dispatch(updateTheReview(review));
       },
       (errors) => dispatch(receiveReviewErrors(errors.responseJSON))
     );

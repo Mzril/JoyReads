@@ -3,7 +3,7 @@ export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS";
 
 import * as UserAPIUtil from './../util/user_api_util';
 
-export const receiveCurrentUser = (payload) => {
+export const receiveUser = (payload) => {
   return {
     type: RECEIVE_A_USER,
     user: payload.user,
@@ -20,13 +20,24 @@ export const receiveUserErrors = (errors) => {
   };
 };
 
-export const getUser = (username) => {
+export const getUserById = (id) => {
   return dispatch => {
-    return UserAPIUtil.getUser(username).then(
+    return UserAPIUtil.getUserById(id).then(
       (payload) => {
-        return dispatch(receiveCurrentUser(payload));
+        return dispatch(receiveUser(payload));
       },
-      (errors) => dispatch(receiveErrors(errors.responseJSON))
+      (errors) => dispatch(receiveUserErrors(errors.responseJSON))
+    );
+  };
+};
+
+export const getUserByUsername = (username) => {
+  return dispatch => {
+    return UserAPIUtil.getUserByUsername(username).then(
+      (payload) => {
+        return dispatch(receiveUser(payload));
+      },
+      (errors) => dispatch(receiveUserErrors(errors.responseJSON))
     );
   };
 };

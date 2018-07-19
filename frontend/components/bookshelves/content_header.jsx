@@ -20,7 +20,7 @@ class ContentHeader extends React.Component{
        } else if (this.props.user){
          bigtext = <Link to="/books" className="main-header-link">{this.props.user.username}'s books'</Link>;
        }else if(this.props.currentUser){
-         bigtext = <Link to="/books" className="main-header-link">Behold Your Books (Good taste)</Link>;
+         bigtext = <Link to="/books" className="main-header-link">My Books</Link>;
        }
        else{
          bigtext = <Link to="/books" className="main-header-link">Recently Added</Link>;

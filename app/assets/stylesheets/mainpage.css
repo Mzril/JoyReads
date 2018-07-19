@@ -1,11 +1,17 @@
 .site-content{
   max-width: 970px;
   min-width: 200px;
-  margin: auto;
+  position: absolute;
+  top: 45px;
+  min-height: calc(100vh - 75px);
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   flex-direction: column;
-  margin-top: 15px;
+  padding-top: 20px;
   box-sizing: border-box;
-  padding: 5px;
+  overflow: auto;
 }
 
 .content-header{
