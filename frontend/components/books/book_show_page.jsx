@@ -4,7 +4,9 @@ import {connect} from 'react-redux';
 import {fetchBook} from "./../../actions/book_actions";
 import ReviewBar from "./review_bar";
 import ShelfDropDown from "./shelf_drop_down";
+import ShowRating from "./show_rating";
 import ReviewList from "./../reviews/review_list.jsx";
+import BookStats from "./book_stats";
 
 class BookShowPage extends React.Component{
 
@@ -15,12 +17,20 @@ class BookShowPage extends React.Component{
 
   componentDidMount(){
     const that = this;
-    this.props.fetchBook(this.props.match.params.bookId).then(()=>{
+    if(this.props.loaded !== true){
+      this.props.fetchBook(this.props.match.params.bookId).then(()=>{
+        that.setState({loaded: true});
+      });
+    }else{
       that.setState({loaded: true});
-    });
+      this.props.fetchBook(this.props.match.params.bookId).then(()=>{
+        that.setState({loaded: true});
+      });
+    }
   }
 
   shouldComponentUpdate(nextProps){
+    //update later??
     return true;
   }
 
@@ -42,8 +52,12 @@ class BookShowPage extends React.Component{
       desc = (<div className="book-right-aside">
                 <div className ="book-show-title">{this.props.books[id].title}</div>
                 <div className ="book-show-author">by {this.props.books[id].author}</div>
-                <div className = "book-stats"> Review/Rating Details</div>
-                <div className ="book-desc">{this.props.books[id].description.split('.').join('.\n')}</div>
+                <div className ="review-stats">
+                  <ShowRating reviewRating={Math.round(this.props.books[id].avg_score)}/>
+                  <BookStats reviewIds={this.props.books[id].review_ids} reviews={this.props.books[id].review_ids}/>
+                </div>
+                <div className ="book-desc">{this.props.books[id].description}</div>
+                <div className ="book-desc">ISBN_13: {this.props.books[id].isbn_13}</div>
               </div>);
       left = (<div className="split-left">
                 <img className="book-show-image" src={this.props.books[id].photoUrl}/>
@@ -72,7 +86,8 @@ const mSP = (state, ownProps)=>{
     currentUser: state.entities.users[state.session.currentUserId],
     books: state.entities.books,
     errors: state.errors.books,
-    bookId: bookId
+    bookId: bookId,
+    loaded: state.ui.visitedBooks.bookId
   };
 };
 

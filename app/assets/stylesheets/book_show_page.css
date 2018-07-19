@@ -11,12 +11,10 @@
 
 .book-show-image{
   width: 256px;
-  margin-top: 10px;
   box-shadow: 3px 3px 10px rgba(0,0,0,0.07);
 }
 
 .book-show-title{
-  padding-top: 10px;
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 5px;
@@ -32,9 +30,9 @@
 
 .book-show-info{
   display:flex;
-  background-color: #f4f2e938;
-  box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.1);
-  padding-bottom: 20px;
+  background-color: #fdfdfd;
+  box-shadow: 2px 4px 2px 1px rgba(0,0,0,0.05);
+  padding: 20px;
   margin-bottom: 50px;
 }
 
@@ -45,7 +43,6 @@
 }
 
 .book-desc {
-  white-space: pre-line;
   margin-top: 20px;
   margin-right: 20px;
   font-size: 16px;
@@ -129,4 +126,47 @@ input.star-5:checked ~ label.star:before {
 
 fieldset{
   border: none;
+}
+
+.userlink{
+  padding-right: 20px;
+}
+
+.chart-container{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  width: 100px;
+  padding-left: 15px;
+}
+
+
+.chart{
+  position: absolute;
+  top: 30px;
+  left: -114px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 5px solid #ede6d6;
+  border-radius: 5px;
+  background-color: white;
+  height: 210px;
+  width: 400px;
+}
+
+.legend{
+  height: 100%;
+  width: 20%;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.review-stats{
+  display: flex;
+  padding-top: 10px;
+  align-items: center;
 }

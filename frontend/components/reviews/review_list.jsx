@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link, withRouter} from 'react-redux';
+import {Link, withRouter} from 'react-router-dom';
+import ShowRating from './../books/show_rating';
 
 class ReviewList extends React.Component{
 
@@ -9,24 +10,25 @@ class ReviewList extends React.Component{
 
   }
 
-   shouldComponentUpdate(nextProps){
-     
-   }
 
    bookReviews(){
      const {reviews, users, book} = this.props;
      return book.review_ids.map((id)=>{
-       return (<div key={id}>
-                  <div>{users[reviews[id].user_id].username}</div>
-                  <div>Rated this book a {reviews[id].rating}</div>
-              </div>);
+       const user = users[reviews[id].user_id];
+       const reviewRating = reviews[id].rating;
+       const userlink = "/users/" + user.username;
+       if( user.id !== this.props.currentUserId){
+         return (<div style={{display: "flex"}} key={id}>
+                    <Link className="userlink" to={userlink}>{user.username}</Link>
+                    <ShowRating reviewRating={reviewRating} starkey={book.id}/>
+                </div>);
+       }
      });
    }
 
   render(){
     return (
       <div>
-        Review List
         <div>Review Body Form</div>
         {this.bookReviews.bind(this)()}
       </div>
@@ -37,7 +39,8 @@ class ReviewList extends React.Component{
 const mSP = (state, ownProps)=>{
   return{
     users: state.entities.users,
-    reviews: state.entities.reviews
+    reviews: state.entities.reviews,
+    currentUserId: state.session.currentUserId
   };
 };
 

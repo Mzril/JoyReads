@@ -80,13 +80,13 @@
   right: 0;
 }
 
-.fa{
+.fa.fa-pencil-square, .fa.fa-eraser{
   color: lightgrey;
   padding-right: 3px;
   padding-left: 3px;
 }
 
-.fa:hover {
+.fa.fa-pencil-square:hover, .fa.fa-eraser:hover{
   padding-left: 2px;
   padding-right: 2px;
   font-size: 18px;

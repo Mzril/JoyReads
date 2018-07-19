@@ -1,5 +1,5 @@
 json.book do
-  json.extract! @book, :id, :title, :description, :isbn_13, :published_date, :author, :review_ids
+  json.extract! @book, :id, :title, :description, :isbn_13, :published_date, :author, :review_ids, :avg_score
   json.photoUrl @book.image_url
 end
 

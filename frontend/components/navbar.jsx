@@ -24,7 +24,7 @@ class Navbar extends React.Component {
     } else {
       navbuttons = (<div className="nav-buttons">
                       <Link to={`/users/${this.props.currentUser.id}`} >{this.props.currentUser.username}</Link>
-                      <a onClick={this.handleClick}>Log Out</a>
+                      <Link to='/home' onClick={this.handleClick}>Log Out</Link>
                     </div>);
     }
     return (

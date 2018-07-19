@@ -11,24 +11,9 @@ class ReviewBar extends React.Component{
     this.handleSubmit= this.handleSubmit.bind(this);
   }
 
-   // componentWillReceiveProps({displayedUser, reviews, books}){
-   //   if(displayedUser.id !== null){
-   //     const reviewed_book_ids = displayedUser.review_ids.map((id) =>{
-   //       return reviews[id].book_id;
-   //     });
-   //     // Change reviewIds to hash for O(1) time - Later
-   //     for (let i = 0; i < reviewed_book_ids.length; i++) {
-   //       if(reviewed_book_ids[i] === this.props.starkey){
-   //         this.setState({currentvalue: reviews[id].value});
-   //         break;
-   //       }
-   //     }
-   //   }
-   // }
-
    componentDidMount(){
      const {displayedUser, reviews, books} = this.props;
-     if(displayedUser.id !== null){
+     if(displayedUser.review_ids){
        const reviewed_book_ids = displayedUser.review_ids.map((id) =>{
          return reviews[id].book_id;
        });
@@ -39,14 +24,13 @@ class ReviewBar extends React.Component{
            break;
          }
        }
+     }else if(displayedUser.id !==null){
+       this.setState({currentvalue: this.props.reviewRating});
      }
    }
 
   handleSubmit(e){
     const rating = parseInt(e.target.value);
-    console.log(rating);
-    console.log(this.props.starkey);
-    console.log(this.props.displayedUser.id);
     this.setState({currentvalue: rating});
     const data = {user_id: this.props.displayedUser.id, book_id: this.props.starkey, rating: rating};
     this.props.handleReview(data);
@@ -60,15 +44,15 @@ class ReviewBar extends React.Component{
       }
       return (<div>
                 <form>
-                  <input onChange={this.handleSubmit} checked={this.state.currentvalue === 5} className={`star star-5 ${addedclass}`} id={`star-5-${this.props.starkey}`} value='5' type="radio" name="star"/>
+                  <input disabled={this.props.disabled} onChange={this.handleSubmit} checked={this.state.currentvalue === 5} className={`star star-5 ${addedclass}`} id={`star-5-${this.props.starkey}`} value='5' type="radio" name="star"/>
                   <label className={`star star-5 ${addedclass}`} htmlFor={`star-5-${this.props.starkey}`}></label>
-                  <input onChange={this.handleSubmit} checked={this.state.currentvalue === 4} className={`star star-4 ${addedclass}`} id={`star-4-${this.props.starkey}`} value='4' type="radio" name="star"/>
+                  <input disabled={this.props.disabled} onChange={this.handleSubmit} checked={this.state.currentvalue === 4} className={`star star-4 ${addedclass}`} id={`star-4-${this.props.starkey}`} value='4' type="radio" name="star"/>
                   <label className={`star star-4 ${addedclass}`} htmlFor={`star-4-${this.props.starkey}`}></label>
-                  <input onChange={this.handleSubmit} checked={this.state.currentvalue === 3} className={`star star-3 ${addedclass}`} id={`star-3-${this.props.starkey}`} value='3' type="radio" name="star"/>
+                  <input disabled={this.props.disabled} onChange={this.handleSubmit} checked={this.state.currentvalue === 3} className={`star star-3 ${addedclass}`} id={`star-3-${this.props.starkey}`} value='3' type="radio" name="star"/>
                   <label className={`star star-3 ${addedclass}`} htmlFor={`star-3-${this.props.starkey}`}></label>
-                  <input onChange={this.handleSubmit} checked={this.state.currentvalue === 2} className={`star star-2 ${addedclass}`} id={`star-2-${this.props.starkey}`} value='2'type="radio" name="star"/>
+                  <input disabled={this.props.disabled} onChange={this.handleSubmit} checked={this.state.currentvalue === 2} className={`star star-2 ${addedclass}`} id={`star-2-${this.props.starkey}`} value='2'type="radio" name="star"/>
                   <label className={`star star-2 ${addedclass}`} htmlFor={`star-2-${this.props.starkey}`}></label>
-                  <input onChange={this.handleSubmit} checked={this.state.currentvalue === 1} className={`star star-1 ${addedclass}`} id={`star-1-${this.props.starkey}`} value='1'type="radio" name="star"/>
+                  <input disabled={this.props.disabled} onChange={this.handleSubmit} checked={this.state.currentvalue === 1} className={`star star-1 ${addedclass}`} id={`star-1-${this.props.starkey}`} value='1'type="radio" name="star"/>
                   <label className={`star star-1 ${addedclass}`} htmlFor={`star-1-${this.props.starkey}`}></label>
                 </form>
               </div>);

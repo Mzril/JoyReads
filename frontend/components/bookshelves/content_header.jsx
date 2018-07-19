@@ -10,22 +10,22 @@ class ContentHeader extends React.Component{
    }
 
    bigtext(){
+     const {bookshelfId} = this.props.match.params;
      let bigtext;
-     if(this.props.location.pathname === "/home"){
-       bigtext = <Link to="/books" className="main-header-link">Featured Books</Link>;
-     }
-     else if(this.props.match.params.bookshelfId){
-       const {bookshelfId} = this.props.match.params;
-       bigtext = <Link to="/books" className="main-header-link">{this.props.bookshelves[bookshelfId].title}</Link>;
-     } else if (this.props.user){
-       bigtext = <Link to="/books" className="main-header-link">{this.props.user.username}'s books'</Link>;
-     }else if(this.props.currentUser){
-       bigtext = <Link to="/books" className="main-header-link">Behold Your Books (Good taste)</Link>;
-     }
-     else{
-       bigtext = <Link to="/books" className="main-header-link">Recently Added</Link>;
-     }
-     return bigtext;
+       if(this.props.location.pathname === "/home"){
+         bigtext = <Link to="/books" className="main-header-link">Featured Books</Link>;
+       }
+       else if(bookshelfId && this.props.bookshelves[bookshelfId]){
+         bigtext = <Link to="/books" className="main-header-link">{this.props.bookshelves[bookshelfId].title}</Link>;
+       } else if (this.props.user){
+         bigtext = <Link to="/books" className="main-header-link">{this.props.user.username}'s books'</Link>;
+       }else if(this.props.currentUser){
+         bigtext = <Link to="/books" className="main-header-link">Behold Your Books (Good taste)</Link>;
+       }
+       else{
+         bigtext = <Link to="/books" className="main-header-link">Recently Added</Link>;
+       }
+       return bigtext;
    }
 
   render(){

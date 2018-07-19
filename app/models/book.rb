@@ -24,16 +24,18 @@ class Book < ApplicationRecord
     Book.joins(:shelvings).where("shelvings.bookshelf_id = ?", id)
   end
 
-  def average_score
-    length = self.reviews.where.not(rating: null).length
+  def avg_score
+    reviews = self.reviews
+    length = reviews.length
     if length < 1
-      return ""
+      return 0
     end
     sum = 0
-    self.reviews.where.not(rating: null).each do |review|
+    reviews.each do |review|
       sum += review.rating
     end
-    return sum/length
+    float = sum/length.to_f
+    return float.round(2)
   end
 
 end

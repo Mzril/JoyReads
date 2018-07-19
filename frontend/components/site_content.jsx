@@ -18,7 +18,7 @@ const SiteContent = (props) => {
         <Route exact path='/home' render={(props) => (
           <ShelfRoute {...props}/>
         )}/>
-        <Route path='/users/:userId/bookshelves' render={(props) => (
+        <Route path='/users/:username/bookshelves' render={(props) => (
           <ShelfRoute {...props} />
         )}/>
         <Route path='/bookshelves/:bookshelfId' render={(props) => (
@@ -27,7 +27,7 @@ const SiteContent = (props) => {
         <Route path='/books/:bookId' render={(props) => (
           <BookShowPage {...props}  />
         )}/>
-      <Route path='/users/:id' render={(props) => (
+        <Route path='/users/:username' render={(props) => (
           <UserShowPage {...props}  />
         )}/>
         <Route path="/bookshelves" component={ShelfRoute}/>

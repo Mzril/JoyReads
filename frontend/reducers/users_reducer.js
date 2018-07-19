@@ -3,6 +3,7 @@ import { REMOVE_BOOKSHELF, RECEIVE_ONE_BOOKSHELF} from '../actions/bookshelf_act
 import { REMOVE_SHELVING, RECEIVE_SHELVING} from '../actions/bookshelf_actions';
 import { RECEIVE_ONE_BOOK } from '../actions/book_actions';
 import { RECEIVE_REVIEW, DELETE_REVIEW } from '../actions/review&status_actions';
+import { RECEIVE_A_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
 
 const usersReducer = (state = {}, action) => {
@@ -11,6 +12,7 @@ const usersReducer = (state = {}, action) => {
   let userReviews;
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
+    case RECEIVE_A_USER:
       return merge( {}, state, {[action.user.id]: action.user} );
     case REMOVE_BOOKSHELF:
       userShelves = newState[action.bookshelf.user_id].bookshelf_ids;

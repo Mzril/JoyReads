@@ -15,7 +15,7 @@
   color: #333;
   cursor: default;
   outline: none;
-  padding: 8px 20px 8px 5px;
+  padding: 8px 20px 8px 0px;
   transition: all 200ms ease;
 }
 
@@ -61,12 +61,31 @@
 
 .dropdown-hack{
   font-size: inherit;
-  margin-right: 5px;
+  align-self: center;
+  text-align: center;
   z-index: 20;
+  transition-duration: 0s;
 }
 
-.dropdown-hack:hover{
-  background-color: black;
+.fa.fa-plus-circle, .fa.fa-minus-circle{
+  font-size: 16px;
+}
+
+.fa.fa-plus-circle.biggerdropdown{
+  font-size: 20px;
+}
+
+.fa.fa-minus-circle.biggerdropdown{
+  font-size: 20px;
+}
+
+.fa.fa-plus-circle{
+  color: springgreen;
+  font-size: 16.2px;
+}
+
+.fa.fa-minus-circle{
+  color: #f16a6a;
 }
 
 .Dropdown-menu .Dropdown-group > .Dropdown-title{
@@ -123,6 +142,16 @@
 
 .take-all-space{
   display: flex;
+  box-sizing: border-box;
+  padding-left: 5px;
+}
+
+.take-all-space.biggerdropdown{
+  padding-left: 10px;
+}
+
+.align-this{
+  padding-left: 5px;
 }
 
 
