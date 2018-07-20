@@ -14,7 +14,7 @@ class EditForm extends React.Component{
 
   updateReview(e){
     e.preventDefault();
-    this.handleReview({body: this.state.body, user_id: this.props.currentUserId});
+    this.props.handleReview({body: this.state.body, user_id: this.props.currentUserId});
   }
 
   toggleForm(){
