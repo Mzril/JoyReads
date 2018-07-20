@@ -22,10 +22,10 @@ export const receiveBookshelf= (bookshelf) => {
   };
 };
 
-export const receiveShelving= (shelving) => {
+export const receiveShelving= (payload) => {
   return {
     type: RECEIVE_SHELVING,
-    shelving: shelving
+    shelving: payload.shelving
   };
 };
 

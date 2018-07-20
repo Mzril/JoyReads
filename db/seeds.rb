@@ -10,6 +10,8 @@ User.destroy_all
 Bookshelf.destroy_all
 Book.destroy_all
 Shelving.destroy_all
+Review.destroy_all
+Status.destroy_all
 
 user1 = User.create(username: "Mzril", email: "wnbs36@gmail.com", password: "password1")
 user2 = User.create(username: "Beepo", email: "beepo@gmail.com", password: "password1")

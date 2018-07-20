@@ -5,8 +5,7 @@ class Api::StatusesController < ApplicationController
   def create
     @status = Status.new(status_params)
     if @status.save
-      @relatedshelf = User.find(params[:status][:user_id])).bookshelf_ids[params[:status][:status]]
-      @shelving = @shelving.new(bookshelf_id: )
+      @shelving = Shelving.new(params[:status][:book_id])
       render :show
     else
       render json: @status.errors.full_messages, status: 404
@@ -14,8 +13,11 @@ class Api::StatusesController < ApplicationController
   end
 
   def update
-    @status= Status.find_by(book_id: params[:status][:book_id], user_id: params[:status][:user_id])
-    if @status
+    @status = Status.find_by(book_id: params[:status][:book_id], user_id: params[:status][:user_id])
+    if @status && (@status.value != params[:status][:value])
+      @shelving = Shelving.includes(:owner).find(@status.shelving_ids.first)
+      array = @shelving.owner.bookshelf_ids;
+      @shelving.update(bookshelf_id: array[params[:status][:value]])
       @status.update(status_params)
       render :show
     else
@@ -23,10 +25,14 @@ class Api::StatusesController < ApplicationController
     end
   end
 
+
   def destroy
-    @status= Status.find_by(book_id: params[:book_id], user_id: params[:user_id])
+    @status= Status.find_by(book_id: params[:status][:book_id], user_id: params[:status][:user_id])
     if @status
+      @shelvings = @status.shelvings
+      @review = @status.review
       @status.destroy
+      render :custshow
     else
       render json: ["Status doesn't exist"] , status: 404
     end
@@ -34,7 +40,7 @@ class Api::StatusesController < ApplicationController
 
   private
   def status_params
-    params.require(:status).permit(:book_id, :user_id, :status)
+    params.require(:status).permit(:book_id, :user_id, :value)
   end
 
 end

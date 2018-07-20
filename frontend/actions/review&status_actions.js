@@ -11,10 +11,12 @@ export const RECEIVE_STATUS_ERRORS = "RECEIVE_STATUS_ERRORS";
 
 import * as ReviewStatusAPIUtil from "./../util/review&status_api_util.js";
 
-export const receiveReview = (review)=>{
+export const receiveReview = ({review, status, shelving})=>{
   return {
     type: RECEIVE_REVIEW,
-    review: review
+    review: review,
+    status: status,
+    shelving: shelving
   };
 };
 export const updateTheReview = (review)=>{
@@ -29,22 +31,27 @@ export const deleteReview = (review)=>{
     review: review
   };
 };
-export const receiveStatus = (status)=>{
+export const receiveStatus = (payload)=>{
   return {
     type: RECEIVE_STATUS,
-    status: status
+    status: payload.status,
+    shelving: payload.shelving
   };
 };
-export const updateStatus = (status)=>{
+export const updateStatus = (payload)=>{
   return {
     type: UPDATE_STATUS,
-    status: status
+    status: payload.status,
+    shelving: payload.shelving
   };
 };
-export const deleteStatus = (status)=>{
+
+export const deleteStatus = (payload)=>{
   return {
     type: DELETE_STATUS,
-    status: status
+    status: payload.status,
+    review: payload.review,
+    shelvings: payload.shelvings
   };
 };
 
@@ -65,8 +72,8 @@ export const receiveStatusErrors = (error)=>{
 export const handleReview = (data) => {
   return dispatch => {
     return ReviewStatusAPIUtil.handleReview(data).then(
-      (review) => {
-        return dispatch(receiveReview(review));
+      (payload) => {
+        return dispatch(receiveReview(payload));
       },
       (errors) => dispatch(receiveReviewErrors(errors.responseJSON))
     );
@@ -99,8 +106,30 @@ export const removeReview = (data) => {
 export const createReview = (data) => {
   return dispatch => {
     return ReviewStatusAPIUtil.handleReview(data).then(
-      (shelving) => {
+      (status) => {
         return dispatch(receiveShelving(shelving));
+      },
+      (errors) => dispatch(receiveErrors(errors.responseJSON))
+    );
+  };
+};
+
+export const handleStatus = (data) =>{
+  return dispatch => {
+    return ReviewStatusAPIUtil.handleStatus(data).then(
+      (payload) => {
+        return dispatch(receiveStatus(payload));
+      },
+      (errors) => dispatch(receiveErrors(errors.responseJSON))
+    );
+  };
+};
+
+export const removeStatus = (data)=>{
+  return dispatch => {
+    return ReviewStatusAPIUtil.deleteStatus(data).then(
+      (payload) => {
+        return dispatch(deleteStatus(payload));
       },
       (errors) => dispatch(receiveErrors(errors.responseJSON))
     );

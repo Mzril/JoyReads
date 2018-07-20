@@ -9,6 +9,30 @@
   height: 315px;
 }
 
+.book-info-container-mason{
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  align-items: center;
+  font-size: 12px;
+  box-sizing: border-box;
+  padding: 5px;
+  height: calc( + 20px;);
+}
+
+.mason-row{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booktable{
+  min-width: 150px;
+  max-width: 750px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .book-image{
   width: 128px;
   flex-grow: 0;
@@ -20,13 +44,6 @@
 
 .book-image:hover{
   width: 135px;
-}
-
-.booktable{
-  min-width: 150px;
-  max-width: 750px;
-  display: flex;
-  flex-wrap: wrap;
 }
 
 .book-title{

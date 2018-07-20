@@ -9,11 +9,12 @@ class BookTable extends React.Component{
 
   constructor(props){
     super(props);
-    this.state = {displayedBookIds: []};
+    this.state = {displayedBookIds: [], style: 0};
     this.table = this.table.bind(this);
   }
 
   componentDidMount(){
+    this.setState({style: this.props.ui.style});
     if(this.props.currentPath === "/home"){
       if(!this.props.ui.visitedIndex || this.props.ui.updated){
         this.getFromHome.bind(this)();
@@ -35,7 +36,12 @@ class BookTable extends React.Component{
     }
   }
 
+
   componentWillReceiveProps(nextProps){
+    if(nextProps.ui.style !== this.props.ui.style){
+      this.setState({style: nextProps.ui.style});
+      return null;
+    }
     if(nextProps.user){
       if(nextProps.currentPath === '/books'){
         let userBookIds = [];
@@ -45,17 +51,22 @@ class BookTable extends React.Component{
         userBookIds = Array.from(new Set(userBookIds));
         userBookIds = userBookIds.sort().reverse();
         this.setState({displayedBookIds: userBookIds});
+        return null;
       }else if(nextProps.currentPath === "/home" && this.props.currentPath !== "/home"){
         if(!nextProps.ui.visitedIndex || nextProps.ui.updated){
           this.getFromHome.bind(this)();
+          return null;
         }else{
           this.setState({displayedBookIds: nextProps.ui.indexBookIds });
+          return null;
         }
       }else if(nextProps.match.params.bookshelfId){
         const shelfId = nextProps.match.params.bookshelfId;
         this.setState({displayedBookIds: nextProps.bookshelves[shelfId].book_ids});
+        return null;
       }
     }
+
   }
 
 
@@ -82,22 +93,47 @@ class BookTable extends React.Component{
     //Find out why you need to put the unique function here and not anywhere else
     // let userBookIds = Array.from(new Set(this.state.displayedBookIds));
     // userBookIds = userBookIds.sort().reverse();
-    const table = this.state.displayedBookIds.map((bookId) => {
-      return (<div key={bookId} className="book-info-container">
-                <Link to={`/books/${bookId}`}>
-                <img className="book-image" src={this.props.books[bookId].photoUrl}/>
-                </Link>
-                <span className="book-title">
-                  {this.props.books[bookId].title}
-                </span>
-                <div>
-                  <ReviewBar starkey={`${bookId}`}/>
-                </div>
-                <div>
-                  <ShelfDropDown bookId={bookId}/>
-                </div>
-              </div>);
-    });
+    let table;
+    let addedClass = "";
+    if(this.state.style === 0){
+      const that = this;
+      table = this.state.displayedBookIds.map((bookId, that) => {
+
+
+        return (<div key={bookId} className="book-info-container">
+                  <Link to={`/books/${bookId}`}>
+                  <img className="book-image" src={this.props.books[bookId].photoUrl}/>
+                  </Link>
+                  <span className="book-title">
+                    {this.props.books[bookId].title}
+                  </span>
+                  <div>
+                    <ReviewBar starkey={`${bookId}`}/>
+                  </div>
+                  <div>
+                    <ShelfDropDown bookId={bookId}/>
+                  </div>
+                </div>);});
+    }else if(this.state.style===1){
+      table = [[],[],[],[],[]];
+      this.state.displayedBookIds.forEach((bookId, i)=>{
+        table[i % 5].push(<div key={bookId} className="book-info-container-mason">
+                            <Link to={`/books/${bookId}`}>
+                            <img className="book-image" src={this.props.books[bookId].photoUrl}/>
+                            </Link>
+                            <span className="book-title">
+                              {this.props.books[bookId].title}
+                            </span>
+                            <div>
+                              <ReviewBar starkey={`${bookId}`}/>
+                            </div>
+                            <div>
+                              <ShelfDropDown bookId={bookId}/>
+                            </div>
+                          </div>);
+      });
+      table= table.map((el, i)=><div key={i} className="mason-row">{el}</div>);
+    }
     return table;
   }
 

@@ -19,10 +19,11 @@ Rails.application.routes.draw do
 
     delete '/shelvings/', to: "shelvings#destroy", as: 'api_shelvings'
 
+    delete '/reviews/', to: "reviews#destroy", as: 'api_reviews'
     post '/reviews', to: "reviews#handle", as: 'reviews_handle'
-    resources :reviews, only: [:destroy]
 
-    resources :statuses, only: [:update, :create, :destroy]
+    delete '/statuses/', to: "statuses#destroy", as: 'api_statuses'
+    post '/statuses', to: "statuses#handle", as: 'statuses_handle'
 
   end
 end

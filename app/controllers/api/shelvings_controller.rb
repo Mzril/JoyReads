@@ -1,9 +1,10 @@
 class Api::ShelvingsController < ApplicationController
 
   before_action :ensure_logged_in, only: [:destroy, :create, :update]
+  before_action :ensure_status_presence, only: [:create]
 
   def create
-    @shelving = Shelving.new(shelving_params)
+    @shelving = Shelving.new(book_id: params[:shelving][:book_id], bookshelf_id: params[:shelving][:bookshelf_id], status_id: @status.id)
     if @shelving.save
       render :show
     else
@@ -29,9 +30,17 @@ class Api::ShelvingsController < ApplicationController
     @shelving = Shelving.find_by(book_id: params[:book_id], bookshelf_id: params[:bookshelf_id])
     if @shelving
       @shelving.destroy
-      render :show
+      render :showlimited
     else
       render json: ["Shelving Doesn't exist"], status: 404
+    end
+  end
+
+  def ensure_status_presence
+    @user = Bookshelf.find(params[:shelving][:bookshelf_id]).user
+    @status = Status.find_by(book_id: params[:shelving][:book_id], user_id: @user.id)
+    unless @status
+      @status = Status.create(book_id: params[:shelving][:book_id], user_id: @user.id, value: 0)
     end
   end
 

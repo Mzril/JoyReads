@@ -74,7 +74,7 @@ class BookshelvesIndex extends React.Component {
   }
 
   shelves(bookshelfIds, bookshelves){
-    const bookshelfids = bookshelfIds.slice();
+    const bookshelfids = bookshelfIds.slice().sort();
     let total_book_ids = [];
     let exclusive = bookshelfids.splice(0,3).map((id) =>{
       total_book_ids = total_book_ids.concat(bookshelves[id].book_ids);

@@ -10,7 +10,8 @@ export const receiveCurrentUser = (payload) => {
     user: payload.user,
     bookshelves : payload.bookshelves,
     books : payload.books,
-    reviews: payload.reviews
+    reviews: payload.reviews,
+    statuses: payload.statuses
   };
 };
 

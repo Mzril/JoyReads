@@ -4,7 +4,7 @@ import { RECEIVE_SHELVING, REMOVE_SHELVING} from '../actions/bookshelf_actions';
 import { RECEIVE_A_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
 
-const default_state = {visitedUsers: {}, visitedIndex: false, indexBookIds:[], updated: false, visitedBooks: {}};
+const default_state = {visitedUsers: {}, visitedIndex: false, indexBookIds:[], updated: false, visitedBooks: {}, style: 1};
 
 export const uiReducer = (state = default_state, action) => {
   let newState;
@@ -32,6 +32,10 @@ export const uiReducer = (state = default_state, action) => {
     case RECEIVE_ONE_BOOK:
       newState = merge({}, state);
       newState.visitedBooks[action.book.id]=true;
+      return newState;
+    case "TOGGLE_VIEW":
+      newState = merge({}, state);
+      newState.style = action.style;
       return newState;
     default:
       return state;

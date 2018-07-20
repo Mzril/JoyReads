@@ -2,7 +2,7 @@ import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
 import { REMOVE_BOOKSHELF, RECEIVE_ONE_BOOKSHELF} from '../actions/bookshelf_actions';
 import { REMOVE_SHELVING, RECEIVE_SHELVING} from '../actions/bookshelf_actions';
 import { RECEIVE_ONE_BOOK } from '../actions/book_actions';
-import { RECEIVE_REVIEW, DELETE_REVIEW } from '../actions/review&status_actions';
+import { RECEIVE_REVIEW, DELETE_REVIEW , RECEIVE_STATUS, DELETE_STATUS} from '../actions/review&status_actions';
 import { RECEIVE_A_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
 
@@ -39,7 +39,11 @@ const usersReducer = (state = {}, action) => {
     case DELETE_REVIEW:
       userReviews = newState[action.review.user_id].review_ids;
       userReviews.splice(userReviews.indexOf(action.review.id), 1);
-    return newState;
+      return newState;
+    case RECEIVE_STATUS:
+      return newState;
+    case DELETE_STATUS:
+      return newState;
     default:
       return state;
   }

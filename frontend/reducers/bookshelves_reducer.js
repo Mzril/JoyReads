@@ -3,6 +3,8 @@ REMOVE_SHELVING, RECEIVE_SHELVING, UPDATE_SHELVING } from '../actions/bookshelf_
 import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
 import { RECEIVE_A_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
+import { RECEIVE_STATUS, DELETE_STATUS } from '../actions/user_actions';
+import { RECEIVE_REVIEW } from '../actions/review&status_actions';
 
 const bookshelvesReducer = (state = {}, action) => {
   let newState;
@@ -28,6 +30,25 @@ const bookshelvesReducer = (state = {}, action) => {
       newState = merge({},state);
       const receivingshelf = newState[action.shelving.bookshelf_id];
       receivingshelf.book_ids.push(action.shelving.book_id);
+      return newState;
+    case RECEIVE_STATUS:
+      newState = merge({},state);
+      //What goes here?
+      return newState;
+    case DELETE_STATUS:
+      newState = merge({},state);
+      debugger
+      action.shelvings.forEach(shelving=>{
+        newState[shelving.bookshelf_id].book_ids.splice(newState[shelving.bookshelf_id].book_ids.indexOf(action.status.book_id) , 1);
+        debugger
+      });
+      return newState;
+    case RECEIVE_REVIEW:
+      newState = merge({}, state);
+      if(action.shelving){
+        const receivingshelf = newState[action.shelving.bookshelf_id];
+        receivingshelf.book_ids.push(action.shelving.book_id);
+      }
       return newState;
     default:
       return state;

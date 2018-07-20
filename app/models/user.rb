@@ -9,15 +9,15 @@ class User < ApplicationRecord
     foreign_key: :user_id,
     dependent: :destroy
 
-  has_many :books, -> { distinct },
-    through: :bookshelves,
-    source: :books
-
   has_many :reviews,
     dependent: :destroy
 
   has_many :statuses,
     dependent: :destroy
+
+  has_many :books,
+    through: :statuses,
+    source: :book
 
   has_one_attached :photo
 

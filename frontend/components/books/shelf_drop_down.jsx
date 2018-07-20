@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import React from 'react';
 import {createShelving, deleteShelving} from "./../../actions/bookshelf_actions";
-import {handleStatus} from "./../../actions/review&status_actions";
+import {handleStatus, removeStatus} from "./../../actions/review&status_actions";
 import Dropdown from "react-dropdown";
 
 class ShelfDropDown extends React.Component{
@@ -30,7 +30,7 @@ class ShelfDropDown extends React.Component{
 
   statusclick(e, bookshelfId){
     console.log('status');
-    // this.props.handleStatus({book_id: this.props.bookId, bookshelf_id: bookshelfId, user_id: this.props.currentUser.id});
+    this.props.handleStatus({book_id: this.props.bookId, bookshelf_id: bookshelfId, user_id: this.props.currentUser.id});
   }
 
   stop(e){
@@ -49,8 +49,9 @@ class ShelfDropDown extends React.Component{
     return (e)=>this.deleteClick(e,bookshelfId);
   }
 
-  destroyAllClick(){
-
+  destroyAllClick(e){
+    // this.props.removeStatus({book_id: this.props.bookId, user_id: this.props.currentUser.id});
+    e.stopPropagation();
   }
 
   whichbutton(bookshelfId, addedclass){
@@ -87,7 +88,6 @@ class ShelfDropDown extends React.Component{
              label: <div className={"take-all-space"+ addedclass} onClick={this.stop} onMouseDown={this.stop} onTouchEnd={this.stop}>{this.whichbutton(id, addedclass)}<div className="align-this">{bookshelves[id].title}</div></div>};
           }
         });
-
         return (<div><Dropdown disabled={this.props.disabled} placeholder="Add to Shelf" className={addedclass} controlClassName={addedclass} menuClassName={addedclass} options={userShelves}/></div>);
       } else {
         return (<div><div></div></div>);
@@ -105,6 +105,7 @@ const mSP = (state, ownProps)=>{
   return {
     currentUser: state.entities.users[state.session.currentUserId],
     bookshelves: state.entities.bookshelves,
+    statuses: state.entities.statuses,
     disabled: disabled,
     user: user
   };
@@ -114,7 +115,8 @@ const mDP = (dispatch, ownProps)=>{
   return {
     createShelving: (data)=>dispatch(createShelving(data)),
     deleteShelving: (data)=>dispatch(deleteShelving(data)),
-    handleStatus: (data)=>dispatch(handleStatus(data))
+    handleStatus: (data)=>dispatch(handleStatus(data)),
+    removeStatus: (data)=>dispatch(removeStatus(data))
   };
 };
 

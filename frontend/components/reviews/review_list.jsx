@@ -15,37 +15,46 @@ class ReviewList extends React.Component{
    bookReviews(){
      const {reviews, users, book} = this.props;
      let myReviewId = 0;
-     const otherUsersReviews = [];
-     book.review_ids.forEach((id)=>{
+     let otherUsersReviews = [[],[],[]];
+     book.review_ids.forEach((id, i)=>{
        const user = users[reviews[id].user_id];
        const reviewRating = reviews[id].rating;
        const reviewBody = reviews[id].body;
        const userlink = "/users/" + user.username;
        if( user.id !== this.props.currentUserId){
-         //Don't forget this.props.location.state handling laster to optimize and preload if within array of visited Users
-         otherUsersReviews.push(<div key={id} className="whole-user-review">
-                                   <div style={{display: "flex"}}>
-                                       <Link className="userlink" to={{pathname: userlink, state: user.id}}>{user.username}</Link>
-                                       <ShowRating reviewRating={reviewRating} starkey={book.id}/>
-                                   </div>
-                                   <div className='review-body'>{reviewBody}</div>
-                                </div>
-                              );
+         //Don't forget this.props.location.state handling later to optimize and preload if within array of visited Users
+         otherUsersReviews[i % 3].push(<div key={id} className="whole-user-review">
+                                           <div className="user-review-header">
+                                                <ShowRating reviewRating={reviewRating} starkey={book.id}/>
+                                                Profile image here?
+                                                <Link className="userlink" to={{pathname: userlink, state: user.id}}>{user.username}</Link>
+                                           </div>
+                                           <div className='review-body'>
+                                             {reviewBody}
+                                           </div>
+                                      </div>
+                                    );
        }else{
          myReviewId = id;
        }});
-       let reviewForm=[];
+       let reviewForm;
        if(myReviewId){
-         reviewForm.push(<EditForm key={myReviewId} reviewId={myReviewId}/>);
+         reviewForm = <EditForm key={myReviewId} reviewId={myReviewId}/>;
        }else if(this.props.currentUserId){
-         reviewForm.push(<PostForm key={0}/>);
+         reviewForm = <PostForm key={0} />;
        }
-       return reviewForm.concat(otherUsersReviews);
+       otherUsersReviews = otherUsersReviews.map((el, i)=><div key={i} className="mason-row review-mason">{el}</div>);
+       return (<div className='r1'>
+                 {reviewForm}
+                 <div className="review-holder">
+                    {otherUsersReviews}
+                 </div>
+              </div>);
    }
 
   render(){
     return (
-      <div>
+      <div className="review-container">
         <div className="review-container-header">User Reviews</div>
         <div className="review-contents">
           {this.bookReviews.bind(this)()}

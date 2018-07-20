@@ -8,7 +8,7 @@ export const createStatus = (data)=>{
 
 export const deleteStatus = (data)=>{
   return $.ajax({
-    method: "POST",
+    method: "DELETE",
     url: `/api/statuses`,
     data: {status: data}
   });

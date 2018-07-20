@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchBook} from "./../../actions/book_actions";
-import ReviewBar from "./review_bar";
+import ReviewBarShow from "./review_bar_show";
 import ShelfDropDown from "./shelf_drop_down";
 import ShowRating from "./show_rating";
 import ReviewList from "./../reviews/review_list.jsx";
@@ -41,7 +41,7 @@ class BookShowPage extends React.Component{
     let userOptions = "";
     if(this.props.currentUser){
       userOptions = (<div className="only-logged-in">
-        <ReviewBar starkey={this.props.match.params.bookId} className="show-stars" biggerstars="true"/>
+        <ReviewBarShow starkey={this.props.match.params.bookId} className="show-stars" biggerstars="true"/>
         <ShelfDropDown bookId={this.props.bookId} biggerdropdown="true"/>
       </div>);
     }

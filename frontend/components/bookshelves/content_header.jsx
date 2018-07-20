@@ -1,12 +1,25 @@
 import React from 'react';
 import {Link, Route, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {toggleView} from './../../actions/ui_actions';
 
 class ContentHeader extends React.Component{
 
    constructor(){
      super();
      this.bigtext = this.bigtext.bind(this);
+     this.toggleOne = this.toggleOne.bind(this);
+     this.toggleZero = this.toggleZero.bind(this);
+   }
+
+   toggleOne(){
+     console.log("Set to one");
+     this.props.toggleView(1);
+   }
+
+   toggleZero(){
+     console.log("Set to two");
+     this.props.toggleView(0);
    }
 
    bigtext(){
@@ -33,8 +46,8 @@ class ContentHeader extends React.Component{
       <div className="content-header">
         {this.bigtext()}
         <div className="display-option">
-          <button disabled>Classic</button>
-          <button disabled>Modern</button>
+          <button onClick={this.toggleZero}>Spaced</button>
+          <button onClick={this.toggleOne}>Dense</button>
         </div>
       </div>
     );
@@ -58,7 +71,8 @@ const mSP = (state, ownProps) => {
 
 const mDP = (dispatch) => {
   return {
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    toggleView: (style)=>dispatch({type: "TOGGLE_VIEW", style: style})
   };
 };
 

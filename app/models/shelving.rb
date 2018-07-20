@@ -1,7 +1,7 @@
 class Shelving < ApplicationRecord
 
 
-  validates :book_id, :bookshelf_id, presence: true
+  validates :book_id, :bookshelf_id, :status_id, presence: true
   validates :book_id, uniqueness: {scope: :bookshelf_id, message: "can't have multiple books of same title"}
 
   belongs_to :bookshelf

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_17_213807) do
+ActiveRecord::Schema.define(version: 2018_07_20_085909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2018_07_17_213807) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "exclusive", default: false
     t.index ["user_id", "title"], name: "index_bookshelves_on_user_id_and_title", unique: true
     t.index ["user_id"], name: "index_bookshelves_on_user_id"
   end
@@ -64,7 +65,9 @@ ActiveRecord::Schema.define(version: 2018_07_17_213807) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status_id"
     t.index ["book_id", "user_id"], name: "index_reviews_on_book_id_and_user_id", unique: true
+    t.index ["status_id"], name: "index_reviews_on_status_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -73,8 +76,10 @@ ActiveRecord::Schema.define(version: 2018_07_17_213807) do
     t.integer "bookshelf_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status_id"
     t.index ["book_id", "bookshelf_id"], name: "index_shelvings_on_book_id_and_bookshelf_id", unique: true
     t.index ["book_id"], name: "index_shelvings_on_book_id"
+    t.index ["status_id"], name: "index_shelvings_on_status_id"
   end
 
   create_table "statuses", force: :cascade do |t|
