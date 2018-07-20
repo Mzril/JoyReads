@@ -6,11 +6,12 @@
   margin-left: auto;
   margin-right: auto;
   min-width: 200px;
-  max-width: 970px;
+  max-width: 1000px;
 }
 
 .control-width{
   margin-left: 20px;
+  margin-right: 20px;
 }
 
 .exclusive-shelves{
