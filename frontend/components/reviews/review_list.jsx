@@ -26,7 +26,7 @@ class ReviewList extends React.Component{
          otherUsersReviews[i % 3].push(<div key={id} className="whole-user-review">
                                            <div className="user-review-header">
                                                 <ShowRating reviewRating={reviewRating} starkey={book.id}/>
-                                                Profile image here?
+
                                                 <Link className="userlink" to={{pathname: userlink, state: user.id}}>{user.username}</Link>
                                            </div>
                                            <div className='review-body'>
