@@ -66,3 +66,7 @@ i {
   background-color: #382110;
   cursor: pointer;
 }
+
+.display-option > button{
+  cursor: pointer;
+}
