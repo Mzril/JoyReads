@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from './../actions/session_actions';
+import BookSearch from './booksearch';
 
 class Navbar extends React.Component {
 
@@ -38,7 +39,7 @@ class Navbar extends React.Component {
               <Link to="/books">My Books</Link>
             </div>
           </div>
-          <input className="nav-search-bar" disabled type="search" placeholder="Search books"/>
+          <BookSearch/>
           {navbuttons}
         </div>
       </div>

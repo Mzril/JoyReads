@@ -42,6 +42,10 @@ class BookTable extends React.Component{
       this.setState({style: nextProps.ui.style});
       return null;
     }
+    if(nextProps.currentPath === "/books/searchresults" && nextProps.ui.searchBookIds.length > 0){
+      this.setState({displayedBookIds: nextProps.ui.searchBookIds});
+      return null;
+    }
     if(nextProps.user){
       if(nextProps.currentPath === '/books'){
         let userBookIds = [];
@@ -90,9 +94,8 @@ class BookTable extends React.Component{
   }
 
   table(){
-    //Find out why you need to put the unique function here and not anywhere else
-    // let userBookIds = Array.from(new Set(this.state.displayedBookIds));
-    // userBookIds = userBookIds.sort().reverse();
+    //Optimization: See if you can't pass if reviews to Review bar component based on current user's reviews, same thing default for status for status.
+    //This way you can get everything in the review bar and shelf dropdown O(n) time. Users {1: {id: 1, username: Mzril, bookInfo: {id: {reviewvalue: number, status: value}}}}}
     let table;
     let addedClass = "";
     if(this.state.style === 0){
@@ -108,10 +111,10 @@ class BookTable extends React.Component{
                     {this.props.books[bookId].title}
                   </span>
                   <div>
-                    <ReviewBar starkey={`${bookId}`}/>
+                    <ReviewBar  starkey={`${bookId}`}/>
                   </div>
                   <div>
-                    <ShelfDropDown bookId={bookId}/>
+                    <ShelfDropDown  bookId={bookId}/>
                   </div>
                 </div>);});
     }else if(this.state.style===1){
@@ -144,7 +147,13 @@ class BookTable extends React.Component{
         <Redirect to="/" />
       );
     }
-    if(this.state.displayedBookIds.length===0 && this.props.location.pathname !=="/home"){
+    if(this.props.errors.length > 0){
+      return (
+        <div className="booktable max error">
+          {this.props.errors[0]}
+        </div>
+      );
+    }else if(this.state.displayedBookIds.length===0 && this.props.location.pathname !=="/home"){
       return (
         <div className="booktable max">
           No Books here yet...go add some!

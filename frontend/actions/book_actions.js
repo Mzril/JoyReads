@@ -1,4 +1,5 @@
 export const RECEIVE_BOOKS = "RECEIVE_BOOKS";
+export const RECEIVE_SEARCH_BOOKS = "RECEIVE_SEARCH_BOOKS";
 export const RECEIVE_BOOK_ERRORS = "RECEIVE_BOOK_ERRORS";
 export const RECEIVE_ONE_BOOK = "RECEIVE_ONE_BOOK";
 export const RECEIVE_INDEX = "RECEIVE_INDEX";
@@ -8,6 +9,13 @@ import * as BookAPIUtil from './../util/book_api_util';
 export const receiveBooks = (books) => {
   return {
     type: RECEIVE_BOOKS,
+    books: books
+  };
+};
+
+export const receiveSearchBooks = (books) => {
+  return {
+    type: RECEIVE_SEARCH_BOOKS,
     books: books
   };
 };
@@ -91,7 +99,7 @@ export const fetchBooksByQuery = (query) => {
   return dispatch => {
     return BookAPIUtil.fetchBooksByQuery(query).then(
       (books) => {
-        return dispatch(receiveBooks(books));
+        return dispatch(receiveSearchBooks(books));
       },
       (errors) => dispatch(receiveErrors(errors.responseJSON))
     );

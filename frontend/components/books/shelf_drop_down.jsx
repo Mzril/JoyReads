@@ -28,17 +28,17 @@ class ShelfDropDown extends React.Component{
     e.stopPropagation();
   }
 
-  statusclick(e, bookshelfId){
+  statusclick(e,value){
     console.log('status');
-    this.props.handleStatus({book_id: this.props.bookId, bookshelf_id: bookshelfId, user_id: this.props.currentUser.id});
+    this.props.handleStatus({book_id: this.props.bookId, value: value, user_id: this.props.currentUser.id});
   }
 
   stop(e){
     e.stopPropagation();
   }
 
-  statusUpdate(bookshelfId){
-    return (e)=>this.statusclick(e,bookshelfId);
+  statusUpdate(i){
+    return (e)=>this.statusclick(e,i);
   }
 
   execute(bookshelfId){
@@ -79,8 +79,8 @@ class ShelfDropDown extends React.Component{
         const userShelves = bookshelf_ids.map((id,i) => {
           const that = this;
           if(i<3){
-            return {value: id,
-             label: <div className={"take-all-space"+ addedclass} onClick={this.stop} onMouseDown={this.statusUpdate(id)} onTouchEnd={this.stop}>
+            return {value: i,
+             label: <div className={"take-all-space"+ addedclass} onClick={this.stop} onMouseDown={this.statusUpdate(i)} onTouchEnd={this.stop}>
                       {bookshelves[id].title}
                     </div>};
           }else{

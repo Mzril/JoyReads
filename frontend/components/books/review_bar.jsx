@@ -14,6 +14,7 @@ class ReviewBar extends React.Component{
    componentDidMount(){
      const {displayedUser, reviews, books} = this.props;
      if(displayedUser.review_ids){
+       // Change reviewIds to hash for O(1) time - Later?
        const reviewed_book_ids = displayedUser.review_ids.map((id) =>{
          return reviews[id].book_id;
        });

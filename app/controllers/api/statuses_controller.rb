@@ -18,7 +18,9 @@ class Api::StatusesController < ApplicationController
       @shelving = Shelving.includes(:owner).find(@status.shelving_ids.first)
       array = @shelving.owner.bookshelf_ids;
       @shelving.update(bookshelf_id: array[params[:status][:value]])
+      @previous_status = @status.value
       @status.update(status_params)
+      debugger
       render :show
     else
       render json: ["Status doesn't exist"]  ,status: 404

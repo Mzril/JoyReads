@@ -66,3 +66,7 @@
 .booktable.max{
   display: block;
 }
+
+.booktable.max.error{
+  color: crimson;
+}

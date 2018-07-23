@@ -30,6 +30,14 @@ export const handleReview = (data)=>{
   });
 };
 
+export const updateReview = (data)=>{
+  return $.ajax({
+    method: "PATCH",
+    url: `/api/reviews/${data.id}`,
+    data: {review: data}
+  });
+};
+
 export const deleteReview = (data)=>{
   return $.ajax({
     method: "DELETE",

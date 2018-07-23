@@ -1,4 +1,4 @@
-import { RECEIVE_ONE_BOOK, RECEIVE_BOOKS, RECEIVE_INDEX, RECEIVE_USER_BOOKS} from '../actions/book_actions';
+import { RECEIVE_ONE_BOOK, RECEIVE_BOOKS, RECEIVE_INDEX, RECEIVE_USER_BOOKS, RECEIVE_SEARCH_BOOKS} from '../actions/book_actions';
 import { RECEIVE_A_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
 import { RECEIVE_CURRENT_USER } from './../actions/session_actions';
@@ -8,6 +8,7 @@ const booksReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
     case RECEIVE_BOOKS:
+    case RECEIVE_SEARCH_BOOKS:
     case RECEIVE_INDEX:
     case RECEIVE_CURRENT_USER:
     case RECEIVE_USER_BOOKS:

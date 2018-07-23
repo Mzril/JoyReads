@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
     delete '/reviews/', to: "reviews#destroy", as: 'api_reviews'
     post '/reviews', to: "reviews#handle", as: 'reviews_handle'
+    resources :reviews, only: [:update]
 
     delete '/statuses/', to: "statuses#destroy", as: 'api_statuses'
     post '/statuses', to: "statuses#handle", as: 'statuses_handle'

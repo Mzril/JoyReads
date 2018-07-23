@@ -27,6 +27,8 @@ class ContentHeader extends React.Component{
      let bigtext;
        if(this.props.location.pathname === "/home"){
          bigtext = <Link to="/books" className="main-header-link">Featured Books</Link>;
+       }else if(this.props.location.pathname === "/books/searchresults"){
+         bigtext = <Link to="/books" className="main-header-link">Search Results</Link>;
        }
        else if(bookshelfId && this.props.bookshelves[bookshelfId]){
          bigtext = <Link to="/books" className="main-header-link">{this.props.bookshelves[bookshelfId].title}</Link>;

@@ -125,11 +125,21 @@
   border: 1px solid #dcd6cc;
   background-color: #F4F1EA;
   padding: 3px 11px 3px 11px;
+  cursor: pointer;
+}
+
+.shelf-button-form:hover{
+  background-color: #f3eddf;
 }
 
 .shelf-button-form.update{
   padding: 3px;
   font-size: 10.5px;
+  cursor: pointer;
+}
+
+.shelf-button-form.update:hover{
+  background-color: #f3eddf;
 }
 
 .add-shelf-button{

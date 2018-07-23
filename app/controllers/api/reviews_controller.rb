@@ -1,7 +1,7 @@
 class Api::ReviewsController < ApplicationController
 
-  before_action :ensure_logged_in, only: [:handle, :destroy]
-  before_action :ensure_status_presence, only: [:handle]
+  before_action :ensure_logged_in, only: [:handle, :destroy, :update]
+  before_action :ensure_status_presence, only: [:handle, :create]
 
   def handle
     @review = Review.find_by(book_id: params[:review][:book_id], user_id: params[:review][:user_id])
@@ -14,6 +14,15 @@ class Api::ReviewsController < ApplicationController
       else
         render json: @review.errors.full_messages , status: 411
       end
+    end
+  end
+
+  def update
+    @review = Review.find(params[:id])
+    if @review && @review.update(review_params)
+      render :update
+    else
+      render json: @review.errors.full_messages , status: 411
     end
   end
 

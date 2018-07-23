@@ -55,7 +55,7 @@ export const deleteStatus = (payload)=>{
   };
 };
 
-export const receiveReviewErrors = (error)=>{
+export const receiveReviewErrors = (errors)=>{
   return {
     type: RECEIVE_REVIEW_ERRORS,
     errors: errors

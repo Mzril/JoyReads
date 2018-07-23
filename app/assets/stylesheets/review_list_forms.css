@@ -3,10 +3,8 @@
   justify-content: space-between;
 }
 
-.font-opener {
+.font-opener{
   margin-right: 0;
-  overflow-wrap: break-word;
-  max-width: 140px;
   vertical-align: center;
   font-size: 14px;
   color: #00635d;
@@ -67,4 +65,20 @@
 .r1{
   display: flex;
   flex-direction: column;
+}
+
+.form-holder{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-input-form{
+  padding: 5px;
+  min-height: 50px;
+  font-size: 14px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 75%;
+  margin-bottom: 10px;
 }

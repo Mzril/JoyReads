@@ -36,8 +36,8 @@ export const createApiBooks = (data)=>{
 
 export const fetchBooksByQuery = (query)=>{
   return $.ajax({
-    method: "POST",
-    url: `/api/books/${query}`
+    method: "GET",
+    url: `/api/books/search/${query}`
   });
 };
 

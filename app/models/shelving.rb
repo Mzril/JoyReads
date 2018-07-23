@@ -6,6 +6,7 @@ class Shelving < ApplicationRecord
 
   belongs_to :bookshelf
   belongs_to :book
+  belongs_to :status
 
   has_one :owner,
     through: :bookshelf,

@@ -12,7 +12,7 @@ class Api::BooksController < ApplicationController
   end
 
   def user
-    @user = User.includes(:books).find(params[:user_id])
+    @user = User.includes(:books, :reviews).find(params[:user_id])
     if @user.books
       render "api/users/show"
     else
@@ -21,9 +21,9 @@ class Api::BooksController < ApplicationController
   end
 
   def search
-    @books = Book.where("title LIKE ?", "#{params[:title]}%")
+    @books = Book.where('lower(title) like ? ', "%#{params[:title].downcase}%")
     unless @books.empty?
-      render :index
+      render :results
     else
       render json: ["Books Not Found"], status: 404
     end
@@ -31,7 +31,6 @@ class Api::BooksController < ApplicationController
 
   def shelf
     @books = Book.in_shelf(params[:bookshelf_id])
-
     unless @books.empty?
       render :index
     else

@@ -19,7 +19,8 @@ class User < ApplicationRecord
     through: :statuses,
     source: :book
 
-  has_one_attached :photo
+  has_one_attached :photo,
+    dependent: :destroy
 
   attr_reader :password
   after_initialize :ensure_session_token
