@@ -8,7 +8,6 @@ class ShelfDropDown extends React.Component{
 
   constructor(props){
     super(props);
-    this.handleSubmit = this.handleSubmit;
     this.click=this.click.bind(this);
     this.statusclick=this.statusclick.bind(this);
     this.statusUpdate = this.statusUpdate.bind(this);
@@ -55,7 +54,6 @@ class ShelfDropDown extends React.Component{
   }
 
   whichbutton(bookshelfId, addedclass){
-    //where are we getting the book ID from?
     // how to we prevent callbacks from occuring here?
     const bookId = parseInt(this.props.bookId);
     if(this.props.bookshelves[bookshelfId].book_ids.includes(bookId)){
@@ -88,7 +86,20 @@ class ShelfDropDown extends React.Component{
              label: <div className={"take-all-space"+ addedclass} onClick={this.stop} onMouseDown={this.stop} onTouchEnd={this.stop}>{this.whichbutton(id, addedclass)}<div className="align-this">{bookshelves[id].title}</div></div>};
           }
         });
-        return (<div><Dropdown disabled={this.props.disabled} placeholder="Add to Shelf" className={addedclass} controlClassName={addedclass} menuClassName={addedclass} options={userShelves}/></div>);
+        const inStatus = this.props.currentUser.bookInfo[this.props.bookId];
+        if(inStatus){
+          let newPlaceholder;
+          if(this.props.statuses[inStatus.statusId].value === 0){
+            newPlaceholder = <div className="dropdown-derp">Read</div>;
+          }else if(this.props.statuses[inStatus.statusId].value === 1){
+            newPlaceholder = <div className="dropdown-derp">Currently Reading</div>;
+          }else if (this.props.statuses[instatus.statusId].value === 2){
+            newPlaceholder = <div className="dropdown-derp">Want to Read</div>;
+          }
+          return (<div><Dropdown disabled={this.props.disabled} placeholder={newPlaceholder} className={addedclass} controlClassName={addedclass} menuClassName={addedclass} options={userShelves}/></div>);
+        }else{
+          return (<div><Dropdown disabled={this.props.disabled} placeholder="Add to Shelf" className={addedclass} controlClassName={addedclass} menuClassName={addedclass} options={userShelves}/></div>);
+        }
       } else {
         return (<div><div></div></div>);
       }

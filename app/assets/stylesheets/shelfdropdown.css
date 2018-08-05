@@ -140,6 +140,10 @@
   padding-left: 5px;
 }
 
+.dropdown-derp{
+  padding-left: 5px;
+}
+
 .take-all-space{
   display: flex;
   box-sizing: border-box;

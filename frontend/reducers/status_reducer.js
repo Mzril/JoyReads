@@ -1,4 +1,4 @@
-import {RECEIVE_STATUS, DELETE_STATUS, UPDATE_STATUS} from "./../actions/review&status_actions";
+import { RECEIVE_STATUS, DELETE_STATUS, UPDATE_STATUS, RECEIVE_REVIEW} from "./../actions/review&status_actions";
 import { RECEIVE_ONE_BOOK, RECEIVE_BOOKS, RECEIVE_INDEX, RECEIVE_USER_BOOKS} from '../actions/book_actions';
 import { merge } from 'lodash';
 import { RECEIVE_CURRENT_USER } from './../actions/session_actions';
@@ -8,6 +8,13 @@ const statusReducer = (state = {}, action) => {
   //remove all the new stat initialization for optimization
   let newState;
   switch (action.type) {
+    case RECEIVE_REVIEW:
+      if(action.status){
+        newState = merge({}, state);
+        newState[action.status.id] = action.status;
+        return newState;
+      }
+      return state;
     case RECEIVE_STATUS:
       return merge({}, state, {[action.status.id]: action.status});
     case DELETE_STATUS:

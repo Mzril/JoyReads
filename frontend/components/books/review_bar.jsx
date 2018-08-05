@@ -13,16 +13,12 @@ class ReviewBar extends React.Component{
 
    componentDidMount(){
      const {displayedUser, reviews, books} = this.props;
-     if(displayedUser.review_ids){
-       // Change reviewIds to hash for O(1) time - Later?
-       const reviewed_book_ids = displayedUser.review_ids.map((id) =>{
-         return reviews[id].book_id;
-       });
-       // Change reviewIds to hash for O(1) time - Later
-       for (let i = 0; i < reviewed_book_ids.length; i++) {
-         if(reviewed_book_ids[i] === parseInt(this.props.starkey)){
-           this.setState({currentvalue: reviews[displayedUser.review_ids[i]].rating});
-           break;
+     if(displayedUser.bookInfo){
+       const bookExists = displayedUser.bookInfo[parseInt(this.props.starkey)];
+       if(bookExists){
+         const lookup = displayedUser.bookInfo[parseInt(this.props.starkey)].reviewId;
+         if(lookup !== undefined){
+           this.setState({currentvalue: reviews[lookup].rating});
          }
        }
      }else if(displayedUser.id !==null){

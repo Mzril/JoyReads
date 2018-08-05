@@ -33,6 +33,8 @@
   font-family: "Merriweather", Georgia, "Times New Roman", serif;
   color: #00635d;
   font-weight: 700;
+  max-width: 840px;
+  overflow: hidden;
   text-decoration: solid;
 }
 

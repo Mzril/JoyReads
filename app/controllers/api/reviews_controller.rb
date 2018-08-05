@@ -40,7 +40,7 @@ class Api::ReviewsController < ApplicationController
     @status = Status.find_by(book_id: params[:review][:book_id], user_id: params[:review][:user_id])
     unless @status
       @status = Status.create(book_id: params[:review][:book_id], user_id: params[:review][:user_id], value: 0)
-      @shelving = Shelving.create(book_id: params[:review][:book_id], bookshelf_id: User.find(params[:review][:user_id]).bookshelf_ids.first)
+      @shelving = Shelving.create(status_id: @status.id, book_id: params[:review][:book_id], bookshelf_id: User.find(params[:review][:user_id]).bookshelf_ids.first)
       @review = Review.create(rating: params[:review][:rating], book_id: params[:review][:book_id], user_id: params[:review][:user_id], status_id: @status.id)
       render :showshelving
     end

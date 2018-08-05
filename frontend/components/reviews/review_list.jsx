@@ -21,9 +21,10 @@ class ReviewList extends React.Component{
        const reviewRating = reviews[id].rating;
        const reviewBody = reviews[id].body;
        const userlink = "/users/" + user.username;
+       let offset = 0;
        if( user.id !== this.props.currentUserId){
          //Don't forget this.props.location.state handling later to optimize and preload if within array of visited Users
-         otherUsersReviews[i % 3].push(<div key={id} className="whole-user-review">
+         otherUsersReviews[(i+offset) % 3].push(<div key={id} className="whole-user-review">
                                            <div className="user-review-header">
                                                 <ShowRating reviewRating={reviewRating} starkey={book.id}/>
 
@@ -36,6 +37,7 @@ class ReviewList extends React.Component{
                                     );
        }else{
          myReviewId = id;
+         offset -= 1;
        }});
        let reviewForm;
        if(myReviewId){

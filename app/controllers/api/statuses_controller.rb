@@ -34,7 +34,7 @@ class Api::StatusesController < ApplicationController
       @shelvings = @status.shelvings
       @review = @status.review
       @status.destroy
-      render :custshow
+      render :custshows
     else
       render json: ["Status doesn't exist"] , status: 404
     end
