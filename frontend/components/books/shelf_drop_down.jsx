@@ -1,12 +1,13 @@
 import {connect} from 'react-redux';
 import React from 'react';
 import {createShelving, deleteShelving} from "./../../actions/bookshelf_actions";
-import {handleStatus, removeStatus} from "./../../actions/review&status_actions";
+import {createStatus, updateStatus, removeStatus} from "./../../actions/review&status_actions";
 import Dropdown from "react-dropdown";
 
 class ShelfDropDown extends React.Component{
 
   constructor(props){
+    // Switch currentUser for generic User when implementing other user's bookshelves
     super(props);
     this.click=this.click.bind(this);
     this.statusclick=this.statusclick.bind(this);
@@ -28,8 +29,14 @@ class ShelfDropDown extends React.Component{
   }
 
   statusclick(e,value){
-    console.log('status');
-    this.props.handleStatus({book_id: this.props.bookId, value: value, user_id: this.props.currentUser.id});
+    const inStatus = this.props.currentUser.bookInfo[this.props.bookId];
+    if(inStatus){
+      if(this.props.statuses[inStatus.statusId].value != value){
+        this.props.updateStatus({id: this.props.currentUser.bookInfo[this.props.bookId].statusId, value: value});
+      }
+    }else{
+      this.props.createStatus({bookshelf_id: this.props.currentUser.bookshelf_ids[value], book_id: this.props.bookId, value: value, user_id: this.props.currentUser.id});
+    }
   }
 
   stop(e){
@@ -49,7 +56,7 @@ class ShelfDropDown extends React.Component{
   }
 
   destroyAllClick(e){
-    // this.props.removeStatus({book_id: this.props.bookId, user_id: this.props.currentUser.id});
+    this.props.removeStatus(this.props.statuses[this.props.currentUser.bookInfo[this.props.bookId].statusId].id);
     e.stopPropagation();
   }
 
@@ -69,8 +76,8 @@ class ShelfDropDown extends React.Component{
           addedclass = " biggerdropdown";
         }
         const deleteFromAll = {value: -1,
-        label: <div className={"take-all-space"+ addedclass} onClick={this.stop} onMouseDown={this.destroyAllClick.bind(this)} onTouchEnd={this.stop}>
-                    Remove
+        label: <div className={"take-all-space delete"+ addedclass} onClick={this.stop} onMouseDown={this.destroyAllClick.bind(this)} onTouchEnd={this.stop}>
+                    REMOVE
                  </div>};
         const bookshelves=this.props.bookshelves;
         const {bookshelf_ids} = this.props.currentUser;
@@ -86,14 +93,16 @@ class ShelfDropDown extends React.Component{
              label: <div className={"take-all-space"+ addedclass} onClick={this.stop} onMouseDown={this.stop} onTouchEnd={this.stop}>{this.whichbutton(id, addedclass)}<div className="align-this">{bookshelves[id].title}</div></div>};
           }
         });
+
         const inStatus = this.props.currentUser.bookInfo[this.props.bookId];
         if(inStatus){
           let newPlaceholder;
+          userShelves.push(deleteFromAll);
           if(this.props.statuses[inStatus.statusId].value === 0){
             newPlaceholder = <div className="dropdown-derp">Read</div>;
           }else if(this.props.statuses[inStatus.statusId].value === 1){
             newPlaceholder = <div className="dropdown-derp">Currently Reading</div>;
-          }else if (this.props.statuses[instatus.statusId].value === 2){
+          }else if (this.props.statuses[inStatus.statusId].value === 2){
             newPlaceholder = <div className="dropdown-derp">Want to Read</div>;
           }
           return (<div><Dropdown disabled={this.props.disabled} placeholder={newPlaceholder} className={addedclass} controlClassName={addedclass} menuClassName={addedclass} options={userShelves}/></div>);
@@ -126,8 +135,9 @@ const mDP = (dispatch, ownProps)=>{
   return {
     createShelving: (data)=>dispatch(createShelving(data)),
     deleteShelving: (data)=>dispatch(deleteShelving(data)),
-    handleStatus: (data)=>dispatch(handleStatus(data)),
-    removeStatus: (data)=>dispatch(removeStatus(data))
+    createStatus: (data)=>dispatch(createStatus(data)),
+    updateStatus: (data)=>dispatch(updateStatus(data)),
+    removeStatus: (id)=>dispatch(removeStatus(id))
   };
 };
 

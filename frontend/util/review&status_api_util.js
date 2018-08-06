@@ -6,18 +6,17 @@ export const createStatus = (data)=>{
   });
 };
 
-export const deleteStatus = (data)=>{
+export const deleteStatus = (id)=>{
   return $.ajax({
     method: "DELETE",
-    url: `/api/statuses`,
-    data: {status: data}
+    url: `/api/statuses/${id}`
   });
 };
 
 export const updateStatus = (data)=>{
   return $.ajax({
     method: "PATCH",
-    url: `/api/statuses`,
+    url: `/api/statuses/${data.id}`,
     data: {status: data}
   });
 };

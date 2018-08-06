@@ -3,7 +3,7 @@ REMOVE_SHELVING, RECEIVE_SHELVING, UPDATE_SHELVING } from '../actions/bookshelf_
 import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
 import { RECEIVE_A_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
-import { RECEIVE_STATUS, DELETE_STATUS } from '../actions/user_actions';
+import { RECEIVE_STATUS, DELETE_STATUS, UPDATE_STATUS } from '../actions/review&status_actions';
 import { RECEIVE_REVIEW } from '../actions/review&status_actions';
 
 const bookshelvesReducer = (state = {}, action) => {
@@ -33,14 +33,17 @@ const bookshelvesReducer = (state = {}, action) => {
       return newState;
     case RECEIVE_STATUS:
       newState = merge({},state);
-      //What goes here?
+      newState[action.shelving.bookshelf_id].book_ids.push(action.shelving.book_id);
+      return newState;
+    case UPDATE_STATUS:
+      newState = merge({},state);
+      newState[action.shelving.bookshelf_id].book_ids.push(action.shelving.book_id);
+      newState[action.previous_shelf].book_ids.splice(newState[action.previous_shelf].book_ids.indexOf(action.status.book_id), 1);
       return newState;
     case DELETE_STATUS:
       newState = merge({},state);
-      debugger
-      action.shelvings.forEach(shelving=>{
-        newState[shelving.bookshelf_id].book_ids.splice(newState[shelving.bookshelf_id].book_ids.indexOf(action.status.book_id) , 1);
-        debugger
+      action.bookshelf_ids.forEach(bookshelf_id=>{
+        newState[bookshelf_id].book_ids.splice(newState[bookshelf_id].book_ids.indexOf(action.status.book_id) , 1);
       });
       return newState;
     case RECEIVE_REVIEW:

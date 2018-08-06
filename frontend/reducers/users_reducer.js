@@ -56,9 +56,13 @@ const usersReducer = (state = {}, action) => {
       return newState;
     case RECEIVE_STATUS:
       newState = merge({}, state);
+      userBookInfo = newState[action.status.user_id].bookInfo;
+      userBookInfo[action.status.book_id] = {statusId: action.status.id};
       return newState;
     case DELETE_STATUS:
       newState = merge({}, state);
+      userBookInfo = newState[action.status.user_id].bookInfo;
+      delete userBookInfo[action.status.book_id];
       return newState;
     default:
       return state;

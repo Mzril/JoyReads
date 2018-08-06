@@ -154,6 +154,10 @@
   padding-left: 10px;
 }
 
+.take-all-space.delete{
+  color: crimson;
+}
+
 .align-this{
   padding-left: 5px;
 }

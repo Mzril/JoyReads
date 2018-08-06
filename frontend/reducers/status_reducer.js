@@ -17,6 +17,8 @@ const statusReducer = (state = {}, action) => {
       return state;
     case RECEIVE_STATUS:
       return merge({}, state, {[action.status.id]: action.status});
+    case UPDATE_STATUS:
+      return merge({}, state, {[action.status.id]: action.status});
     case DELETE_STATUS:
       newState = merge({}, state);
       delete newState[action.status.id];

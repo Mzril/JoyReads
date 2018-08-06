@@ -38,11 +38,12 @@ export const receiveStatus = (payload)=>{
     shelving: payload.shelving
   };
 };
-export const updateStatus = (payload)=>{
+export const updateStatus2 = (payload)=>{
   return {
     type: UPDATE_STATUS,
     status: payload.status,
-    shelving: payload.shelving
+    shelving: payload.shelving,
+    previous_shelf: payload.previous_shelf
   };
 };
 
@@ -51,7 +52,7 @@ export const deleteStatus = (payload)=>{
     type: DELETE_STATUS,
     status: payload.status,
     review: payload.review,
-    shelvings: payload.shelvings
+    bookshelf_ids: payload.bookshelf_ids
   };
 };
 
@@ -114,20 +115,31 @@ export const createReview = (data) => {
   };
 };
 
-export const handleStatus = (data) =>{
+export const createStatus = (data) =>{
   return dispatch => {
-    return ReviewStatusAPIUtil.handleStatus(data).then(
+    return ReviewStatusAPIUtil.createStatus(data).then(
       (payload) => {
         return dispatch(receiveStatus(payload));
       },
-      (errors) => dispatch(receiveErrors(errors.responseJSON))
+      (errors) => dispatch(receiveStatusErrors(errors.responseJSON))
     );
   };
 };
 
-export const removeStatus = (data)=>{
+export const updateStatus = (data) =>{
   return dispatch => {
-    return ReviewStatusAPIUtil.deleteStatus(data).then(
+    return ReviewStatusAPIUtil.updateStatus(data).then(
+      (payload) => {
+        return dispatch(updateStatus2(payload));
+      },
+      (errors) => dispatch(receiveStatusErrors(errors.responseJSON))
+    );
+  };
+};
+
+export const removeStatus = (id)=>{
+  return dispatch => {
+    return ReviewStatusAPIUtil.deleteStatus(id).then(
       (payload) => {
         return dispatch(deleteStatus(payload));
       },
