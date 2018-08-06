@@ -31,7 +31,7 @@ const booksReducer = (state = {}, action) => {
       bookReviews.splice(bookReviews.indexOf(action.review.id), 1);
       return newState;
     case DELETE_STATUS:
-      if(action.review){
+      if(action.review && state[action.review.book_id].review_ids){
         newState=merge({}, state);
         bookReviews = newState[action.review.book_id].review_ids;
         bookReviews.splice(bookReviews.indexOf(action.review.id), 1);

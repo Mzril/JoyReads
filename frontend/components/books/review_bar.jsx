@@ -26,6 +26,7 @@ class ReviewBar extends React.Component{
      }
    }
 
+   //Can I change this to shouldComponentUpdate and componentWillUpdate later?
    componentWillReceiveProps(nextProps){
      const {displayedUser} = nextProps;
      if(displayedUser.bookInfo){
