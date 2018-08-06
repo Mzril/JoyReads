@@ -13,12 +13,10 @@ class ContentHeader extends React.Component{
    }
 
    toggleOne(){
-     console.log("Set to one");
      this.props.toggleView(1);
    }
 
    toggleZero(){
-     console.log("Set to two");
      this.props.toggleView(0);
    }
 
