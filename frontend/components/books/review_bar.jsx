@@ -26,16 +26,15 @@ class ReviewBar extends React.Component{
      }
    }
 
-   // componentWillReceiveProps(nextProps){
-   //   const {displayedUser, reviews, books} = nextProps;
-   //   const reviewed_book_ids = displayedUser.review_ids.map((id) =>{
-   //     return reviews[id].book_id;
-   //   });
-   //   // Change reviewIds to hash for O(1) time - Later
-   //   if (reviewed_book_ids.indexOf(parseInt(this.props.starkey)) === -1){
-   //      this.setState({currentvalue: 0});
-   //   }
-   // }
+   componentWillReceiveProps(nextProps){
+     const {displayedUser} = nextProps;
+     if(displayedUser.bookInfo){
+       const bookExists = displayedUser.bookInfo[parseInt(this.props.starkey)];
+       if(!bookExists){
+        this.setState({currentvalue: 0});
+       }
+     }
+   }
 
   handleSubmit(e){
     const rating = parseInt(e.target.value);

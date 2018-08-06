@@ -11,34 +11,30 @@ class ReviewBarShow extends React.Component{
     this.handleSubmit= this.handleSubmit.bind(this);
   }
 
-   componentDidMount(){
-     const {displayedUser, reviews, books} = this.props;
-     if(displayedUser.review_ids){
-       const reviewed_book_ids = displayedUser.review_ids.map((id) =>{
-         return reviews[id].book_id;
-       });
-       // Change reviewIds to hash for O(1) time - Later
-       for (let i = 0; i < reviewed_book_ids.length; i++) {
-         if(reviewed_book_ids[i] === parseInt(this.props.starkey)){
-           this.setState({currentvalue: reviews[displayedUser.review_ids[i]].rating});
-           break;
-         }
-       }
-     }else if(displayedUser.id !==null){
-       this.setState({currentvalue: this.props.reviewRating});
-     }
-   }
+  componentDidMount(){
+    const {displayedUser, reviews, books} = this.props;
+    if(displayedUser.bookInfo){
+      const bookExists = displayedUser.bookInfo[parseInt(this.props.starkey)];
+      if(bookExists){
+        const lookup = displayedUser.bookInfo[parseInt(this.props.starkey)].reviewId;
+        if(lookup !== undefined){
+          this.setState({currentvalue: reviews[lookup].rating});
+        }
+      }
+    }else if(displayedUser.id !==null){
+      this.setState({currentvalue: this.props.reviewRating});
+    }
+  }
 
-   componentWillReceiveProps(nextProps){
-     const {displayedUser, reviews, books} = nextProps;
-     const reviewed_book_ids = displayedUser.review_ids.map((id) =>{
-       return reviews[id].book_id;
-     });
-     // Change reviewIds to hash for O(1) time - Later
-     if (reviewed_book_ids.indexOf(parseInt(this.props.starkey)) === -1){
-        this.setState({currentvalue: 0});
-     }
-   }
+  componentWillReceiveProps(nextProps){
+    const {displayedUser} = nextProps;
+    if(displayedUser.bookInfo){
+      const bookExists = displayedUser.bookInfo[parseInt(this.props.starkey)];
+      if(!bookExists){
+       this.setState({currentvalue: 0});
+      }
+    }
+  }
 
   handleSubmit(e){
     const rating = parseInt(e.target.value);

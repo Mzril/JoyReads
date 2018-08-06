@@ -99,11 +99,11 @@ class ShelfDropDown extends React.Component{
           let newPlaceholder;
           userShelves.push(deleteFromAll);
           if(this.props.statuses[inStatus.statusId].value === 0){
-            newPlaceholder = <div className="dropdown-derp">Read</div>;
+            newPlaceholder = <div className={"dropdown-derp"+ addedclass}>Read</div>;
           }else if(this.props.statuses[inStatus.statusId].value === 1){
-            newPlaceholder = <div className="dropdown-derp">Currently Reading</div>;
+            newPlaceholder = <div className={"dropdown-derp"+ addedclass}>Currently Reading</div>;
           }else if (this.props.statuses[inStatus.statusId].value === 2){
-            newPlaceholder = <div className="dropdown-derp">Want to Read</div>;
+            newPlaceholder = <div className={"dropdown-derp"+ addedclass}>Want to Read</div>;
           }
           return (<div><Dropdown disabled={this.props.disabled} placeholder={newPlaceholder} className={addedclass} controlClassName={addedclass} menuClassName={addedclass} options={userShelves}/></div>);
         }else{

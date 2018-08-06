@@ -144,6 +144,10 @@
   padding-left: 5px;
 }
 
+.dropdown-derp.biggerdropdown{
+  padding-left: 10px;
+}
+
 .take-all-space{
   display: flex;
   box-sizing: border-box;

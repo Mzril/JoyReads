@@ -2,10 +2,11 @@ import { RECEIVE_ONE_BOOK, RECEIVE_BOOKS, RECEIVE_INDEX, RECEIVE_USER_BOOKS, REC
 import { RECEIVE_A_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
 import { RECEIVE_CURRENT_USER } from './../actions/session_actions';
-import { RECEIVE_REVIEW, DELETE_REVIEW } from './../actions/review&status_actions';
+import { RECEIVE_REVIEW, DELETE_REVIEW, DELETE_STATUS } from './../actions/review&status_actions';
 
 const booksReducer = (state = {}, action) => {
   let newState;
+  let bookReviews;
   switch (action.type) {
     case RECEIVE_BOOKS:
     case RECEIVE_SEARCH_BOOKS:
@@ -26,9 +27,17 @@ const booksReducer = (state = {}, action) => {
       return newState;
     case DELETE_REVIEW:
       newState=merge({}, state);
-      const bookReviews = newState[action.review.book_id].review_ids;
+      bookReviews = newState[action.review.book_id].review_ids;
       bookReviews.splice(bookReviews.indexOf(action.review.id), 1);
       return newState;
+    case DELETE_STATUS:
+      if(action.review){
+        newState=merge({}, state);
+        bookReviews = newState[action.review.book_id].review_ids;
+        bookReviews.splice(bookReviews.indexOf(action.review.id), 1);
+        return newState;
+      }
+      return state;
     default:
       return state;
   }
