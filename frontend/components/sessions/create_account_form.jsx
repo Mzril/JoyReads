@@ -43,7 +43,7 @@ class CreateAccountForm extends React.Component {
     if(this.changed){
       e.preventDefault();
       const user = Object.assign( {}, this.state);
-      this.props.signUp(user).then(()=>console.log("derp"),()=>this.setState({clicked:false}));
+      this.props.signUp(user).then(()=>{},()=>this.setState({clicked:false}));
     }
   }
 
