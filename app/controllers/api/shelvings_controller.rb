@@ -37,10 +37,13 @@ class Api::ShelvingsController < ApplicationController
   end
 
   def ensure_status_presence
+    # Micro opt, can't I just look up the user in the state?
     @user = Bookshelf.find(params[:shelving][:bookshelf_id]).user
     @status = Status.find_by(book_id: params[:shelving][:book_id], user_id: @user.id)
     unless @status
       @status = Status.create(book_id: params[:shelving][:book_id], user_id: @user.id, value: 0)
+      @status_shelving = Shelving.create(book_id: params[:shelving][:book_id], status_id: @status.id, bookshelf_id: @user.bookshelf_ids.min)
+      @created = true
     end
   end
 

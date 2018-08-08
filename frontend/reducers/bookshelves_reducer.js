@@ -29,6 +29,10 @@ const bookshelvesReducer = (state = {}, action) => {
     case RECEIVE_SHELVING:
       newState = merge({},state);
       const receivingshelf = newState[action.shelving.bookshelf_id];
+      if(action.status_shelving){
+        const readshelf = newState[action.status_shelving.bookshelf_id];
+        readshelf.book_ids.push(action.status_shelving.book_id);
+      }
       receivingshelf.book_ids.push(action.shelving.book_id);
       return newState;
     case RECEIVE_STATUS:

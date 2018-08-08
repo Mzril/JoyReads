@@ -15,16 +15,16 @@ class ReviewList extends React.Component{
    bookReviews(){
      const {reviews, users, book} = this.props;
      let myReviewId = 0;
-     let otherUsersReviews = [[],[],[]];
+     let otherUsersReviews = [[],[]];
+     let offset = 0;
      book.review_ids.forEach((id, i)=>{
        const user = users[reviews[id].user_id];
        const reviewRating = reviews[id].rating;
        const reviewBody = reviews[id].body;
        const userlink = "/users/" + user.username;
-       let offset = 0;
        if( user.id !== this.props.currentUserId){
          //Don't forget this.props.location.state handling later to optimize and preload if within array of visited Users
-         otherUsersReviews[(i+offset) % 3].push(<div key={id} className="whole-user-review">
+         otherUsersReviews[(i+offset) % 2].push(<div key={id} className="whole-user-review">
                                            <div className="user-review-header">
                                                 <ShowRating reviewRating={reviewRating} starkey={book.id}/>
 
@@ -37,7 +37,7 @@ class ReviewList extends React.Component{
                                     );
        }else{
          myReviewId = id;
-         offset -= 1;
+         offset = -1;
        }});
        let reviewForm;
        if(myReviewId){
@@ -57,7 +57,7 @@ class ReviewList extends React.Component{
   render(){
     return (
       <div className="review-container">
-        <div className="review-container-header">User Reviews</div>
+        <div className="review-container-header">Community Reviews</div>
         <div className="review-contents">
           {this.bookReviews.bind(this)()}
         </div>

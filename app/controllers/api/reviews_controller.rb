@@ -4,15 +4,19 @@ class Api::ReviewsController < ApplicationController
   before_action :ensure_status_presence, only: [:handle, :create]
 
   def handle
-    @review = Review.find_by(book_id: params[:review][:book_id], user_id: params[:review][:user_id])
-    if @review && @review.update(review_params)
-      render :show
+    if @created
+      render :showshelving
     else
-      @review = Review.new(rating: params[:review][:rating], book_id: params[:review][:book_id], user_id: params[:review][:user_id], status_id: @status.id)
-      if @review.save
+      @review = Review.find_by(book_id: params[:review][:book_id], user_id: params[:review][:user_id])
+      if @review && @review.update(review_params)
         render :show
       else
-        render json: @review.errors.full_messages , status: 411
+        @review = Review.new(rating: params[:review][:rating], book_id: params[:review][:book_id], user_id: params[:review][:user_id], status_id: @status.id)
+        if @review.save
+          render :show
+        else
+          render json: @review.errors.full_messages , status: 411
+        end
       end
     end
   end
@@ -39,10 +43,10 @@ class Api::ReviewsController < ApplicationController
   def ensure_status_presence
     @status = Status.find_by(book_id: params[:review][:book_id], user_id: params[:review][:user_id])
     unless @status
+      @created = true;
       @status = Status.create(book_id: params[:review][:book_id], user_id: params[:review][:user_id], value: 0)
-      @shelving = Shelving.create(status_id: @status.id, book_id: params[:review][:book_id], bookshelf_id: User.find(params[:review][:user_id]).bookshelf_ids.first)
+      @shelving = Shelving.create(status_id: @status.id, book_id: params[:review][:book_id], bookshelf_id: User.find(params[:review][:user_id]).bookshelf_ids.min)
       @review = Review.create(rating: params[:review][:rating], book_id: params[:review][:book_id], user_id: params[:review][:user_id], status_id: @status.id)
-      render :showshelving
     end
   end
 

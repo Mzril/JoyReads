@@ -1,12 +1,14 @@
 import React from "react";
 import {connect} from "react-redux";
 import {removeReview, updateReview} from './../../actions/review&status_actions';
+import {Link} from 'react-router-dom';
+import ReviewBar from './../books/review_bar';
 import Textarea from 'react-textarea-autosize';
 
 class EditForm extends React.Component{
   constructor(){
     super();
-    this.state = {new_rating: null, body: "", opened: false};
+    this.state = {new_rating: null, body: "", opened: false, editing: true};
     this.toggleForm=this.toggleForm.bind(this);
     this.delete = this.delete.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -37,24 +39,32 @@ class EditForm extends React.Component{
   }
 
   render(){
+    const user = this.props.users[this.props.currentUserId];
     if(!this.state.opened){
       return (<div className="review-bar">
-                <div onClick={this.toggleForm} className="shelves form-opener">Add/Edit Description</div>
-                <i onClick={this.delete} className="fa fa-trash-o"></i>
+                <div onClick={this.toggleForm} className="shelves form-opener">Edit Your Review</div>
              </div>);
-    }else{
+    }else if(this.state.editing === true){
+      // const userlink = "/users/" + user.username;
       return(
         <div className="form-open">
           <div className="review-bar">
-              <div onClick={this.toggleForm} className="form-opener shelves">Add/Edit Description</div>
-              <i onClick={this.delete} className="fa fa-trash-o"></i>
+              <div onClick={this.toggleForm} className="form-opener shelves">Close</div>
           </div>
-          <form className="form-holder" onSubmit={this.updateReview.bind(this)}>
-            <Textarea className="review-input-form" placeholder="Write your review..." value={this.state.body} onChange={this.handleChange}/>
-            <input type="submit"/>
-          </form>
+          <div className="mine">
+            <div className="my-review-header">
+               <div className="userlink" >My Review</div>
+               <i onClick={this.delete} className="fa fa-trash-o"></i>
+            </div>
+            <form className="my-form-holder" onSubmit={this.updateReview.bind(this)}>
+              <Textarea className="review-input-form" placeholder="Write your review..." value={this.state.body} onChange={this.handleChange}/>
+              <input type="submit"/>
+            </form>
+         </div>
         </div>
       );
+    }else{
+
     }
   }
 }
@@ -62,6 +72,7 @@ class EditForm extends React.Component{
 const mSP = (state, ownProps) => {
   return {
     currentUserId: state.session.currentUserId,
+    users: state.entities.users,
     reviews: state.entities.reviews,
     reviewId: ownProps.reviewId
   };

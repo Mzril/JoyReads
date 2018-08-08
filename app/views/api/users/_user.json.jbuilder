@@ -29,6 +29,7 @@ json.reviews do
 end
 
 json.user do
-  json.extract! user, :id , :username, :bookshelf_ids, :book_ids, :review_ids, :status_ids
+  json.extract! user, :id , :username, :book_ids, :review_ids, :status_ids
+  json.bookshelf_ids user.bookshelf_ids.sort
   json.bookInfo bookInfo
 end

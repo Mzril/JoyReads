@@ -59,6 +59,14 @@ const usersReducer = (state = {}, action) => {
       userBookInfo = newState[action.status.user_id].bookInfo;
       userBookInfo[action.status.book_id] = {statusId: action.status.id};
       return newState;
+    case RECEIVE_SHELVING:
+      if(action.status){
+        newState = merge({}, state);
+        userBookInfo = newState[action.status.user_id].bookInfo;
+        userBookInfo[action.status.book_id] = {statusId: action.status.id};
+        return newState;
+      }
+      return state;
     case DELETE_STATUS:
       newState = merge({}, state);
       userBookInfo = newState[action.status.user_id].bookInfo;

@@ -33,7 +33,7 @@ class ReviewBar extends React.Component{
        const bookExists = displayedUser.bookInfo[parseInt(this.props.starkey)];
        if(!bookExists){
         this.setState({currentvalue: 0});
-       }
+      }
      }
    }
 

@@ -25,7 +25,9 @@ export const receiveBookshelf= (bookshelf) => {
 export const receiveShelving= (payload) => {
   return {
     type: RECEIVE_SHELVING,
-    shelving: payload.shelving
+    shelving: payload.shelving,
+    status: payload.status,
+    status_shelving: payload.status_shelving
   };
 };
 

@@ -15,9 +15,9 @@ class Api::StatusesController < ApplicationController
   def update
     @status = Status.includes(:associated_bookshelves).find(params[:id])
     if @status && @status.value != params[:status][:value].to_i
-      @shelving = Shelving.find(@status.shelving_ids.first)
+      @shelving = Shelving.find(@status.shelving_ids.min)
       @previous_shelf = @shelving.bookshelf_id;
-      array = @status.user.bookshelf_ids
+      array = @status.user.bookshelf_ids.sort
       @shelving.update(bookshelf_id: array[params[:status][:value].to_i])
       @status.update(status_params)
       render :update

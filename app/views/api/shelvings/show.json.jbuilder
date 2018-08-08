@@ -2,10 +2,12 @@ json.shelving do
   json.extract! @shelving, :id, :book_id, :bookshelf_id, :status_id
 end
 
-json.status do
-  json.extract! @status, :id, :book_id, :user_id, :value
-end
+if @created
+  json.status do
+    json.extract! @status, :id, :book_id, :user_id, :value
+  end
 
-json.created do
-  @created
+  json.status_shelving do
+    json.extract! @status_shelving, :id, :book_id, :bookshelf_id
+  end
 end

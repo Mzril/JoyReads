@@ -1,6 +1,13 @@
+
+
 .review-bar{
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+  padding-right: 8px;
+  padding-left: 8px;
+  box-sizing: border-box;
 }
 
 .font-opener{
@@ -34,18 +41,50 @@
 }
 
 .whole-user-review{
-  min-width: 250px;
+  width: 450px;
+  box-sizing: border-box;
   background-color: white;
   border: 1px solid #dedfe3;
   padding: 15px;
-  min-height: 200px;
+  min-height: 130px;
   margin-bottom: 30px;
   box-shadow: 0 1px 1px 0 rgba(0,0,0,.5);
+}
+
+.form-open{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mine{
+  width: calc(100% - 15px);
+  padding: 15px;
+  box-sizing: border-box;
+  background-color: white;
+  border: 1px solid #dedfe3;
+  min-height: 130px;
+  margin-bottom: 20px;
+  margin-right: 0;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.5);
+}
+
+.my-review-header{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
+
+.review-body{
+  padding-top: 10px;
+  padding-left: 5px;
+  font-size: 12px;
 }
 
 .mason-row.review-mason{
   display: flex;
   flex-direction: column;
+  width: 465px;
 }
 
 .review-holder{
@@ -57,28 +96,45 @@
 .book-reviews-container{
   display: flex;
   flex-direction: column;
-  width: 970px;
   padding: 10px;
-  margin: auto;
+  margin-left: 18px;
+  margin-top: 10px;
 }
 
 .r1{
   display: flex;
   flex-direction: column;
+
 }
 
 .form-holder{
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 10px;
+}
+
+.review-contents{
+  margin-top: 10px;
 }
 
 .review-input-form{
+  width: 100%;
   padding: 5px;
+  line-height: 18px;
   min-height: 50px;
-  font-size: 14px;
+  font-size: 12px;
+  border: 0;
   box-sizing: border-box;
-  border-radius: 4px;
-  width: 75%;
-  margin-bottom: 10px;
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif;
+}
+
+
+.review-container-header{
+  border-bottom: 1px solid lightgrey;
+  font-size: 22px;
+  padding-bottom: 10px;
+  font-weight: 500;
+  font-family: "Merriweather", "Georgia", serif;
+  color: #95897d;
 }
