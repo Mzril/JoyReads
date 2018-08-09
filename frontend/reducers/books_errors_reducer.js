@@ -5,6 +5,7 @@ import
    RECEIVE_SEARCH_BOOKS} from '../actions/book_actions';
 
 const booksErrorsReducer = (state = [], action) => {
+
   switch (action.type) {
     case RECEIVE_ONE_BOOK:
     case RECEIVE_BOOKS:

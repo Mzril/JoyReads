@@ -44,7 +44,7 @@ export const receiveBook = ({book, users, reviews}) => {
   };
 };
 
-export const receiveErrors= (errors) => {
+export const receiveErrors = (errors) => {
   return {
     type: RECEIVE_BOOK_ERRORS,
     errors: errors

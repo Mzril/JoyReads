@@ -51,7 +51,7 @@ class BookTable extends React.Component{
       this.setState({style: nextProps.ui.style});
       return null;
     }
-    if(nextProps.currentPath === "/books/searchresults" && nextProps.ui.searchBookIds && nextProps.ui.searchBookIds.length > 0){
+    if(nextProps.currentPath === "/books/searchresults" && nextProps.ui.searchBookIds){
       this.setState({displayedBookIds: nextProps.ui.searchBookIds});
       return null;
     }

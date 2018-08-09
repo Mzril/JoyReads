@@ -1,5 +1,5 @@
 import { RECEIVE_CURRENT_USER} from '../actions/session_actions';
-import { RECEIVE_INDEX, RECEIVE_USER_BOOKS, RECEIVE_BOOKS, RECEIVE_ONE_BOOK, RECEIVE_SEARCH_BOOKS} from '../actions/book_actions';
+import { RECEIVE_INDEX, RECEIVE_USER_BOOKS, RECEIVE_BOOKS, RECEIVE_ONE_BOOK, RECEIVE_SEARCH_BOOKS, RECEIVE_BOOK, RECEIVE_BOOK_ERRORS} from '../actions/book_actions';
 import { RECEIVE_SHELVING, REMOVE_SHELVING} from '../actions/bookshelf_actions';
 import { RECEIVE_A_USER } from '../actions/user_actions';
 import { merge } from 'lodash';
@@ -36,6 +36,10 @@ export const uiReducer = (state = default_state, action) => {
         return book.id;
       });
       newState.searchBookIds = bookSearchArray;
+      return newState;
+    case RECEIVE_BOOK_ERRORS:
+      newState = merge({}, state);
+      newState.searchBookIds = [];
       return newState;
     case RECEIVE_ONE_BOOK:
       newState = merge({}, state);
