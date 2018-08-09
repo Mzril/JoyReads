@@ -147,6 +147,7 @@ class BookTable extends React.Component{
 
   render(){
     //Fix the error rendering.
+    //Add Loading Text?
     if(this.props.user === null && this.props.currentPath==="/books"){
       return (
         <Redirect to="/" />
@@ -161,7 +162,7 @@ class BookTable extends React.Component{
     }else if(this.state.displayedBookIds.length===0 && this.props.location.pathname !=="/home"){
       return (
         <div className="booktable max">
-          Currently Empty
+
         </div>
       );
     }else if(this.state.displayedBookIds.length === 0){
