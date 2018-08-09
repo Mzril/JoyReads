@@ -12,6 +12,8 @@ class ReviewList extends React.Component{
 
   }
 
+
+
    bookReviews(){
      const {reviews, users, book} = this.props;
      let myReviewId = 0;
@@ -21,20 +23,21 @@ class ReviewList extends React.Component{
        const user = users[reviews[id].user_id];
        const reviewRating = reviews[id].rating;
        const reviewBody = reviews[id].body;
-       const userlink = "/users/" + user.username;
+       // const userlink = "/users/" + user.username;
+       const userlink=`/users/${user.id}/bookshelves`;
        if( user.id !== this.props.currentUserId){
          //Don't forget this.props.location.state handling later to optimize and preload if within array of visited Users
          otherUsersReviews[(i+offset) % 2].push(<div key={id} className="whole-user-review">
-                                           <div className="user-review-header">
-                                                <ShowRating reviewRating={reviewRating} starkey={book.id}/>
+                                                 <div className="user-review-header">
+                                                      <ShowRating reviewRating={reviewRating} starkey={book.id}/>
 
-                                                <Link className="userlink" to={{pathname: userlink, state: user.id}}>{user.username}</Link>
-                                           </div>
-                                           <div className='review-body'>
-                                             {reviewBody}
-                                           </div>
-                                      </div>
-                                    );
+                                                      <Link className="userlink" to={{pathname: userlink, state: user.id}}>{user.username}</Link>
+                                                 </div>
+                                                 <div className='review-body'>
+                                                   {reviewBody}
+                                                 </div>
+                                                </div>
+                                              );
        }else{
          myReviewId = id;
          offset = -1;

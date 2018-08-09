@@ -24,7 +24,7 @@ const SiteContent = (props) => {
         <Route exact path='/home' render={(props) => (
           <ShelfRoute {...props}/>
         )}/>
-      <Route path='/users/:userId/bookshelves' render={(props) => (
+        <Route path='/users/:userId/bookshelves' render={(props) => (
           <ShelfRoute {...props} />
         )}/>
         <Route path='/bookshelves/:bookshelfId' render={(props) => (

@@ -56,7 +56,7 @@ class ContentHeader extends React.Component{
 
 const mSP = (state, ownProps) => {
   let currentUser;
-  const user = ownProps.user || 0;
+  const user = state[ownProps.match.params.userId] || 0;
   if(state.session.currentUserId!==null){
     currentUser = state.entities.users[state.session.currentUserId];
   }else {

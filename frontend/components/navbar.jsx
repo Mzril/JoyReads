@@ -16,6 +16,8 @@ class Navbar extends React.Component {
   }
 
   render() {
+    // Add this back in after grad night
+    // <Link to={{pathname:`/users/${this.props.currentUser.username}`, state: this.props.currentUser.id}} >{this.props.currentUser.username}</Link>
     let navbuttons;
     if(!this.props.currentUser) {
       navbuttons = (<div className="nav-buttons">
@@ -24,7 +26,7 @@ class Navbar extends React.Component {
                     </div>);
     } else {
       navbuttons = (<div className="nav-buttons">
-                      <Link to={{pathname:`/users/${this.props.currentUser.username}`, state: this.props.currentUser.id}} >{this.props.currentUser.username}</Link>
+                      <Link to={{pathname:`/books`, state: this.props.currentUser.id}} >{this.props.currentUser.username}</Link>
                       <Link to='/home' onClick={this.handleClick}>Log Out</Link>
                     </div>);
     }
