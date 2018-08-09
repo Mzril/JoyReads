@@ -21,7 +21,7 @@ class BookSearch extends React.Component {
     this.setState({query: e.currentTarget.value});
   }
 
-  render() {
+  render(){
     return(
       <span className="booksearch">
         <input onChange={this.updateQuery} className="nav-search-bar" type="search" placeholder="Search books"/>

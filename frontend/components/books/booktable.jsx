@@ -16,7 +16,6 @@ class BookTable extends React.Component{
 
   componentDidMount(){
     let userId = this.props.match.params.userId;
-
     this.setState({style: this.props.ui.style});
     if(this.props.currentPath === "/home"){
       if(!this.props.ui.visitedIndex || this.props.ui.updated){
@@ -52,7 +51,7 @@ class BookTable extends React.Component{
       this.setState({style: nextProps.ui.style});
       return null;
     }
-    if(nextProps.currentPath === "/books/searchresults" && nextProps.ui.searchBookIds.length > 0){
+    if(nextProps.currentPath === "/books/searchresults" && nextProps.ui.searchBookIds && nextProps.ui.searchBookIds.length > 0){
       this.setState({displayedBookIds: nextProps.ui.searchBookIds});
       return null;
     }
@@ -147,13 +146,13 @@ class BookTable extends React.Component{
   }
 
   render(){
-    //Fix the bookshelf render route and why it's not updating when visiting a shelf
+    //Fix the error rendering.
     if(this.props.user === null && this.props.currentPath==="/books"){
       return (
         <Redirect to="/" />
       );
     }
-    if(this.props.errors.length > 0){
+    if(this.state.displayedBookIds.length===0 && this.props.errors.length > 0){
       return (
         <div className="booktable max error">
           {this.props.errors[0]}
@@ -162,7 +161,7 @@ class BookTable extends React.Component{
     }else if(this.state.displayedBookIds.length===0 && this.props.location.pathname !=="/home"){
       return (
         <div className="booktable max">
-          No Books here yet...go add some!
+          Currently Empty
         </div>
       );
     }else if(this.state.displayedBookIds.length === 0){
