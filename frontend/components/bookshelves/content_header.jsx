@@ -31,7 +31,8 @@ class ContentHeader extends React.Component{
        else if(bookshelfId && this.props.bookshelves[bookshelfId]){
          bigtext = <Link to="/books" className="main-header-link">{this.props.bookshelves[bookshelfId].title}</Link>;
        } else if (this.props.user){
-         bigtext = <Link to="/books" className="main-header-link">{this.props.user.username}'s books'</Link>;
+         const content = `${this.props.user.username+ "'s books"}`;
+         bigtext = <Link to="/books" className="main-header-link">{content}</Link>;
        }else if(this.props.currentUser){
          bigtext = <Link to="/books" className="main-header-link">My Books</Link>;
        }
@@ -56,7 +57,7 @@ class ContentHeader extends React.Component{
 
 const mSP = (state, ownProps) => {
   let currentUser;
-  const user = state[ownProps.match.params.userId] || 0;
+  const user = state.entities.users[ownProps.match.params.userId] || 0;
   if(state.session.currentUserId!==null){
     currentUser = state.entities.users[state.session.currentUserId];
   }else {

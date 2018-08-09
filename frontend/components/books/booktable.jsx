@@ -4,6 +4,7 @@ import ShelfDropDown from "./shelf_drop_down";
 import ReviewBar from "./review_bar";
 import {withRouter, Redirect, Link} from 'react-router-dom';
 import {fetchBooksByShelf, fetchLimitedBooks, fetchBooksByQuery, fetchBooksByUser} from "./../../actions/book_actions";
+import {getUserById} from "./../../actions/user_actions";
 
 class BookTable extends React.Component{
 
@@ -14,6 +15,8 @@ class BookTable extends React.Component{
   }
 
   componentDidMount(){
+    let userId = this.props.match.params.userId;
+
     this.setState({style: this.props.ui.style});
     if(this.props.currentPath === "/home"){
       if(!this.props.ui.visitedIndex || this.props.ui.updated){
@@ -34,10 +37,17 @@ class BookTable extends React.Component{
         this.setState({displayedBookIds: userBookIds});
       }
     }
+    else if(userId){
+      if(!this.props.ui.visitedUsers[userId]){
+        this.getFromUser.bind(this)(this.props.match.params.userId);
+      }else{
+        this.setState({displayedBookIds: this.props.user.book_ids});
+      }
+    }
   }
 
-
   componentWillReceiveProps(nextProps){
+    //Optimization: can you remove Set here?
     if(nextProps.ui.style !== this.props.ui.style){
       this.setState({style: nextProps.ui.style});
       return null;
@@ -61,7 +71,7 @@ class BookTable extends React.Component{
           this.getFromHome.bind(this)();
           return null;
         }else{
-          this.setState({displayedBookIds: nextProps.ui.indexBookIds });
+          this.setState({displayedBookIds: nextProps.ui.indexBookIds});
           return null;
         }
       }else if(nextProps.match.params.bookshelfId){
@@ -73,16 +83,14 @@ class BookTable extends React.Component{
 
   }
 
-
   getFromHome(){
     this.props.fetchLimitedBooks().then(response => {
     const ids = response.books.map(book=>book.id);
     this.setState({displayedBookIds: ids});});
   }
 
-  getFromUser(){
-    const id = this.props.match.params.userId || this.props.user.id;
-    this.props.fetchBooksByUser(id).then(response => {
+  getFromUser(id){
+    this.props.fetchUser(id).then(response => {
     const ids = response.books.map(book=>book.id);
     this.setState({displayedBookIds: ids});});
   }
@@ -95,13 +103,11 @@ class BookTable extends React.Component{
 
   table(){
     //Optimization: See if you can't pass if reviews to Review bar component based on current user's reviews, same thing default for status for status.
-    //This way you can get everything in the review bar and shelf dropdown O(n) time. Users {1: {id: 1, username: Mzril, bookInfo: {id: {reviewvalue: number, status: value}}}}}
     let table;
     let addedClass = "";
     if(this.state.style === 0){
       const that = this;
       table = this.state.displayedBookIds.map((bookId, that) => {
-
 
         return (<div key={bookId} className="book-info-container">
                   <Link to={`/books/${bookId}`}>
@@ -174,8 +180,8 @@ class BookTable extends React.Component{
 
 const mSP = (state, ownProps)=>{
   let user;
-  if(ownProps.user){
-    user = ownProps.user;
+  if(ownProps.match.params.userId && state.entities.users[ownProps.match.params.userId]){
+    user = state.entities.users[ownProps.match.params.userId];
   } else if(state.session.currentUserId){
     user = state.entities.users[state.session.currentUserId];
   } else {
@@ -196,7 +202,7 @@ const mDP = (dispatch, ownProps)=>{
     fetchBooksByShelf: (id)=>dispatch(fetchBooksByShelf(id)),
     fetchBooksByQuery: (query)=>dispatch(fetchBooksByQuery(query)),
     fetchLimitedBooks: ()=>dispatch(fetchLimitedBooks()),
-    fetchBooksByUser: (userId)=>dispatch(fetchBooksByUser(userId))
+    fetchUser: (userId)=>dispatch(getUserById(userId))
   };
 };
 
