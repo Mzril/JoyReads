@@ -117,13 +117,17 @@ class ShelfDropDown extends React.Component{
 
 const mSP = (state, ownProps)=>{
   let disabled = false;
-  let user = {id: null};
+  let user;
   if(ownProps.user){
-    disabled = true;
-    user = ownProps.user;
+    if(ownProps.user.id !== state.session.currentUserId){
+      disabled = true;
+      user = ownProps.user;
+    }else if(ownProps.user.id === state.session.currentUserId){
+      user = state.entities.users[state.session.currentUserId];
+    }
   }
   return {
-    currentUser: state.entities.users[state.session.currentUserId],
+    currentUser: user,
     bookshelves: state.entities.bookshelves,
     statuses: state.entities.statuses,
     disabled: disabled,

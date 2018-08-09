@@ -12,8 +12,6 @@ class ReviewList extends React.Component{
 
   }
 
-
-
    bookReviews(){
      const {reviews, users, book} = this.props;
      let myReviewId = 0;
@@ -31,7 +29,7 @@ class ReviewList extends React.Component{
                                                  <div className="user-review-header">
                                                       <ShowRating reviewRating={reviewRating} starkey={book.id}/>
 
-                                                      <Link className="userlink" to={{pathname: userlink, state: user.id}}>{user.username}</Link>
+                                                      <Link className="userlink shelves" to={{pathname: userlink, state: user.id}}>{user.username}</Link>
                                                  </div>
                                                  <div className='review-body'>
                                                    {reviewBody}

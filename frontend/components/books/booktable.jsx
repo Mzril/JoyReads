@@ -117,10 +117,10 @@ class BookTable extends React.Component{
                     {this.props.books[bookId].title}
                   </span>
                   <div>
-                    <ReviewBar  starkey={`${bookId}`}/>
+                    <ReviewBar user={this.props.user} starkey={`${bookId}`}/>
                   </div>
                   <div>
-                    <ShelfDropDown  bookId={bookId}/>
+                    <ShelfDropDown user={this.props.user} bookId={bookId}/>
                   </div>
                 </div>);});
     }else if(this.state.style===1){
@@ -134,10 +134,10 @@ class BookTable extends React.Component{
                               {this.props.books[bookId].title}
                             </span>
                             <div>
-                              <ReviewBar starkey={`${bookId}`}/>
+                              <ReviewBar user={this.props.user} starkey={`${bookId}`}/>
                             </div>
                             <div>
-                              <ShelfDropDown bookId={bookId}/>
+                              <ShelfDropDown user={this.props.user} bookId={bookId}/>
                             </div>
                           </div>);
       });
@@ -191,6 +191,7 @@ const mSP = (state, ownProps)=>{
     user: user,
     bookshelves: state.entities.bookshelves,
     books: state.entities.books,
+    currentUserId: state.session.currentUserId,
     errors: state.errors.books,
     ui: state.ui,
     currentPath: ownProps.location.pathname
