@@ -29,8 +29,9 @@ gem 'annotate'
 gem 'jquery-rails'
 gem 'pry-rails'
 
-gem 'faker', '~> 1.9', '>= 1.9.1'
-gem 'faker-isbn', '~> 0.0.4'
+#Faker gem unneeded for now
+# gem 'faker', '~> 1.9', '>= 1.9.1'
+# gem 'faker-isbn', '~> 0.0.4'
 gem 'ez_download'
 gem "aws-sdk-s3"
 gem "figaro"
