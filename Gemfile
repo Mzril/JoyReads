@@ -35,8 +35,6 @@ gem 'ez_download'
 gem "aws-sdk-s3"
 gem "figaro"
 
-
-
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

@@ -32,7 +32,7 @@ class ShelfDropDown extends React.Component{
     const inStatus = this.props.currentUser.bookInfo[this.props.bookId];
     if(inStatus){
       if(this.props.statuses[inStatus.statusId].value != value){
-        this.props.updateStatus({id: this.props.currentUser.bookInfo[this.props.bookId].statusId, value: value});
+        this.props.updateStatus({id: inStatus[this.props.bookId].statusId, value: value});
       }
     }else{
       this.props.createStatus({bookshelf_id: this.props.currentUser.bookshelf_ids[value], book_id: this.props.bookId, value: value, user_id: this.props.currentUser.id});
@@ -97,12 +97,13 @@ class ShelfDropDown extends React.Component{
         const inStatus = this.props.currentUser.bookInfo[this.props.bookId];
         if(inStatus){
           let newPlaceholder;
+          const value = this.props.statuses[inStatus.statusId].value;
           userShelves.push(deleteFromAll);
-          if(this.props.statuses[inStatus.statusId].value === 0){
+          if(value === 0){
             newPlaceholder = <div className={"dropdown-derp"+ addedclass}>Read</div>;
-          }else if(this.props.statuses[inStatus.statusId].value === 1){
+          }else if(value === 1){
             newPlaceholder = <div className={"dropdown-derp"+ addedclass}>Currently Reading</div>;
-          }else if (this.props.statuses[inStatus.statusId].value === 2){
+          }else if (value === 2){
             newPlaceholder = <div className={"dropdown-derp"+ addedclass}>Want to Read</div>;
           }
           return (<div><Dropdown disabled={this.props.disabled} placeholder={newPlaceholder} className={addedclass} controlClassName={addedclass} menuClassName={addedclass} options={userShelves}/></div>);
