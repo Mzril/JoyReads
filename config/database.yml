@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: JoyReads_production
-  username: JoyReads
-  password: <%= ENV['JOYREADS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
