@@ -35,10 +35,6 @@ Below are some additional features along with their code snippits and some gifs.
 
 ![](https://github.com/Mzril/JoyReads/blob/master/gifs/adminconsole.gif)
 
-### Review Wheel
-
-![](https://github.com/Mzril/JoyReads/blob/master/gifs/reviewwheel.gif)
-
 ### Book Search
 
 ![](https://github.com/Mzril/JoyReads/blob/master/gifs/booksearching.gif)
@@ -52,3 +48,9 @@ Below are some additional features along with their code snippits and some gifs.
 ![](https://github.com/Mzril/JoyReads/blob/master/gifs/flexlayout.gif)
 
 ## Future Work
+
+### Review Wheel (In progress!)
+
+![](https://github.com/Mzril/JoyReads/blob/master/gifs/reviewwheel.gif)
+
+### The ability to recommend books to other users (will show up as a bookshelf under my books)
