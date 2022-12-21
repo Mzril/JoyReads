@@ -2,7 +2,7 @@
 # exit on error
 set -o errexit
 
-rm Gemfile.lock
+bundle update nokogiri
 bundle install 
 bundle exec rake assets:precompile
 bundle exec rake assets:clean
