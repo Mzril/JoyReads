@@ -32,7 +32,7 @@ class ShelfDropDown extends React.Component{
     const inStatus = this.props.currentUser.bookInfo[this.props.bookId];
     if(inStatus){
       if(this.props.statuses[inStatus.statusId].value != value){
-        this.props.updateStatus({id: inStatus[this.props.bookId].statusId, value: value});
+        this.props.updateStatus({id: inStatus.statusId, value: value});
       }
     }else{
       this.props.createStatus({bookshelf_id: this.props.currentUser.bookshelf_ids[value], book_id: this.props.bookId, value: value, user_id: this.props.currentUser.id});
